@@ -6,7 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
-        <RootNamespace>NetTools.Files</RootNamespace>
+        <RootNamespace>NetTools.Conversions</RootNamespace>
         <AssemblyName>NetTools.Conversions</AssemblyName>
         <Configurations>Release;Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
