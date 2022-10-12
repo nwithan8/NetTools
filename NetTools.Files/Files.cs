@@ -1,5 +1,3 @@
-using System.IO.Compression;
-
 namespace NetTools;
 
 public static class Files

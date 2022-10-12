@@ -29,13 +29,6 @@ coverage:
 format:
 	dotnet dotnet-format --no-restore
 
-## install-cert - Install the PFX certificate to your system (Windows only)
-# @parameters:
-# cert= - The certificate to use for signing the built assets.
-# pass= - The password for the certificate.
-install-cert:
-	scripts\install_cert.bat ${cert} ${pass}
-
 ## install-tools - Install required dotnet tools
 install-tools:
 	dotnet new tool-manifest || exit 0
@@ -55,12 +48,9 @@ lint:
 lint-scripts:
 	scripts\lint_scripts.bat
 
-## prep-release - Build, sign and package the project for distribution, signing with the provided certificate (Windows only)
-# @parameters:
-# cert= - The certificate to use for signing the built assets.
-# pass= - The password for the certificate.
+## prep-release - Build and package the project for distribution (Windows only)
 prep-release:
-	scripts\build_release_nuget.bat NetTools ${cert} ${pass} NetTools Release
+	scripts\build_release_nuget.bat NetTools Release
 
 ## publish-all - Publish all NuGet files to nuget.org.
 # WARNING: Will publish ALL discovered NuGet files.

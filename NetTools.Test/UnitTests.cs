@@ -32,7 +32,7 @@ public class UnitTests
         public static readonly TestMultiValueEnum Value4 = new TestMultiValueEnum(4, "string", 100.00, false, TestEnum.Value1);
 
         private TestMultiValueEnum(int id, params object[] values) : base(id, values)
-        { 
+        {
         }
     }
 
@@ -55,8 +55,8 @@ public class UnitTests
     public void TestEnumAll()
     {
         IEnumerable<MultiValueEnum> all = Enum.All<TestMultiValueEnum>();
-        
-        
+
+
         Assert.Equal(4, Enum.All<TestMultiValueEnum>().Count());
     }
 
@@ -64,13 +64,13 @@ public class UnitTests
     public void TestEnumFromId()
     {
         const int id = 1;
-        
+
         var value = Enum.FromId<TestEnum>(id);
         Assert.Equal(TestEnum.Value1, value);
-        
+
         var value2 = Enum.FromId<TestValueEnum>(id);
         Assert.Equal(TestValueEnum.Value1, value2);
-        
+
         var value3 = Enum.FromId<TestMultiValueEnum>(id);
         Assert.Equal(TestMultiValueEnum.Value1, value3);
     }
@@ -79,14 +79,14 @@ public class UnitTests
     public void TestEnumFromValue()
     {
         const int value = 1;
-        
+
         var value2 = ValueEnum.FromValue<TestValueEnum>(value);
         Assert.Equal(TestValueEnum.Value1, value2);
-        
+
         var value3 = MultiValueEnum.FromValue<TestMultiValueEnum>(value);
         Assert.Equal(TestMultiValueEnum.Value2, value3);
     }
-    
+
     [Fact]
     public void TestEnumFromValues()
     {
@@ -98,12 +98,12 @@ public class UnitTests
         // find a match if all values are provided
         var matchingEnum = MultiValueEnum.FromValues<TestMultiValueEnum>(value1, value2, value3, value4);
         Assert.Equal(TestMultiValueEnum.Value4, matchingEnum);
-        
+
         // don't find a match if not all values are provided
         var matchingEnum2 = MultiValueEnum.FromValues<TestMultiValueEnum>(value1, value2, value3);
         Assert.Null(matchingEnum2);
     }
-    
+
     [Fact]
     public void TestEnumFromValuesOrder()
     {
@@ -111,18 +111,26 @@ public class UnitTests
         const double value2 = 100.00;
         const bool value3 = false;
         var value4 = TestEnum.Value1;
-        
+
         // find a match if all values are present and provided in the right order
         var matchingEnum = MultiValueEnum.FromValuesOrder<TestMultiValueEnum>(value1, value2, value3, value4);
         Assert.Equal(TestMultiValueEnum.Value4, matchingEnum);
-        
+
         // don't find a match if not all values are provided
         var matchingEnum2 = MultiValueEnum.FromValuesOrder<TestMultiValueEnum>(value1, value2, value3);
         Assert.Null(matchingEnum2);
-        
+
         // don't find a match if all values are present, but not provided in the wrong order
         var matchingEnum3 = MultiValueEnum.FromValuesOrder<TestMultiValueEnum>(value4, value1, value3, value2);
         Assert.Null(matchingEnum3);
     }
-    
+
+    [Fact]
+    public void TestConversions()
+    {
+        const int feet = 123;
+
+        // convert feet to meters
+        var meters = NetTools.Distance.Feet.ToMeters(feet);
+    }
 }

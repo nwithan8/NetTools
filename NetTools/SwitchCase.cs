@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NetTools;
 // Thanks to https://stackoverflow.com/a/34388226/13343799

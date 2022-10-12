@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace NetTools.Attributes;
+namespace NetTools;
 
 public abstract class CustomAttribute : Attribute, ICustomAttribute
 {

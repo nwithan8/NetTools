@@ -1,3 +1,5 @@
+using System;
+
 namespace NetTools;
 
 public static class Time

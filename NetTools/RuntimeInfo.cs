@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -43,12 +44,6 @@ public static class RuntimeInfo
         /// <returns>Details about the operating system.</returns>
         public static OperatingSystem OperatingSystem => Environment.OSVersion;
 
-        public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-
-        public static bool IsLinux => RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
-
-        public static bool IsMacOs => RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
-
         /// <summary>
         ///     Get the name of the operating system.
         /// </summary>
@@ -61,9 +56,9 @@ public static class RuntimeInfo
                 var name = "Unknown";
                 var @switch = new SwitchCase
                 {
-                    { IsLinux, () => name = "Linux" },
-                    { IsMacOs, () => name = "MacOS" },
-                    { IsWindows, () => name = "Windows" },
+                    { RuntimeInformation.IsOSPlatform(OSPlatform.Windows), () => name = "Linux" },
+                    { RuntimeInformation.IsOSPlatform(OSPlatform.Linux), () => name = "MacOS" },
+                    { RuntimeInformation.IsOSPlatform(OSPlatform.OSX), () => name = "Windows" },
                     { Scenario.Default, () => name = "Unknown" }
                 };
 

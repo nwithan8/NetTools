@@ -1,4 +1,5 @@
-using System.Globalization;
+using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace NetTools;
@@ -27,6 +28,11 @@ public static class RegularExpressions
     /// <returns>True if the string matches the pattern, false otherwise.</returns>
     public static bool Matches(string input, string pattern, bool ignoreCase = true)
     {
+        if (!Validation.Exists(input))
+        {
+            return false;
+        }
+        
         try
         {
             return Regex.IsMatch(input,

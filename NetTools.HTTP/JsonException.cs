@@ -1,4 +1,4 @@
-namespace NetTools.Exceptions
+namespace NetTools
 {
     public class JsonException : Newtonsoft.Json.JsonSerializationException
     {

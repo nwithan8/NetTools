@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
         <LangVersion>10</LangVersion>
-        <ImplicitUsings>disable</ImplicitUsings>
+        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
         <RootNamespace>NetTools</RootNamespace>
@@ -52,6 +52,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="RestSharp" Version="108.0.2" />
     </ItemGroup>
-    
+
 </Project>

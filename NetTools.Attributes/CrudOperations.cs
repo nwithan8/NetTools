@@ -1,4 +1,4 @@
-namespace NetTools.Attributes;
+namespace NetTools;
 
 public static class CrudOperations
 {

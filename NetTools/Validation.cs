@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -29,22 +30,23 @@ public static class Validation
 
         return value1.Equals(value2);
     }
-
-    public static bool IsValidPhoneNumber(string phoneNumber, string countryCode = "US")
-    {
-        return Exists(phoneNumber) && PhoneNumbers.IsValidPhoneNumber(phoneNumber, countryCode);
+    
+    public static bool IsValidUnitedStatesPhoneNumber(string phoneNumber)
+    { 
+        const string pattern = @"^\d{3}-\d{3}-\d{4}$";
+        return RegularExpressions.Matches(phoneNumber, pattern, true);
     }
 
     public static bool IsValidSocialSecurityNumber(string ssn)
     {
-        var r = new Regex(@"^(?!(000|666|9))\d{3}-(?!00)\d{2}-(?!0000)\d{4}$");
-        return r.IsMatch(ssn);
+        const string pattern = @"^(?!(000|666|9))\d{3}-(?!00)\d{2}-(?!0000)\d{4}$";
+        return RegularExpressions.Matches(ssn, pattern, true);
     }
 
     public static bool IsValidPassportNumber(string passportNumber)
     {
-        var r = new Regex(@"^[A-Z|\d]{6,9}$");
-        return r.IsMatch(passportNumber);
+        const string pattern = @"^[A-Z|\d]{6,9}$";
+        return RegularExpressions.Matches(passportNumber, pattern, true);
     }
 
     public static bool IsValidEmail(string email)
@@ -72,11 +74,11 @@ public static class Validation
                 return match.Groups[1].Value + domainName;
             }
         }
-        catch (RegexMatchTimeoutException e)
+        catch (RegexMatchTimeoutException)
         {
             return false;
         }
-        catch (ArgumentException e)
+        catch (ArgumentException)
         {
             return false;
         }
@@ -84,23 +86,14 @@ public static class Validation
         // source: VB.NET here: http://emailregex.com/
         const string emailAddressPattern = @"^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$";
 
-        return RegularExpressions.Matches(input: email,
-            pattern: emailAddressPattern,
-            ignoreCase: true);
+        return RegularExpressions.Matches(email, emailAddressPattern, true);
     }
 
     public static bool IsValidPassword(string password, int minLength = 1, int maxLength = 100)
     {
-        if (!Exists(password))
-        {
-            return false;
-        }
-
         var passwordPattern = @"(?=.*[A-Z])(?=.*\\d)(?=.*[¡!@#$%*¿?\\-_.\\(\\)])[A-Za-z\\d¡!@#$%*¿?\\-\\(\\)&]{" +
                               minLength + "," + maxLength + "}";
 
-        return RegularExpressions.Matches(input: password,
-            pattern: passwordPattern,
-            ignoreCase: true);
+        return RegularExpressions.Matches(password, passwordPattern, true);
     }
 }

@@ -1,4 +1,4 @@
-namespace NetTools.Conversions;
+namespace NetTools;
 
 public static class Distance
 {

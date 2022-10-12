@@ -1,3 +1,5 @@
+using System;
+
 namespace NetTools.Exceptions;
 
 public class NetToolsException : Exception

@@ -3,15 +3,15 @@
     <PropertyGroup>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <TargetFrameworks>net462;net48;net5.0;net6.0;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
         <LangVersion>10</LangVersion>
 
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0"/>
+        <PackageReference Include="xunit" Version="2.4.1"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -23,7 +23,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\NetTools\NetTools.csproj" />
+        <ProjectReference Include="..\NetTools\NetTools.csproj"/>
+        <ProjectReference Include="..\NetTools.Attributes\NetTools.Attributes.csproj"/>
+        <ProjectReference Include="..\NetTools.Conversions\NetTools.Conversions.csproj"/>
+        <ProjectReference Include="..\NetTools.Crypto\NetTools.Crypto.csproj"/>
+        <ProjectReference Include="..\NetTools.Files\NetTools.Files.csproj"/>
+        <ProjectReference Include="..\NetTools.HTTP\NetTools.HTTP.csproj"/>
+        <ProjectReference Include="..\NetTools.Localization\NetTools.Localization.csproj"/>
     </ItemGroup>
 
 </Project>

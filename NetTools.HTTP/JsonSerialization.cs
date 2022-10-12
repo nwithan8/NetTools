@@ -1,9 +1,8 @@
 using System.Dynamic;
-using NetTools.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using JsonSerializationException = NetTools.Exceptions.JsonSerializationException;
+using JsonSerializationException = NetTools.JsonSerializationException;
 
 namespace NetTools
 {
