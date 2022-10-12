@@ -7,6 +7,13 @@ internal class MetricVolumeUnitInfo : BaseMetricUnitInfo, IVolumeUnitInfo
     }
 }
 
+internal class ImperialVolumeUnitInfo : BaseImperialUnitInfo, IVolumeUnitInfo
+{
+    internal ImperialVolumeUnitInfo(string name, string symbol, double inTeaspoons) : base(name, symbol, inTeaspoons)
+    {
+    }
+}
+
 internal interface IVolumeUnitInfo : IConvertableUnitInfo
 {
 }

@@ -33,4 +33,24 @@ public class UnitTests
 
         Assert.Equal(160.9344, kilometers, 3); // 3 decimal places tolerance
     }
+
+    [Fact]
+    public void TestVolumeConversion()
+    {
+        const int gallons = 100;
+
+        var liters = Conversions.Volume.Convert(gallons, Volume.Units.Gallons, Volume.Units.Liters);
+
+        Assert.Equal(378.5411, liters, 3); // 3 decimal places tolerance
+    }
+
+    [Fact]
+    public void TestWeightConversion()
+    {
+        const int pounds = 100;
+
+        var kilograms = Conversions.Weight.Convert(pounds, Weight.Units.Pounds, Weight.Units.Kilograms);
+
+        Assert.Equal(45.3592, kilograms, 3); // 3 decimal places tolerance
+    }
 }

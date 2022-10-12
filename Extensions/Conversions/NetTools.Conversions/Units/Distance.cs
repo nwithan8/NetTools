@@ -7,17 +7,11 @@ internal class MetricDistanceUnitInfo : BaseMetricUnitInfo, IDistanceUnitInfo
     }
 }
 
-internal class ImperialDistanceUnitInfo : BaseUnitInfo, IDistanceUnitInfo
+internal class ImperialDistanceUnitInfo : BaseImperialUnitInfo, IDistanceUnitInfo
 {
-    internal ImperialDistanceUnitInfo(string name, string symbol, double inInches) : base(name, symbol)
+    internal ImperialDistanceUnitInfo(string name, string symbol, double inInches) : base(name, symbol, inInches)
     {
-        InInches = inInches;
     }
-
-    internal double InInches { get; }
-
-    public Func<double, double> FromBase => x => x / InInches;
-    public Func<double, double> ToBase => x => x * InInches;
 }
 
 internal interface IDistanceUnitInfo : IConvertableUnitInfo

@@ -52,14 +52,14 @@ namespace NetTools.Conversions
 
         private static double ConvertMetricUnits(double value, MetricDistanceUnitInfo currentConvertableConvertableUnitInfo, MetricDistanceUnitInfo finalConvertableConvertableUnitInfo)
         {
-            var toBase = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to meters
-            return finalConvertableConvertableUnitInfo.FromBase(toBase); // Convert meters to final unit
+            var inMeters = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to meters
+            return finalConvertableConvertableUnitInfo.FromBase(inMeters); // Convert meters to final unit
         }
 
         private static double ConvertImperialUnits(double value, ImperialDistanceUnitInfo currentConvertableConvertableUnitInfo, ImperialDistanceUnitInfo finalConvertableConvertableUnitInfo)
         {
-            var toBase = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to inches
-            return finalConvertableConvertableUnitInfo.FromBase(toBase); // Convert inches to final unit
+            var inInches = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to inches
+            return finalConvertableConvertableUnitInfo.FromBase(inInches); // Convert inches to final unit
         }
 
         private static double ConvertMetricToImperialUnits(double value, MetricDistanceUnitInfo currentConvertableConvertableUnitInfo, ImperialDistanceUnitInfo finalConvertableConvertableUnitInfo)

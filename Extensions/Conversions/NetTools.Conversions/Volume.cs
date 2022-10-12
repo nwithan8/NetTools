@@ -6,24 +6,31 @@ namespace NetTools.Conversions
     {
         public class Units : Enum
         {
-            public static readonly Units Yottaliters = new Units(1, new MetricDistanceUnitInfo("Yottaliters", "Ym", 1e+24));
-            public static readonly Units Zettaliters = new Units(2, new MetricDistanceUnitInfo("Zettaliters", "Zm", 1e+21));
-            public static readonly Units Exaliters = new Units(3, new MetricDistanceUnitInfo("Exaliters", "Em", 1e+18));
-            public static readonly Units Petaliters = new Units(4, new MetricDistanceUnitInfo("Petaliters", "Pm", 1e+15));
-            public static readonly Units Teraliters = new Units(5, new MetricDistanceUnitInfo("Teraliters", "Tm", 1e+12));
-            public static readonly Units Gigaliters = new Units(6, new MetricDistanceUnitInfo("Gigaliters", "Gm", 1e+09));
-            public static readonly Units Kiloliters = new Units(7, new MetricDistanceUnitInfo("Kiloliters", "km", 1e+03));
-            public static readonly Units Hectoliters = new Units(8, new MetricDistanceUnitInfo("Hectoliters", "hm", 1e+02));
-            public static readonly Units Decaliters = new Units(9, new MetricDistanceUnitInfo("Decaliters", "dam", 1e+01));
-            public static readonly Units Liters = new Units(10, new MetricDistanceUnitInfo("Liters", "m", 1e+00));
-            public static readonly Units Deciliters = new Units(11, new MetricDistanceUnitInfo("Deciliters", "dm", 1e-01));
-            public static readonly Units Centiliters = new Units(12, new MetricDistanceUnitInfo("Centiliters", "cm", 1e-02));
-            public static readonly Units Milliliters = new Units(13, new MetricDistanceUnitInfo("Milliliters", "mm", 1e-03));
-            public static readonly Units Microliters = new Units(14, new MetricDistanceUnitInfo("Microliters", "um", 1e-06));
-            public static readonly Units Nanoliters = new Units(15, new MetricDistanceUnitInfo("Nanoliters", "nm", 1e-09));
-            public static readonly Units Picoliters = new Units(16, new MetricDistanceUnitInfo("Picoliters", "pm", 1e-12));
+            public static readonly Units Yottaliters = new Units(1, new MetricVolumeUnitInfo("Yottaliters", "YL", 24));
+            public static readonly Units Zettaliters = new Units(2, new MetricVolumeUnitInfo("Zettaliters", "ZL", 21));
+            public static readonly Units Exaliters = new Units(3, new MetricVolumeUnitInfo("Exaliters", "EL", 18));
+            public static readonly Units Petaliters = new Units(4, new MetricVolumeUnitInfo("Petaliters", "PL", 15));
+            public static readonly Units Teraliters = new Units(5, new MetricVolumeUnitInfo("Teraliters", "TL", 12));
+            public static readonly Units Gigaliters = new Units(6, new MetricVolumeUnitInfo("Gigaliters", "GL", 9));
+            public static readonly Units Kiloliters = new Units(7, new MetricVolumeUnitInfo("Kiloliters", "kL", 3));
+            public static readonly Units Hectoliters = new Units(8, new MetricVolumeUnitInfo("Hectoliters", "hL", 2));
+            public static readonly Units Decaliters = new Units(9, new MetricVolumeUnitInfo("Decaliters", "daL", 1));
+            public static readonly Units Liters = new Units(10, new MetricVolumeUnitInfo("Liters", "L", 0));
+            public static readonly Units Deciliters = new Units(11, new MetricVolumeUnitInfo("Deciliters", "dL", -1));
+            public static readonly Units Centiliters = new Units(12, new MetricVolumeUnitInfo("Centiliters", "cL", -2));
+            public static readonly Units Milliliters = new Units(13, new MetricVolumeUnitInfo("Milliliters", "mL", -3));
+            public static readonly Units Microliters = new Units(14, new MetricVolumeUnitInfo("Microliters", "uL", -6));
+            public static readonly Units Nanoliters = new Units(15, new MetricVolumeUnitInfo("Nanoliters", "nL", -9));
+            public static readonly Units Picoliters = new Units(16, new MetricVolumeUnitInfo("Picoliters", "pL", -12));
+            public static readonly Units Teaspoons = new Units(17, new ImperialVolumeUnitInfo("Teaspoons", "tsp", 1));
+            public static readonly Units Tablespoons = new Units(18, new ImperialVolumeUnitInfo("Tablespoons", "tbsp", 3));
+            public static readonly Units FluidOunces = new Units(19, new ImperialVolumeUnitInfo("Fluid Ounces", "fl oz", 6));
+            public static readonly Units Cups = new Units(20, new ImperialVolumeUnitInfo("Cups", "cup", 48));
+            public static readonly Units Pints = new Units(21, new ImperialVolumeUnitInfo("Pints", "pt", 96));
+            public static readonly Units Quarts = new Units(22, new ImperialVolumeUnitInfo("Quarts", "qt", 192));
+            public static readonly Units Gallons = new Units(23, new ImperialVolumeUnitInfo("Gallons", "gal", 768));
 
-            private Units(int id, IConvertableUnitInfo convertableUnitInfo) : base(id)
+            private Units(int id, IVolumeUnitInfo convertableUnitInfo) : base(id)
             {
                 ConvertableUnitInfo = convertableUnitInfo;
             }
@@ -38,38 +45,38 @@ namespace NetTools.Conversions
 
             return currentUnitInfo switch
             {
-                ImperialDistanceUnitInfo currentImperialUnitInfo when finalUnitInfo is ImperialDistanceUnitInfo finalImperialUnitInfo => ConvertImperialUnits(value, currentImperialUnitInfo, finalImperialUnitInfo),
-                ImperialDistanceUnitInfo currentImperialUnitInfo when finalUnitInfo is MetricDistanceUnitInfo finalMetricUnitInfo => ConvertImperialToMetricUnits(value, currentImperialUnitInfo, finalMetricUnitInfo),
-                MetricDistanceUnitInfo currentMetricUnitInfo when finalUnitInfo is ImperialDistanceUnitInfo finalImperialUnitInfo => ConvertMetricToImperialUnits(value, currentMetricUnitInfo, finalImperialUnitInfo),
-                MetricDistanceUnitInfo currentMetricUnitInfo when finalUnitInfo is MetricDistanceUnitInfo finalMetricUnitInfo => ConvertMetricUnits(value, currentMetricUnitInfo, finalMetricUnitInfo),
+                ImperialVolumeUnitInfo currentImperialUnitInfo when finalUnitInfo is ImperialVolumeUnitInfo finalImperialUnitInfo => ConvertImperialUnits(value, currentImperialUnitInfo, finalImperialUnitInfo),
+                ImperialVolumeUnitInfo currentImperialUnitInfo when finalUnitInfo is MetricVolumeUnitInfo finalMetricUnitInfo => ConvertImperialToMetricUnits(value, currentImperialUnitInfo, finalMetricUnitInfo),
+                MetricVolumeUnitInfo currentMetricUnitInfo when finalUnitInfo is ImperialVolumeUnitInfo finalImperialUnitInfo => ConvertMetricToImperialUnits(value, currentMetricUnitInfo, finalImperialUnitInfo),
+                MetricVolumeUnitInfo currentMetricUnitInfo when finalUnitInfo is MetricVolumeUnitInfo finalMetricUnitInfo => ConvertMetricUnits(value, currentMetricUnitInfo, finalMetricUnitInfo),
                 var _ => throw new ArgumentException("Invalid unit type")
             };
         }
 
-        private static double ConvertMetricUnits(double value, MetricDistanceUnitInfo currentConvertableConvertableUnitInfo, MetricDistanceUnitInfo finalConvertableConvertableUnitInfo)
+        private static double ConvertMetricUnits(double value, MetricVolumeUnitInfo currentConvertableConvertableUnitInfo, MetricVolumeUnitInfo finalConvertableConvertableUnitInfo)
         {
-            var toBase = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to meters
-            return finalConvertableConvertableUnitInfo.FromBase(toBase); // Convert meters to final unit
+            var inLiters = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to liters
+            return finalConvertableConvertableUnitInfo.FromBase(inLiters); // Convert liters to final unit
         }
 
-        private static double ConvertImperialUnits(double value, ImperialDistanceUnitInfo currentConvertableConvertableUnitInfo, ImperialDistanceUnitInfo finalConvertableConvertableUnitInfo)
+        private static double ConvertImperialUnits(double value, ImperialVolumeUnitInfo currentConvertableConvertableUnitInfo, ImperialVolumeUnitInfo finalConvertableConvertableUnitInfo)
         {
-            var toBase = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to inches
-            return finalConvertableConvertableUnitInfo.FromBase(toBase); // Convert inches to final unit
+            var inTeaspoons = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to teaspoons
+            return finalConvertableConvertableUnitInfo.FromBase(inTeaspoons); // Convert teaspoons to final unit
         }
 
-        private static double ConvertMetricToImperialUnits(double value, MetricDistanceUnitInfo currentConvertableConvertableUnitInfo, ImperialDistanceUnitInfo finalConvertableConvertableUnitInfo)
+        private static double ConvertMetricToImperialUnits(double value, MetricVolumeUnitInfo currentConvertableConvertableUnitInfo, ImperialVolumeUnitInfo finalConvertableConvertableUnitInfo)
         {
-            var toBase = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to meters
-            var toInches = toBase * 39.3701; // Convert meters to inches
-            return finalConvertableConvertableUnitInfo.FromBase(toInches); // Convert inches to final unit
+            var inLiters = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to liters
+            var inTeaspoons = inLiters * 202.884; // Convert liters to teaspoons
+            return finalConvertableConvertableUnitInfo.FromBase(inTeaspoons); // Convert teaspoons to final unit
         }
 
-        private static double ConvertImperialToMetricUnits(double value, ImperialDistanceUnitInfo currentConvertableConvertableUnitInfo, MetricDistanceUnitInfo finalConvertableConvertableUnitInfo)
+        private static double ConvertImperialToMetricUnits(double value, ImperialVolumeUnitInfo currentConvertableConvertableUnitInfo, MetricVolumeUnitInfo finalConvertableConvertableUnitInfo)
         {
-            var toBase = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to inches
-            var toMeters = toBase / 39.3701; // Convert inches to meters
-            return finalConvertableConvertableUnitInfo.FromBase(toMeters); // Convert meters to final unit
+            var inTeaspoons = currentConvertableConvertableUnitInfo.ToBase(value); // Convert initial unit to teaspoons
+            var inLiters = inTeaspoons / 202.884; // Convert teaspoons to liters
+            return finalConvertableConvertableUnitInfo.FromBase(inLiters); // Convert liters to final unit
         }
 
         public static class Common
