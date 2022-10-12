@@ -81,169 +81,124 @@ namespace NetTools.Conversions
             public static class Miles
             {
                 public static double ToFeet(double miles)
-                {
-                    return Convert(miles, Units.Miles, Units.Feet);
-                }
+                    => Convert(miles, Units.Miles, Units.Feet);
 
                 public static double ToYards(double miles)
-                {
-                    return Convert(miles, Units.Miles, Units.Yards);
-                }
+                    => Convert(miles, Units.Miles, Units.Yards);
 
                 public static double ToInches(double miles)
-                {
-                    return Convert(miles, Units.Miles, Units.Inches);
-                }
+                    => Convert(miles, Units.Miles, Units.Inches);
 
                 public static double ToKilometers(double miles)
-                {
-                    return Convert(miles, Units.Miles, Units.Kilometers);
-                }
+                    => Convert(miles, Units.Miles, Units.Kilometers);
 
                 public static double ToMeters(double miles)
-                {
-                    return Convert(miles, Units.Miles, Units.Meters);
-                }
+                    => Convert(miles, Units.Miles, Units.Meters);
             }
 
             public static class Yards
             {
                 public static double ToFeet(double yards)
-                {
-                    return Convert(yards, Units.Yards, Units.Feet);
-                }
+                    => Convert(yards, Units.Yards, Units.Feet);
 
                 public static double ToMiles(double yards)
-                {
-                    return Convert(yards, Units.Yards, Units.Miles);
-                }
+                    => Convert(yards, Units.Yards, Units.Miles);
 
                 public static double ToInches(double yards)
-                {
-                    return Convert(yards, Units.Yards, Units.Inches);
-                }
+                    => Convert(yards, Units.Yards, Units.Inches);
 
                 public static double ToKilometers(double yards)
-                {
-                    return Convert(yards, Units.Yards, Units.Kilometers);
-                }
+                    => Convert(yards, Units.Yards, Units.Kilometers);
 
                 public static double ToMeters(double yards)
-                {
-                    return Convert(yards, Units.Yards, Units.Meters);
-                }
+                    => Convert(yards, Units.Yards, Units.Meters);
             }
 
             public static class Feet
             {
                 public static double ToMiles(double feet)
-                {
-                    return Convert(feet, Units.Feet, Units.Miles);
-                }
+                    => Convert(feet, Units.Feet, Units.Miles);
+
 
                 public static double ToYards(double feet)
-                {
-                    return Convert(feet, Units.Feet, Units.Yards);
-                }
+                    => Convert(feet, Units.Feet, Units.Yards);
+
 
                 public static double ToInches(double feet)
-                {
-                    return Convert(feet, Units.Feet, Units.Inches);
-                }
+                    => Convert(feet, Units.Feet, Units.Inches);
+
 
                 public static double ToMeters(double feet)
-                {
-                    return Convert(feet, Units.Feet, Units.Meters);
-                }
+                    => Convert(feet, Units.Feet, Units.Meters);
+
 
                 public static double ToKilometers(double feet)
-                {
-                    return Convert(feet, Units.Feet, Units.Kilometers);
-                }
+                    => Convert(feet, Units.Feet, Units.Kilometers);
             }
 
             public static class Inches
             {
                 public static double ToFeet(double inches)
-                {
-                    return Convert(inches, Units.Inches, Units.Feet);
-                }
+                    => Convert(inches, Units.Inches, Units.Feet);
+
 
                 public static double ToMiles(double inches)
-                {
-                    return Convert(inches, Units.Inches, Units.Miles);
-                }
+                    => Convert(inches, Units.Inches, Units.Miles);
+
 
                 public static double ToYards(double inches)
-                {
-                    return Convert(inches, Units.Inches, Units.Yards);
-                }
+                    => Convert(inches, Units.Inches, Units.Yards);
+
 
                 public static double ToMeters(double inches)
-                {
-                    return Convert(inches, Units.Inches, Units.Meters);
-                }
+                    => Convert(inches, Units.Inches, Units.Meters);
+
 
                 public static double ToKilometers(double inches)
-                {
-                    return Convert(inches, Units.Inches, Units.Kilometers);
-                }
+                    => Convert(inches, Units.Inches, Units.Kilometers);
             }
 
             public static class Kilometers
             {
                 public static double ToMeters(double kilometers)
-                {
-                    return Convert(kilometers, Units.Kilometers, Units.Meters);
-                }
+                    => Convert(kilometers, Units.Kilometers, Units.Meters);
+
 
                 public static double ToMiles(double kilometers)
-                {
-                    return Convert(kilometers, Units.Kilometers, Units.Miles);
-                }
+                    => Convert(kilometers, Units.Kilometers, Units.Miles);
+
 
                 public static double ToFeet(double kilometers)
-                {
-                    return Convert(kilometers, Units.Kilometers, Units.Feet);
-                }
+                    => Convert(kilometers, Units.Kilometers, Units.Feet);
+
 
                 public static double ToYards(double kilometers)
-                {
-                    return Convert(kilometers, Units.Kilometers, Units.Yards);
-                }
+                    => Convert(kilometers, Units.Kilometers, Units.Yards);
+
 
                 public static double ToInches(double kilometers)
-                {
-                    return Convert(kilometers, Units.Kilometers, Units.Inches);
-                }
+                    => Convert(kilometers, Units.Kilometers, Units.Inches);
             }
 
             public static class Meters
             {
                 public static double ToKilometers(double meters)
-                {
-                    return Convert(meters, Units.Meters, Units.Kilometers);
-                }
+                    => Convert(meters, Units.Meters, Units.Kilometers);
+
 
                 public static double ToFeet(double meters)
-                {
-                    return Convert(meters, Units.Meters, Units.Feet);
-                }
+                    => Convert(meters, Units.Meters, Units.Feet);
+
 
                 public static double ToYards(double meters)
-                {
-                    return Convert(meters, Units.Meters, Units.Yards);
-                }
+                    => Convert(meters, Units.Meters, Units.Yards);
+
 
                 public static double ToMiles(double meters)
-                {
-                    return Convert(meters, Units.Meters, Units.Miles);
-                }
+                    => Convert(meters, Units.Meters, Units.Miles);
 
                 public static double ToInches(double meters)
-                {
-                    return Convert(meters, Units.Meters, Units.Inches);
-                }
+                    => Convert(meters, Units.Meters, Units.Inches);
             }
         }
     }

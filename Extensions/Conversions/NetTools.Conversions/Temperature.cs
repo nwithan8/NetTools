@@ -35,40 +35,28 @@ public static class Temperature
         public static class Celsius
         {
             public static double ToFahrenheit(double celsius)
-            {
-                return Convert(celsius, Units.Celsius, Units.Fahrenheit);
-            }
+                => Convert(celsius, Units.Celsius, Units.Fahrenheit);
 
             public static double ToKelvin(double celsius)
-            {
-                return Convert(celsius, Units.Celsius, Units.Kelvin);
-            }
+                => Convert(celsius, Units.Celsius, Units.Kelvin);
         }
 
         public static class Fahrenheit
         {
             public static double ToCelsius(double fahrenheit)
-            {
-                return Convert(fahrenheit, Units.Fahrenheit, Units.Celsius);
-            }
+                => Convert(fahrenheit, Units.Fahrenheit, Units.Celsius);
 
             public static double ToKelvin(double fahrenheit)
-            {
-                return Convert(fahrenheit, Units.Fahrenheit, Units.Kelvin);
-            }
+                => Convert(fahrenheit, Units.Fahrenheit, Units.Kelvin);
         }
 
         public static class Kelvin
         {
             public static double ToCelsius(double kelvin)
-            {
-                return Convert(kelvin, Units.Kelvin, Units.Celsius);
-            }
+                => Convert(kelvin, Units.Kelvin, Units.Celsius);
 
             public static double ToFahrenheit(double kelvin)
-            {
-                return Convert(kelvin, Units.Kelvin, Units.Fahrenheit);
-            }
+                => Convert(kelvin, Units.Kelvin, Units.Fahrenheit);
         }
     }
 }

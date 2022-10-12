@@ -78,6 +78,80 @@ namespace NetTools.Conversions
 
         public static class Common
         {
+            public static class Pounds
+            {
+                public static double ToKilograms(double value)
+                    => Convert(value, Units.Pounds, Units.Kilograms);
+
+                public static double ToGrams(double value)
+                    => Convert(value, Units.Pounds, Units.Grams);
+
+                public static double ToOunces(double value)
+                    => Convert(value, Units.Pounds, Units.Ounces);
+
+                public static double ToTons(double value)
+                    => Convert(value, Units.Pounds, Units.Tons);
+            }
+
+            public static class Ounces
+            {
+                public static double ToKilograms(double value)
+                    => Convert(value, Units.Ounces, Units.Kilograms);
+
+                public static double ToGrams(double value)
+                    => Convert(value, Units.Ounces, Units.Grams);
+
+                public static double ToPounds(double value)
+                    => Convert(value, Units.Ounces, Units.Pounds);
+
+                public static double ToTons(double value)
+                    => Convert(value, Units.Ounces, Units.Tons);
+            }
+
+            public static class Tons
+            {
+                public static double ToKilograms(double value)
+                    => Convert(value, Units.Tons, Units.Kilograms);
+
+                public static double ToGrams(double value)
+                    => Convert(value, Units.Tons, Units.Grams);
+
+                public static double ToPounds(double value)
+                    => Convert(value, Units.Tons, Units.Pounds);
+
+                public static double ToOunces(double value)
+                    => Convert(value, Units.Tons, Units.Ounces);
+            }
+
+            public static class Grams
+            {
+                public static double ToKilograms(double value)
+                    => Convert(value, Units.Grams, Units.Kilograms);
+
+                public static double ToOunces(double value)
+                    => Convert(value, Units.Grams, Units.Ounces);
+
+                public static double ToPounds(double value)
+                    => Convert(value, Units.Grams, Units.Pounds);
+
+                public static double ToTons(double value)
+                    => Convert(value, Units.Grams, Units.Tons);
+            }
+
+            public static class Kilograms
+            {
+                public static double ToGrams(double value)
+                    => Convert(value, Units.Kilograms, Units.Grams);
+
+                public static double ToOunces(double value)
+                    => Convert(value, Units.Kilograms, Units.Ounces);
+
+                public static double ToPounds(double value)
+                    => Convert(value, Units.Kilograms, Units.Pounds);
+
+                public static double ToTons(double value)
+                    => Convert(value, Units.Kilograms, Units.Tons);
+            }
         }
     }
 }
