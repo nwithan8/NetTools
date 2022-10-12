@@ -3,7 +3,7 @@ using RestSharp;
 
 // ReSharper disable InconsistentNaming
 
-namespace NetTools;
+namespace NetTools.HTTP;
 
 public static class Http
 {

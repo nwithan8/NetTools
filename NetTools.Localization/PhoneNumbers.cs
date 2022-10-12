@@ -2,7 +2,7 @@ using System.Globalization;
 using Nager.Country;
 using PhoneNumbers;
 
-namespace NetTools
+namespace NetTools.Localization
 {
     public static class PhoneNumbers
     {

@@ -1,6 +1,6 @@
 using Nager.Country;
 
-namespace NetTools;
+namespace NetTools.Localization;
 
 public class Country
 {

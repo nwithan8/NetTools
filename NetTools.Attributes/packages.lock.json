@@ -11,6 +11,12 @@
           "Microsoft.NETFramework.ReferenceAssemblies.net461": "1.0.2"
         }
       },
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+      },
       "Microsoft.NETFramework.ReferenceAssemblies.net461": {
         "type": "Transitive",
         "resolved": "1.0.2",
@@ -26,6 +32,12 @@
         "dependencies": {
           "Microsoft.NETFramework.ReferenceAssemblies.net461": "1.0.2"
         }
+      },
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
       },
       "NETStandard.Library": {
         "type": "Direct",
@@ -57,13 +69,33 @@
           "Microsoft.NETFramework.ReferenceAssemblies.net461": "1.0.2"
         }
       },
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+      },
       "Microsoft.NETFramework.ReferenceAssemblies.net461": {
         "type": "Transitive",
         "resolved": "1.0.2",
         "contentHash": "8shzGaD5pZi4npuJYCM3de6pl0zlefcbyTIvXIiCdsTqauZ7lAhdaJVtJSqlhYid9VosFAOygBykoJ1SEOlGWA=="
       }
     },
-    ".NETCoreApp,Version=v5.0": {},
-    "net6.0": {}
+    ".NETCoreApp,Version=v5.0": {
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+      }
+    },
+    "net6.0": {
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+      }
+    }
   }
 }

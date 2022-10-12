@@ -6,11 +6,11 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
-        <RootNamespace>NetTools</RootNamespace>
-        <AssemblyName>NetTools</AssemblyName>
+        <RootNamespace>NetTools.Files</RootNamespace>
+        <AssemblyName>NetTools.Conversions</AssemblyName>
         <Configurations>Release;Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <PackageId>NetTools</PackageId>
+        <PackageId>NetTools.Conversions</PackageId>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     </PropertyGroup>
 
@@ -19,7 +19,7 @@
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
         <OutputPath>bin\Debug</OutputPath>
-        <DefineConstants>TRACE;DEBUG;NET45</DefineConstants>
+        <DefineConstants>TRACE;DEBUG</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
         <Prefer32Bit>false</Prefer32Bit>
@@ -34,7 +34,7 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
-        <DocumentationFile>..\lib\net\NetTools.XML</DocumentationFile>
+        <DocumentationFile>..\lib\net\NetTools.Conversions.XML</DocumentationFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <NoWarn>1701;1702;1591;1570;CS8618;CS8603;CS8602;CS8765;CS8767;CS0659;CS0618</NoWarn>
     </PropertyGroup>
@@ -52,6 +52,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="N8.NetTools" Version="0.2.0" />
     </ItemGroup>
 
 </Project>

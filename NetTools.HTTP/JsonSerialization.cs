@@ -2,9 +2,8 @@ using System.Dynamic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using JsonSerializationException = NetTools.JsonSerializationException;
 
-namespace NetTools
+namespace NetTools.HTTP
 {
     /// <summary>
     ///     A JSON serializer instance with internal de/serialization settings

@@ -11,6 +11,12 @@
           "Microsoft.NETFramework.ReferenceAssemblies.net461": "1.0.2"
         }
       },
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+      },
       "Newtonsoft.Json": {
         "type": "Direct",
         "requested": "[13.0.1, )",
@@ -46,6 +52,12 @@
         "dependencies": {
           "Microsoft.NETFramework.ReferenceAssemblies.net461": "1.0.2"
         }
+      },
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
       },
       "NETStandard.Library": {
         "type": "Direct",
@@ -155,6 +167,12 @@
           "Microsoft.NETFramework.ReferenceAssemblies.net461": "1.0.2"
         }
       },
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+      },
       "Newtonsoft.Json": {
         "type": "Direct",
         "requested": "[13.0.1, )",
@@ -234,6 +252,12 @@
       }
     },
     ".NETCoreApp,Version=v5.0": {
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+      },
       "Newtonsoft.Json": {
         "type": "Direct",
         "requested": "[13.0.1, )",
@@ -256,6 +280,12 @@
       }
     },
     "net6.0": {
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+      },
       "Newtonsoft.Json": {
         "type": "Direct",
         "requested": "[13.0.1, )",
