@@ -73,6 +73,16 @@ public class SwitchCase : IEnumerable<ICase>
     }
 
     /// <summary>
+    ///     Add a case where matching the result of an function triggers an Action
+    /// </summary>
+    /// <param name="func">Func whose return value to match.</param>
+    /// <param name="action">Action to trigger on match.</param>
+    public void Add(Func<object> func, Action? action)
+    {
+        _cases.Add(new StaticCase(func.Invoke(), action));
+    }
+
+    /// <summary>
     ///     Add a case to store Actions in special scenarios. Overrides any previously-set actions for the same scenario.
     /// </summary>
     /// <param name="scenario">CaseEnum to trigger special storage.</param>
@@ -94,9 +104,17 @@ public class SwitchCase : IEnumerable<ICase>
     /// <param name="value">Value to match.</param>
     public void MatchAll(object value)
     {
-        var matchingCase = _cases.Where(c => c.Value == value);
+        var matchingCases = new List<ICase>();
 
-        ProcessMatchingCases(matchingCase.ToList());
+        foreach (var @case in _cases)
+        {
+            if (@case.Value.Equals(value))
+            {
+                matchingCases.Add(@case);
+            }
+        }
+
+        ProcessMatchingCases(matchingCases.ToList());
     }
 
     /// <summary>
@@ -107,13 +125,18 @@ public class SwitchCase : IEnumerable<ICase>
     {
         var matchingCases = new List<ICase>();
 
-        var matchingCase = _cases.FirstOrDefault(c => c.Value.Equals(value));
-        if (matchingCase != null)
+        foreach (var @case in _cases)
         {
-            matchingCases.Add(matchingCase);
+            if (!@case.Value.Equals(value))
+            {
+                continue;
+            }
+
+            matchingCases.Add(@case);
+            break;
         }
 
-        ProcessMatchingCases(matchingCases);
+        ProcessMatchingCases(matchingCases.ToList());
     }
 
     IEnumerator<ICase> IEnumerable<ICase>.GetEnumerator()
