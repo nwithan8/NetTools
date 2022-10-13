@@ -6,43 +6,108 @@ namespace NetTools;
 
 public static class RegularExpressions
 {
-    /// <summary>
-    ///     Check if a matching substring exists in a string
-    /// </summary>
-    /// <param name="pattern">Pattern to search for.</param>
-    /// <param name="text">Text to search within.</param>
-    /// <returns>True if a matching substring exists, false otherwise.</returns>
-    public static bool MatchExists(string pattern, string text)
+    private static RegexOptions GetDefaultOptions(bool ignoreCase = false)
     {
-        var rx = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
-        var matches = rx.Matches(text);
-        return matches.Count > 0;
+        return RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | (ignoreCase ? RegexOptions.IgnoreCase : RegexOptions.None);
     }
+
+    private static readonly TimeSpan DefaultTimeout = TimeSpan.FromMilliseconds(250);
 
     /// <summary>
     ///     Check if the given string matches the given pattern.
+    ///     Can be case-sensitive or case-insensitive.
     /// </summary>
-    /// <param name="input">String to check.</param>
+    /// <param name="text">String to check.</param>
     /// <param name="pattern">Pattern to match against.</param>
     /// <param name="ignoreCase">Whether to ignore case when evaluating string.</param>
     /// <returns>True if the string matches the pattern, false otherwise.</returns>
-    public static bool Matches(string input, string pattern, bool ignoreCase = true)
+    public static bool Matches(string text, string pattern, bool ignoreCase = true)
     {
-        if (!Validation.Exists(input))
+        if (!Validation.Exists(text))
         {
             return false;
         }
-        
+
         try
         {
-            return Regex.IsMatch(input,
+            return Regex.IsMatch(text,
                 pattern,
-                (ignoreCase ? RegexOptions.IgnoreCase : RegexOptions.ExplicitCapture),
-                TimeSpan.FromMilliseconds(250));
+                GetDefaultOptions(ignoreCase),
+                DefaultTimeout);
         }
         catch (RegexMatchTimeoutException)
         {
             return false;
+        }
+    }
+
+    /// <summary>
+    ///     Get all matching substring in a string.
+    ///     Case-sensitive.
+    /// </summary>
+    /// <param name="text">Text to search within.</param>
+    /// <param name="pattern">Pattern to search for.</param>
+    /// <param name="ignoreCase">Whether to ignore case when evaluating string.</param>
+    /// <returns></returns>
+    public static List<string> Substrings(string text, string pattern, bool ignoreCase = true)
+    {
+        var substrings = new List<string>();
+
+        if (!Validation.Exists(text))
+        {
+            return substrings; // empty list
+        }
+
+        var rx = new Regex(pattern, GetDefaultOptions(ignoreCase));
+        var matches = rx.Matches(text);
+        foreach (Match match in matches)
+        {
+            substrings.Add(match.Value);
+        }
+
+        return substrings;
+    }
+
+    /// <summary>
+    ///     Check if a matching substring exists in a string.
+    ///     Case-sensitive.
+    /// </summary>
+    /// <param name="text">Text to search within.</param>
+    /// <param name="pattern">Pattern to search for.</param>
+    /// <param name="ignoreCase">Whether to ignore case when evaluating string.</param>
+    /// <returns>True if a matching substring exists, false otherwise.</returns>
+    public static bool SubstringExists(string text, string pattern, bool ignoreCase = true)
+    {
+        var matches = Substrings(text, pattern, ignoreCase);
+        return matches.Count > 0;
+    }
+
+    /// <summary>
+    ///     Replace all matching substrings in a string with a replacement string.
+    /// </summary>
+    /// <param name="text">Text to search within.</param>
+    /// <param name="pattern">Pattern to search for.</param>
+    /// <param name="ignoreCase">Whether to ignore case when evaluating string.</param>
+    /// <param name="replacement">String to replace matches with.</param>
+    /// <returns></returns>
+    public static string Replace(string text, string pattern, string replacement, bool ignoreCase = true)
+    {
+        if (!Validation.Exists(text))
+        {
+            return string.Empty; // text is null or empty, return empty string
+        }
+
+        try
+        {
+            return Regex.Replace(text,
+                pattern,
+                replacement,
+                GetDefaultOptions(ignoreCase),
+                DefaultTimeout);
+        }
+        catch (RegexMatchTimeoutException)
+        {
+            return string.Empty;
         }
     }
 

@@ -1,0 +1,63 @@
+using System;
+using Xunit;
+
+namespace NetTools.Tools;
+
+public class RegularExpressionsTest
+{
+    [Fact]
+    public void TestRegularExpressionsMatches()
+    {
+        const string input = "This is a test string";
+        const string pattern1 = "This is a test string";
+        const string pattern2 = "is";
+
+        var matches = RegularExpressions.Matches(input, pattern1);
+        Assert.True(matches);
+
+        matches = RegularExpressions.Matches(input, pattern2);
+        Assert.True(matches);
+    }
+
+    [Fact]
+    public void TestRegularExpressionsSubstrings()
+    {
+        const string input = "This is a test string";
+        const string pattern = "is";
+
+        var substrings = RegularExpressions.Substrings(input, pattern);
+        Assert.Equal(2, substrings.Count);
+    }
+
+    [Fact]
+    public void TestRegularExpressionsSubstringExists()
+    {
+        const string input = "This is a test string";
+        const string pattern1 = "is";
+        const string pattern2 = "absent";
+
+        var substringExists = RegularExpressions.SubstringExists(input, pattern1);
+        Assert.True(substringExists);
+
+        substringExists = RegularExpressions.SubstringExists(input, pattern2);
+        Assert.False(substringExists);
+    }
+
+    [Fact]
+    public void TestRegularExpressionsReplace()
+    {
+        const string input = "This is a test string";
+        const string pattern1 = "is";
+        const string pattern2 = "IS";
+        const string expectedOutput = "Thwas was a test string";
+
+        var output = RegularExpressions.Replace(input, pattern1, "was");
+        Assert.Equal(expectedOutput, output);
+        
+        output = RegularExpressions.Replace(input, pattern2, "was", false);
+        Assert.Equal(input, output); // Should not replace anything
+        
+        output = RegularExpressions.Replace(input, pattern2, "was", true);
+        Assert.Equal(expectedOutput, output);
+    }
+}
