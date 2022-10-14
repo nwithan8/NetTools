@@ -52,7 +52,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="N8.NetTools.Crypto" Version="0.1.2" />
+        <PackageReference Include="N8.NetTools" Version="0.3.0"/>
+        <PackageReference Include="N8.NetTools.Crypto" Version="0.1.2"/>
     </ItemGroup>
 
 </Project>
