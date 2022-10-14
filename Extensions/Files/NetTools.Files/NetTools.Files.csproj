@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <LangVersion>10</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputType>Library</OutputType>
+        <RootNamespace>NetTools.Files</RootNamespace>
+        <AssemblyName>NetTools.Files</AssemblyName>
+        <Configurations>Release;Debug</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <PackageId>NetTools.Files</PackageId>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug</OutputPath>
+        <DefineConstants>TRACE;DEBUG</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <Prefer32Bit>false</Prefer32Bit>
+        <!-- Warnings to suppress -->
+        <NoWarn></NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>..\lib\net</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <DocumentationFile>..\lib\net\NetTools.Files.XML</DocumentationFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <NoWarn>1701;1702;1591;1570;CS8618;CS8603;CS8602;CS8765;CS8767;CS0659;CS0618</NoWarn>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <SignAssembly>false</SignAssembly>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <SignAssembly>false</SignAssembly>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="N8.NetTools" Version="0.3.0"/>
+        <PackageReference Include="N8.NetTools.Crypto" Version="0.1.2"/>
+    </ItemGroup>
+
+</Project>
