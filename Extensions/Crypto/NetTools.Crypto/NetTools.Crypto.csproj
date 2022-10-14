@@ -52,7 +52,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="N8.NetTools" Version="0.2.0" />
+        <PackageReference Include="N8.NetTools" Version="0.3.0" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     </ItemGroup>
 

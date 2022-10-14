@@ -15,27 +15,27 @@
         <releaseNotes>See Release Notes at https://github.com/nwithan8/NetTools/releases</releaseNotes>
         <dependencies>
             <group targetFramework="netstandard2.0">
-                <dependency id="N8.NetTools" version="[0.2.0, 1.0.0)" />
+                <dependency id="N8.NetTools" version="[0.3.0, 1.0.0)" />
                 <dependency id="Newtonsoft.Json" version="[13.0.1, 14.0.0)" />
                 <dependency id="RestSharp" version="[108.0.2, 109.0.0)" />
             </group>
             <group targetFramework="netstandard2.1">
-                <dependency id="N8.NetTools" version="[0.2.0, 1.0.0)" />
+                <dependency id="N8.NetTools" version="[0.3.0, 1.0.0)" />
                 <dependency id="Newtonsoft.Json" version="[13.0.1, 14.0.0)" />
                 <dependency id="RestSharp" version="[108.0.2, 109.0.0)" />
             </group>
             <group targetFramework="netcoreapp3.1">
-                <dependency id="N8.NetTools" version="[0.2.0, 1.0.0)" />
+                <dependency id="N8.NetTools" version="[0.3.0, 1.0.0)" />
                 <dependency id="Newtonsoft.Json" version="[13.0.1, 14.0.0)" />
                 <dependency id="RestSharp" version="[108.0.2, 109.0.0)" />
             </group>
             <group targetFramework="net5.0">
-                <dependency id="N8.NetTools" version="[0.2.0, 1.0.0)" />
+                <dependency id="N8.NetTools" version="[0.3.0, 1.0.0)" />
                 <dependency id="Newtonsoft.Json" version="[13.0.1, 14.0.0)" />
                 <dependency id="RestSharp" version="[108.0.2, 109.0.0)" />
             </group>
             <group targetFramework="net6.0">
-                <dependency id="N8.NetTools" version="[0.2.0, 1.0.0)" />
+                <dependency id="N8.NetTools" version="[0.3.0, 1.0.0)" />
                 <dependency id="Newtonsoft.Json" version="[13.0.1, 14.0.0)" />
                 <dependency id="RestSharp" version="[108.0.2, 109.0.0)" />
             </group>

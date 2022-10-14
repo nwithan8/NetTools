@@ -13,9 +13,9 @@
       },
       "N8.NetTools": {
         "type": "Direct",
-        "requested": "[0.2.0, )",
-        "resolved": "0.2.0",
-        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
       },
       "Microsoft.NETFramework.ReferenceAssemblies.net461": {
         "type": "Transitive",
@@ -35,9 +35,9 @@
       },
       "N8.NetTools": {
         "type": "Direct",
-        "requested": "[0.2.0, )",
-        "resolved": "0.2.0",
-        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
       },
       "NETStandard.Library": {
         "type": "Direct",
@@ -71,9 +71,9 @@
       },
       "N8.NetTools": {
         "type": "Direct",
-        "requested": "[0.2.0, )",
-        "resolved": "0.2.0",
-        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
       },
       "Microsoft.NETFramework.ReferenceAssemblies.net461": {
         "type": "Transitive",
@@ -84,17 +84,17 @@
     ".NETCoreApp,Version=v5.0": {
       "N8.NetTools": {
         "type": "Direct",
-        "requested": "[0.2.0, )",
-        "resolved": "0.2.0",
-        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
       }
     },
     "net6.0": {
       "N8.NetTools": {
         "type": "Direct",
-        "requested": "[0.2.0, )",
-        "resolved": "0.2.0",
-        "contentHash": "5Jasoa0EzRSuMB4xOP0sD8Mh7GRu6WpPsp+MYORE++Bz18hR52pTmQg5dDvCKa+1Hvj5cT/VnqHtennDI0TlDg=="
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
       }
     }
   }

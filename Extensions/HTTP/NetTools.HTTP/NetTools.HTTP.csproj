@@ -52,7 +52,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="N8.NetTools" Version="0.2.0" />
+        <PackageReference Include="N8.NetTools" Version="0.3.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="RestSharp" Version="108.0.2" />
     </ItemGroup>

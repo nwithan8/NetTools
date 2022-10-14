@@ -4,7 +4,7 @@
     <metadata>
         <id>N8.NetTools.Files</id>
         <title>NetTools.Files</title>
-        <version>0.1.1</version>
+        <version>0.1.2</version>
         <authors>nwithan8</authors>
         <owners>nwithan8</owners>
         <projectUrl>https://github.com/nwithan8/NetTools</projectUrl>
@@ -15,19 +15,19 @@
         <releaseNotes>See Release Notes at https://github.com/nwithan8/NetTools/releases</releaseNotes>
         <dependencies>
             <group targetFramework="netstandard2.0">
-                <dependency id="N8.NetTools.Conversions" version="[0.1.1, 1.0.0)"/>
+                <dependency id="N8.NetTools.Crypto" version="[0.1.2, 1.0.0)"/>
             </group>
             <group targetFramework="netstandard2.1">
-                <dependency id="N8.NetTools.Conversions" version="[0.1.1, 1.0.0)"/>
+                <dependency id="N8.NetTools.Crypto" version="[0.1.2, 1.0.0)"/>
             </group>
             <group targetFramework="netcoreapp3.1">
-                <dependency id="N8.NetTools.Conversions" version="[0.1.1, 1.0.0)"/>
+                <dependency id="N8.NetTools.Crypto" version="[0.1.2, 1.0.0)"/>
             </group>
             <group targetFramework="net5.0">
-                <dependency id="N8.NetTools.Conversions" version="[0.1.1, 1.0.0)"/>
+                <dependency id="N8.NetTools.Crypto" version="[0.1.2, 1.0.0)"/>
             </group>
             <group targetFramework="net6.0">
-                <dependency id="N8.NetTools.Conversions" version="[0.1.1, 1.0.0)"/>
+                <dependency id="N8.NetTools.Crypto" version="[0.1.1, 1.0.0)"/>
             </group>
         </dependencies>
     </metadata>

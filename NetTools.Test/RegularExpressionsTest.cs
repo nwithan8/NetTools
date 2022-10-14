@@ -53,11 +53,18 @@ public class RegularExpressionsTest
 
         var output = RegularExpressions.Replace(input, pattern1, "was");
         Assert.Equal(expectedOutput, output);
-        
+
         output = RegularExpressions.Replace(input, pattern2, "was", false);
         Assert.Equal(input, output); // Should not replace anything
-        
+
         output = RegularExpressions.Replace(input, pattern2, "was", true);
         Assert.Equal(expectedOutput, output);
+
+        const string base64Pattern = "^(data:)([a-zA-Z0-9]+/[a-zA-Z0-9]+;)(base64,)";
+        const string base64Portion = "dGVzdCBzdHJpbmc=";
+        const string base64Input = $"data:image/png;base64,{base64Portion}";
+        
+        output = RegularExpressions.Replace(base64Input, base64Pattern, string.Empty, true);
+        Assert.Equal(base64Portion, output);
     }
 }

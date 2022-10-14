@@ -52,7 +52,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="N8.NetTools" Version="0.2.0" />
+        <PackageReference Include="N8.NetTools" Version="0.3.0" />
         <PackageReference Include="libphonenumber-csharp" Version="8.12.56" />
         <PackageReference Include="Nager.Country" Version="3.1.1" />
         <PackageReference Include="Nager.Country.Translation" Version="3.0.3" />
