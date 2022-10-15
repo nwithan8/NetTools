@@ -2,42 +2,32 @@
 
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <id>N8.NetTools.HTTP</id>
-        <title>NetTools.HTTP</title>
+        <id>N8.NetTools.Lists</id>
+        <title>NetTools.Lists</title>
         <version>0.1.1</version>
         <authors>nwithan8</authors>
         <owners>nwithan8</owners>
         <projectUrl>https://github.com/nwithan8/NetTools</projectUrl>
         <license type="expression">GPL-3.0-or-later</license>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>A NetTools extension for HTTP and JSON commands</description>
-        <tags>HTTP JSON serialization deserialization</tags>
+        <description>A NetTools extension for lists and sorting algorithms</description>
+        <tags>lists sorting random</tags>
         <releaseNotes>See Release Notes at https://github.com/nwithan8/NetTools/releases</releaseNotes>
         <dependencies>
             <group targetFramework="netstandard2.0">
                 <dependency id="N8.NetTools" version="[0.3.0, 1.0.0)" />
-                <dependency id="Newtonsoft.Json" version="[13.0.1, 14.0.0)" />
-                <dependency id="RestSharp" version="[108.0.2, 109.0.0)" />
             </group>
             <group targetFramework="netstandard2.1">
                 <dependency id="N8.NetTools" version="[0.3.0, 1.0.0)" />
-                <dependency id="Newtonsoft.Json" version="[13.0.1, 14.0.0)" />
-                <dependency id="RestSharp" version="[108.0.2, 109.0.0)" />
             </group>
             <group targetFramework="netcoreapp3.1">
                 <dependency id="N8.NetTools" version="[0.3.0, 1.0.0)" />
-                <dependency id="Newtonsoft.Json" version="[13.0.1, 14.0.0)" />
-                <dependency id="RestSharp" version="[108.0.2, 109.0.0)" />
             </group>
             <group targetFramework="net5.0">
                 <dependency id="N8.NetTools" version="[0.3.0, 1.0.0)" />
-                <dependency id="Newtonsoft.Json" version="[13.0.1, 14.0.0)" />
-                <dependency id="RestSharp" version="[108.0.2, 109.0.0)" />
             </group>
             <group targetFramework="net6.0">
                 <dependency id="N8.NetTools" version="[0.3.0, 1.0.0)" />
-                <dependency id="Newtonsoft.Json" version="[13.0.1, 14.0.0)" />
-                <dependency id="RestSharp" version="[108.0.2, 109.0.0)" />
             </group>
         </dependencies>
     </metadata>
