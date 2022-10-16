@@ -1,8 +1,3 @@
-using System.Dynamic;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using RestSharp;
-
 namespace NetTools.HTTP
 {
     /// <summary>
@@ -10,18 +5,18 @@ namespace NetTools.HTTP
     /// </summary>
     public class JsonSerializer
     {
-        private readonly JsonSerializerSettings _jsonSerializerSettings;
+        private readonly Newtonsoft.Json.JsonSerializerSettings _jsonSerializerSettings;
 
         /// <summary>
         ///     Constructor for a new JsonSerializer instance.
         /// </summary>
         /// <param name="jsonSerializerSettings"><see cref="Newtonsoft.Json.JsonSerializerSettings" /> to be used by this instance.</param>
-        public JsonSerializer(JsonSerializerSettings? jsonSerializerSettings = null)
+        public JsonSerializer(Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null)
         {
-            _jsonSerializerSettings = jsonSerializerSettings ?? new JsonSerializerSettings
+            _jsonSerializerSettings = jsonSerializerSettings ?? new Newtonsoft.Json.JsonSerializerSettings
             {
-                NullValueHandling = NullValueHandling.Ignore,
-                MissingMemberHandling = MissingMemberHandling.Ignore
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore
             };
         }
 
@@ -49,7 +44,7 @@ namespace NetTools.HTTP
         /// <param name="data">A string of JSON data</param>
         /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
         /// <returns>An ExpandoObject object</returns>
-        public ExpandoObject ConvertJsonToObject(string? data, List<string>? rootElementKeys = null) => JsonSerialization.ConvertJsonToObject(data, _jsonSerializerSettings, rootElementKeys);
+        public System.Dynamic.ExpandoObject ConvertJsonToObject(string? data, List<string>? rootElementKeys = null) => JsonSerialization.ConvertJsonToObject(data, _jsonSerializerSettings, rootElementKeys);
 
         /// <summary>
         ///     Deserialize data from a RestSharp.RestResponse into a T-type object, using this instance's
@@ -59,7 +54,7 @@ namespace NetTools.HTTP
         /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
         /// <typeparam name="T">Type of object to deserialize to</typeparam>
         /// <returns>A T-type object</returns>
-        public T ConvertJsonToObject<T>(RestResponse response, List<string>? rootElementKeys = null) => JsonSerialization.ConvertJsonToObject<T>(response, _jsonSerializerSettings, rootElementKeys);
+        public T ConvertJsonToObject<T>(RestSharp.RestResponse response, List<string>? rootElementKeys = null) => JsonSerialization.ConvertJsonToObject<T>(response, _jsonSerializerSettings, rootElementKeys);
 
         /// <summary>
         ///     Serialize an object into a JSON string, using this instance's <see cref="_jsonSerializerSettings" />
@@ -77,12 +72,12 @@ namespace NetTools.HTTP
         /// <summary>
         ///     The default <see cref="Newtonsoft.Json.JsonSerializerSettings" /> to use for de/serialization
         /// </summary>
-        private static JsonSerializerSettings DefaultJsonSerializerSettings => new JsonSerializerSettings
+        private static Newtonsoft.Json.JsonSerializerSettings DefaultJsonSerializerSettings => new Newtonsoft.Json.JsonSerializerSettings
         {
-            NullValueHandling = NullValueHandling.Ignore,
-            MissingMemberHandling = MissingMemberHandling.Ignore,
-            DateFormatHandling = DateFormatHandling.IsoDateFormat,
-            DateTimeZoneHandling = DateTimeZoneHandling.Utc
+            NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+            MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore,
+            DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+            DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc
         };
 
         /// <summary>
@@ -96,7 +91,7 @@ namespace NetTools.HTTP
         /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
         /// <typeparam name="T">Type of object to deserialize to</typeparam>
         /// <returns>A T-type object</returns>
-        public static T ConvertJsonToObject<T>(string? data, JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
+        public static T ConvertJsonToObject<T>(string? data, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
         {
             var obj = ConvertJsonToObject(data, typeof(T), jsonSerializerSettings, rootElementKeys);
             if (obj is T t)
@@ -118,7 +113,7 @@ namespace NetTools.HTTP
         /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
         /// <param name="type">Type of object to deserialize to</param>
         /// <returns>A T-type object</returns>
-        public static object ConvertJsonToObject(string? data, Type type, JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
+        public static object ConvertJsonToObject(string? data, Type type, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
         {
             if (rootElementKeys != null && rootElementKeys.Any())
             {
@@ -132,7 +127,7 @@ namespace NetTools.HTTP
 
             try
             {
-                var obj = JsonConvert.DeserializeObject(data, type, jsonSerializerSettings ?? DefaultJsonSerializerSettings);
+                var obj = Newtonsoft.Json.JsonConvert.DeserializeObject(data, type, jsonSerializerSettings ?? DefaultJsonSerializerSettings);
                 return (obj ?? default)!;
             }
             catch (Exception)
@@ -151,7 +146,7 @@ namespace NetTools.HTTP
         /// </param>
         /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
         /// <returns>An ExpandoObject object</returns>
-        public static ExpandoObject ConvertJsonToObject(string? data, JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null) => ConvertJsonToObject<ExpandoObject>(data, jsonSerializerSettings, rootElementKeys);
+        public static System.Dynamic.ExpandoObject ConvertJsonToObject(string? data, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null) => ConvertJsonToObject<System.Dynamic.ExpandoObject>(data, jsonSerializerSettings, rootElementKeys);
 
         /// <summary>
         ///     Deserialize data from a RestSharp.RestResponse into a T-type object, using this instance's
@@ -165,7 +160,7 @@ namespace NetTools.HTTP
         /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
         /// <typeparam name="T">Type of object to deserialize to</typeparam>
         /// <returns>A T-type object</returns>
-        public static T ConvertJsonToObject<T>(RestResponse response, JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null) => ConvertJsonToObject<T>(response.Content, jsonSerializerSettings, rootElementKeys);
+        public static T ConvertJsonToObject<T>(RestSharp.RestResponse response, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null) => ConvertJsonToObject<T>(response.Content, jsonSerializerSettings, rootElementKeys);
 
         /// <summary>
         ///     Serialize an object into a JSON string, using this instance's <see cref="JsonSerializerSettings" />
@@ -176,11 +171,11 @@ namespace NetTools.HTTP
         ///     serialization. Defaults to <see cref="DefaultJsonSerializerSettings" /> if not provided.
         /// </param>
         /// <returns>A string of JSON data</returns>
-        public static string ConvertObjectToJson(object data, JsonSerializerSettings? jsonSerializerSettings = null)
+        public static string ConvertObjectToJson(object data, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null)
         {
             try
             {
-                return JsonConvert.SerializeObject(data, jsonSerializerSettings ?? DefaultJsonSerializerSettings);
+                return Newtonsoft.Json.JsonConvert.SerializeObject(data, jsonSerializerSettings ?? DefaultJsonSerializerSettings);
             }
             catch (Exception)
             {
@@ -201,11 +196,11 @@ namespace NetTools.HTTP
                 return null;
             }
 
-            var json = JsonConvert.DeserializeObject(data);
+            var json = Newtonsoft.Json.JsonConvert.DeserializeObject(data);
             try
             {
-                rootElementKeys.ForEach(key => { json = (json as JObject)?.Property(key)?.Value; });
-                return (json as JToken)?.ToString();
+                rootElementKeys.ForEach(key => { json = (json as Newtonsoft.Json.Linq.JObject)?.Property(key)?.Value; });
+                return (json as Newtonsoft.Json.Linq.JToken)?.ToString();
             }
             catch (Exception)
             {

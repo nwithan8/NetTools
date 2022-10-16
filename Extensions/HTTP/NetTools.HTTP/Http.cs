@@ -1,6 +1,3 @@
-using System.Net;
-using RestSharp;
-
 // ReSharper disable InconsistentNaming
 
 namespace NetTools.HTTP;
@@ -14,7 +11,7 @@ public static class Http
     /// <param name="min">Minimum valid status code.</param>
     /// <param name="max">Maximum valid status code.</param>
     /// <returns>Whether the given response has a status code in the given range.</returns>
-    public static bool HasStatusCodeBetween(this RestResponseBase response, int min, int max)
+    public static bool HasStatusCodeBetween(this RestSharp.RestResponseBase response, int min, int max)
     {
         return StatusCodeBetween(response, min, max);
     }
@@ -24,7 +21,7 @@ public static class Http
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
     /// <returns>True if the status code is a 1xx error, False otherwise.</returns>
-    public static bool Is1xx(this HttpStatusCode statusCode)
+    public static bool Is1xx(this System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeIs1xx(statusCode);
     }
@@ -34,7 +31,7 @@ public static class Http
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
     /// <returns>True if the status code is a 2xx error, False otherwise.</returns>
-    public static bool Is2xx(this HttpStatusCode statusCode)
+    public static bool Is2xx(this System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeIs2xx(statusCode);
     }
@@ -44,7 +41,7 @@ public static class Http
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
     /// <returns>True if the status code is a 3xx error, False otherwise.</returns>
-    public static bool Is3xx(this HttpStatusCode statusCode)
+    public static bool Is3xx(this System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeIs3xx(statusCode);
     }
@@ -54,7 +51,7 @@ public static class Http
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
     /// <returns>True if the status code is a 4xx error, False otherwise.</returns>
-    public static bool Is4xx(this HttpStatusCode statusCode)
+    public static bool Is4xx(this System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeIs4xx(statusCode);
     }
@@ -64,7 +61,7 @@ public static class Http
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
     /// <returns>True if the status code is a 5xx error, False otherwise.</returns>
-    public static bool Is5xx(this HttpStatusCode statusCode)
+    public static bool Is5xx(this System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeIs5xx(statusCode);
     }
@@ -76,7 +73,7 @@ public static class Http
     /// <param name="min">Minimum valid status code.</param>
     /// <param name="max">Maximum valid status code.</param>
     /// <returns>Whether the given status code is in the given range.</returns>
-    public static bool IsBetween(this HttpStatusCode statusCode, int min, int max)
+    public static bool IsBetween(this System.Net.HttpStatusCode statusCode, int min, int max)
     {
         return StatusCodeBetween(statusCode, min, max);
     }
@@ -86,7 +83,7 @@ public static class Http
     /// </summary>
     /// <param name="response">Response to check.</param>
     /// <returns>True if the response code is not in the 200-299 range, false otherwise.</returns>
-    public static bool ReturnedError(this RestResponse response)
+    public static bool ReturnedError(this RestSharp.RestResponse response)
     {
         return !ReturnedNoError(response);
     }
@@ -96,7 +93,7 @@ public static class Http
     /// </summary>
     /// <param name="response">Response to check.</param>
     /// <returns>True if the response code is in the 200-299 range, false otherwise.</returns>
-    public static bool ReturnedNoError(this RestResponse response)
+    public static bool ReturnedNoError(this RestSharp.RestResponse response)
     {
         return response.StatusCode.Is2xx();
     }
@@ -120,7 +117,7 @@ public static class Http
     /// <param name="min">Minimum valid status code.</param>
     /// <param name="max">Maximum valid status code.</param>
     /// <returns>Whether the given status code is in the given range.</returns>
-    public static bool StatusCodeBetween(HttpStatusCode statusCode, int min, int max)
+    public static bool StatusCodeBetween(System.Net.HttpStatusCode statusCode, int min, int max)
     {
         return StatusCodeBetween((int)statusCode, min, max);
     }
@@ -132,7 +129,7 @@ public static class Http
     /// <param name="min">Minimum valid status code.</param>
     /// <param name="max">Maximum valid status code.</param>
     /// <returns>Whether the given response has a status code in the given range.</returns>
-    public static bool StatusCodeBetween(RestResponseBase response, int min, int max)
+    public static bool StatusCodeBetween(RestSharp.RestResponseBase response, int min, int max)
     {
         return StatusCodeBetween(response.StatusCode, min, max);
     }
@@ -152,7 +149,7 @@ public static class Http
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
     /// <returns>True if the status code is a 1xx error, False otherwise.</returns>
-    public static bool StatusCodeIs1xx(HttpStatusCode statusCode)
+    public static bool StatusCodeIs1xx(System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeBetween(statusCode, 100, 199);
     }
@@ -172,7 +169,7 @@ public static class Http
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
     /// <returns>True if the status code is a 2xx error, False otherwise.</returns>
-    public static bool StatusCodeIs2xx(HttpStatusCode statusCode)
+    public static bool StatusCodeIs2xx(System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeBetween(statusCode, 200, 299);
     }
@@ -192,7 +189,7 @@ public static class Http
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
     /// <returns>True if the status code is a 3xx error, False otherwise.</returns>
-    public static bool StatusCodeIs3xx(HttpStatusCode statusCode)
+    public static bool StatusCodeIs3xx(System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeBetween(statusCode, 300, 399);
     }
@@ -212,7 +209,7 @@ public static class Http
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
     /// <returns>True if the status code is a 4xx error, False otherwise.</returns>
-    public static bool StatusCodeIs4xx(HttpStatusCode statusCode)
+    public static bool StatusCodeIs4xx(System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeBetween(statusCode, 400, 499);
     }
@@ -232,7 +229,7 @@ public static class Http
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
     /// <returns>True if the status code is a 5xx error, False otherwise.</returns>
-    public static bool StatusCodeIs5xx(HttpStatusCode statusCode)
+    public static bool StatusCodeIs5xx(System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeBetween(statusCode, 500, 599);
     }
