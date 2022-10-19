@@ -47,14 +47,14 @@ namespace NetTools.HTTP
         public System.Dynamic.ExpandoObject ConvertJsonToObject(string? data, List<string>? rootElementKeys = null) => JsonSerialization.ConvertJsonToObject(data, _jsonSerializerSettings, rootElementKeys);
 
         /// <summary>
-        ///     Deserialize data from a RestSharp.RestResponse into a T-type object, using this instance's
+        ///     Deserialize data from a RestSharp.RestResponseBase into a T-type object, using this instance's
         ///     <see cref="_jsonSerializerSettings" />
         /// </summary>
-        /// <param name="response">RestSharp.RestResponse object to extract data from.</param>
+        /// <param name="response">RestSharp.RestResponseBase object to extract data from.</param>
         /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
         /// <typeparam name="T">Type of object to deserialize to</typeparam>
         /// <returns>A T-type object</returns>
-        public T ConvertJsonToObject<T>(RestSharp.RestResponse response, List<string>? rootElementKeys = null) => JsonSerialization.ConvertJsonToObject<T>(response, _jsonSerializerSettings, rootElementKeys);
+        public T ConvertJsonToObject<T>(RestSharp.RestResponseBase response, List<string>? rootElementKeys = null) => JsonSerialization.ConvertJsonToObject<T>(response, _jsonSerializerSettings, rootElementKeys);
 
         /// <summary>
         ///     Serialize an object into a JSON string, using this instance's <see cref="_jsonSerializerSettings" />
@@ -149,10 +149,10 @@ namespace NetTools.HTTP
         public static System.Dynamic.ExpandoObject ConvertJsonToObject(string? data, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null) => ConvertJsonToObject<System.Dynamic.ExpandoObject>(data, jsonSerializerSettings, rootElementKeys);
 
         /// <summary>
-        ///     Deserialize data from a RestSharp.RestResponse into a T-type object, using this instance's
+        ///     Deserialize data from a RestSharp.RestResponseBase into a T-type object, using this instance's
         ///     <see cref="JsonSerializerSettings" />
         /// </summary>
-        /// <param name="response">RestSharp.RestResponse object to extract data from.</param>
+        /// <param name="response">RestSharp.RestResponseBase object to extract data from.</param>
         /// <param name="jsonSerializerSettings">
         ///     The <see cref="Newtonsoft.Json.JsonSerializerSettings" /> to use for
         ///     deserialization. Defaults to <see cref="DefaultJsonSerializerSettings" /> if not provided.
@@ -160,7 +160,7 @@ namespace NetTools.HTTP
         /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
         /// <typeparam name="T">Type of object to deserialize to</typeparam>
         /// <returns>A T-type object</returns>
-        public static T ConvertJsonToObject<T>(RestSharp.RestResponse response, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null) => ConvertJsonToObject<T>(response.Content, jsonSerializerSettings, rootElementKeys);
+        public static T ConvertJsonToObject<T>(RestSharp.RestResponseBase response, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null) => ConvertJsonToObject<T>(response.Content, jsonSerializerSettings, rootElementKeys);
 
         /// <summary>
         ///     Serialize an object into a JSON string, using this instance's <see cref="JsonSerializerSettings" />
