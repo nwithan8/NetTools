@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <TargetFrameworks>net5.0;net6.0;netcoreapp3.1</TargetFrameworks>
         <LangVersion>10</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
@@ -54,6 +54,7 @@
     <ItemGroup>
         <PackageReference Include="N8.NetTools" Version="0.3.0" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+        <PackageReference Include="CrypticWizard.RandomWordGenerator" Version="0.9.5" />
     </ItemGroup>
 
 </Project>
