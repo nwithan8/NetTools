@@ -255,6 +255,43 @@
         "resolved": "1.7.1",
         "contentHash": "B43Zsz5EfMwyEbnObwRxW5u85fzJma3lrDeGcSAV1qkhSRTNY5uXAByTn9h9ddNdhM+4/YoLc/CI43umjwIl9Q=="
       }
+    },
+    "net7.0": {
+      "libphonenumber-csharp": {
+        "type": "Direct",
+        "requested": "[8.12.56, )",
+        "resolved": "8.12.56",
+        "contentHash": "OEt+vCEYwnF9oP2xhMxmeIcUeWLNF8kv/3KsX0dUGw43vMo1DjkVsdfPZZbePCiECvxtRX02FjHChtP3jv/2KA==",
+        "dependencies": {
+          "System.Collections.Immutable": "1.7.1"
+        }
+      },
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
+      },
+      "Nager.Country": {
+        "type": "Direct",
+        "requested": "[3.1.1, )",
+        "resolved": "3.1.1",
+        "contentHash": "KO0jHz3zYamS97Y9vw+29WFuJVjdgqm6Lt2UCjtn/7bE9rlFfjXVx7Cx5sblxj2La5N05GgLr6AIp6i4Ac5Kzg=="
+      },
+      "Nager.Country.Translation": {
+        "type": "Direct",
+        "requested": "[3.0.3, )",
+        "resolved": "3.0.3",
+        "contentHash": "kJaBCU6RGV8Ssn5nNtQSc1N1cVyUHT+93BnnkoYe3CF1JK29g0MGEOFem9DveXW4x9FiwM25UHEE3J4Zzy7uRQ==",
+        "dependencies": {
+          "Nager.Country": "3.1.1"
+        }
+      },
+      "System.Collections.Immutable": {
+        "type": "Transitive",
+        "resolved": "1.7.1",
+        "contentHash": "B43Zsz5EfMwyEbnObwRxW5u85fzJma3lrDeGcSAV1qkhSRTNY5uXAByTn9h9ddNdhM+4/YoLc/CI43umjwIl9Q=="
+      }
     }
   }
 }

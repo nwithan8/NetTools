@@ -157,6 +157,29 @@
         "resolved": "4.0.3",
         "contentHash": "W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA=="
       }
+    },
+    "net7.0": {
+      "N8.NetTools": {
+        "type": "Direct",
+        "requested": "[0.3.0, )",
+        "resolved": "0.3.0",
+        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
+      },
+      "N8.NetTools.Crypto": {
+        "type": "Direct",
+        "requested": "[0.1.2, )",
+        "resolved": "0.1.2",
+        "contentHash": "V0mgUuXGVc4RWurJDs8xR/G2RChTcBCDI11kwYSPwArelVP4YLt+NV0wQxC3zqIuc+ajtLDcIwiEsdSHFIuHeg==",
+        "dependencies": {
+          "BCrypt.Net-Next": "[4.0.3, 5.0.0)",
+          "N8.NetTools": "[0.3.0, 1.0.0)"
+        }
+      },
+      "BCrypt.Net-Next": {
+        "type": "Transitive",
+        "resolved": "4.0.3",
+        "contentHash": "W+U9WvmZQgi5cX6FS5GDtDoPzUCV4LkBLkywq/kRZhuDwcbavOzcDAr3LXJFqHUi952Yj3LEYoWW0jbEUQChsA=="
+      }
     }
   }
 }
