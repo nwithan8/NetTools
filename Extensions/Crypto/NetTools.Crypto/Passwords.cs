@@ -33,7 +33,7 @@ public static class Passwords
 
     public static string GenerateRandomPassphrase(int minLength = 16, int maxLength = 64)
     {
-        var generator = new WordGenerator(seed: 918327);
+        var generator = new WordGenerator();
         
         // generate a (adjective-)noun phrase
         var phrase = generator.GetWord(WordGenerator.PartOfSpeech.noun);
