@@ -57,4 +57,8 @@
         <PackageReference Include="CrypticWizard.RandomWordGenerator" Version="0.9.5" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="obj" />
+    </ItemGroup>
+
 </Project>
