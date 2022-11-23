@@ -6,11 +6,70 @@ using System.Linq;
 namespace NetTools;
 // Thanks to https://stackoverflow.com/a/34388226/13343799
 
-public class Scenario : Enum
+public class Scenario : ValidationEnum
 {
-    public static readonly Scenario Default = new(1);
+    /// <summary>
+    ///     Run associated action when no other cases match. <seealso cref="NoMatch"/>
+    /// </summary>
+    public static Scenario Default => NoMatch;
 
-    private Scenario(int id) : base(id)
+    /// <summary>
+    ///     Run associated action when no other cases match. <seealso cref="Default"/>
+    /// </summary>
+    public static Scenario NoMatch => new Scenario(2, matchCount => (int)matchCount! == 0);
+
+    /// <summary>
+    ///     Run associated action when only one case matches.
+    /// </summary>
+    public static Scenario SingleMatch => new Scenario(3, matchCount => (int)matchCount! == 1);
+    
+    /// <summary>
+    ///     Run associated action when multiple cases match.
+    /// </summary>
+    public static Scenario MultipleMatch => new Scenario(4, matchCount => (int)matchCount! > 1);
+
+    /// <summary>
+    ///     Run associated action when at least X number of cases match.
+    /// </summary>
+    /// <param name="count">Minimum number of cases required to match to trigger action.</param>
+    /// <returns>Scenario</returns>
+    public static Scenario AtLeastXMatch(int count)
+    {
+        return new Scenario(5, matchCount => (int)matchCount! >= count);
+    }
+
+    /// <summary>
+    ///     Run associated action when at most X number of cases match.
+    /// </summary>
+    /// <param name="count">Maximum number of cases required to match to trigger action.</param>
+    /// <returns>Scenario</returns>
+    public static Scenario AtMostXMatch(int count)
+    {
+        return new Scenario(6, matchCount => (int)matchCount! <= count);
+    }
+
+    /// <summary>
+    ///     Run associated action when between X and Y number of cases match.
+    /// </summary>
+    /// <param name="min">Minimum number of cases required to match to trigger action.</param>
+    /// <param name="max">Maximum number of cases required to match to trigger action.</param>
+    /// <returns>Scenario</returns>
+    public static Scenario BetweenXandXMatch(int min, int max)
+    {
+        return new Scenario(7, matchCount => (int)matchCount! >= min && (int)matchCount! <= max);
+    }
+
+    /// <summary>
+    ///     Run associated action when exactly X number of cases match.
+    /// </summary>
+    /// <param name="count">Exact number of cases required to match to trigger action.</param>
+    /// <returns>Scenario</returns>
+    public static Scenario ExactlyXMatch(int count)
+    {
+        return new Scenario(8, matchCount => (int)matchCount! == count);
+    }
+
+    private Scenario(int id, Func<object?, bool>? value) : base(id, value)
     {
     }
 }
@@ -44,12 +103,27 @@ public class ExpressionCase : ICase
 }
 
 /// <summary>
-///     Represents a case in a switch statement with a value to match and an action to take.
+///     Represents a case in a switch statement with a static value to match and an action to take.
 /// </summary>
 public sealed class StaticCase : ExpressionCase
 {
     public StaticCase(object value, Action? action) : base(() => value, action)
     {
+    }
+}
+
+internal sealed class ScenarioCase
+{
+    public Action? Action { get; }
+
+    private Scenario Scenario { get; }
+
+    internal bool Validate(object value) => Scenario.Validate(value);
+
+    internal ScenarioCase(Scenario scenario, Action? action)
+    {
+        Scenario = scenario;
+        Action = action;
     }
 }
 
@@ -60,7 +134,7 @@ public class SwitchCase : IEnumerable<ICase>
 {
     private readonly List<ICase> _cases = new();
 
-    private Action? _defaultCaseAction;
+    private readonly List<ScenarioCase> _scenarioCases = new();
 
     /// <summary>
     ///     Add a case where matching a static value triggers an Action
@@ -89,13 +163,7 @@ public class SwitchCase : IEnumerable<ICase>
     /// <param name="action">Action to trigger on match.</param>
     public void Add(Scenario scenario, Action? action)
     {
-        // ironically, we can't use our custom switch-case here, because it would be recursive.
-        // instead, back to good ol' if-else statements.
-        if (scenario == Scenario.Default)
-        {
-            // set the default action to trigger if no match(es) found
-            _defaultCaseAction = action;
-        }
+        _scenarioCases.Add(new ScenarioCase(scenario, action));
     }
 
     /// <summary>
@@ -115,6 +183,25 @@ public class SwitchCase : IEnumerable<ICase>
         }
 
         ProcessMatchingCases(matchingCases.ToList());
+
+        // we process the scenarios last
+        ProcessScenarioCases(matchingCases.ToList());
+    }
+
+    /// <summary>
+    ///     Execute the action of all cases that evaluates to true. If no match is found, execute the default case if set.
+    /// </summary>
+    public void MatchAllTrue()
+    {
+        MatchAll(true);
+    }
+
+    /// <summary>
+    ///     Execute the action of all cases that evaluates to false. If no match is found, execute the default case if set.
+    /// </summary>
+    public void MatchAllFalse()
+    {
+        MatchAll(false);
     }
 
     /// <summary>
@@ -137,6 +224,25 @@ public class SwitchCase : IEnumerable<ICase>
         }
 
         ProcessMatchingCases(matchingCases.ToList());
+
+        // we process the scenarios last
+        ProcessScenarioCases(matchingCases.ToList());
+    }
+
+    /// <summary>
+    ///     Execute the action of the first case that evaluates to true. If no match is found, execute the default case if set.
+    /// </summary>
+    public void MatchFirstTrue()
+    {
+        MatchFirst(true);
+    }
+
+    /// <summary>
+    ///     Execute the action of the first case that evaluates to false. If no match is found, execute the default case if set.
+    /// </summary>
+    public void MatchFirstFalse()
+    {
+        MatchFirst(false);
     }
 
     IEnumerator<ICase> IEnumerable<ICase>.GetEnumerator()
@@ -156,14 +262,27 @@ public class SwitchCase : IEnumerable<ICase>
     /// <param name="matchingCases">List of matching cases to process.</param>
     private void ProcessMatchingCases(List<ICase> matchingCases)
     {
-        if (matchingCases.Count == 0)
-        {
-            _defaultCaseAction?.Invoke();
-        }
-
         foreach (var @case in matchingCases)
         {
             @case?.Action?.Invoke();
+        }
+    }
+
+    /// <summary>
+    ///     Execute the associated action for each matching scenario case.
+    /// </summary>
+    /// <param name="matchingCases">List of matching cases to count.</param>
+    private void ProcessScenarioCases(ICollection matchingCases)
+    {
+        var matchingCaseCount = matchingCases.Count;
+
+        // Default scenario will be processed in here as well
+        foreach (var @case in _scenarioCases)
+        {
+            if (@case.Validate(matchingCaseCount))
+            {
+                @case.Action?.Invoke();
+            }
         }
     }
 }

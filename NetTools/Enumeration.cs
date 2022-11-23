@@ -225,4 +225,28 @@ namespace NetTools
             return FromValuesOrder<T>(values.ToArray());
         }
     }
+    
+    /// <summary>
+    ///     An enum that stores a validation function internally.
+    /// </summary>
+    public abstract class ValidationEnum : Enum
+    {
+        /// <summary>
+        ///     The function of the enum.
+        ///     Function accepts a single nullable object and returns a boolean.
+        /// </summary>
+        public Func<object?, bool>? Func { get; }
+
+        /// <summary>
+        ///     Constructor for the enum.
+        /// </summary>
+        /// <param name="id">Unique ID for the enum.</param>
+        /// <param name="value">Function to store inside the enum.</param>
+        protected ValidationEnum(int id, Func<object?, bool>? value) : base(id)
+        {
+            Func = value;
+        }
+
+        public bool Validate(object? value) => Func?.Invoke(value) ?? false;
+    }
 }
