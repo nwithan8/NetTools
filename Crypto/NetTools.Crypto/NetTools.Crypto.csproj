@@ -6,11 +6,15 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
-        <RootNamespace>NetTools.Common.Crypto</RootNamespace>
+        <RootNamespace>NetTools.Crypto</RootNamespace>
         <Configurations>Release;Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
         <PackageId>NetTools.Crypto</PackageId>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <Authors>nwithan8</Authors>
+        <PackageProjectUrl>https://github.com/nwithan8/NetTools</PackageProjectUrl>
+        <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+        <PackageTags>cryptography encryption hashing md5 sha1 sha256 hmac</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -33,7 +37,7 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
-        <DocumentationFile>..\lib\net\NetTools.Common.Crypto.XML</DocumentationFile>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <NoWarn>1701;1702;1591;1570;CS8618;CS8603;CS8602;CS8765;CS8767;CS0659;CS0618</NoWarn>
     </PropertyGroup>
@@ -51,13 +55,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <None Include="../readme.md" Pack="true" PackagePath=""/>
         <PackageReference Include="N8.NetTools" Version="0.4.0" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
         <PackageReference Include="CrypticWizard.RandomWordGenerator" Version="0.9.5" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="obj" />
+        <None Include="../readme.md" Pack="true" PackagePath=""/>
     </ItemGroup>
 
 </Project>

@@ -6,11 +6,15 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
-        <RootNamespace>NetTools.Common.HTTP</RootNamespace>
+        <RootNamespace>NetTools.HTTP</RootNamespace>
         <Configurations>Release;Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
         <PackageId>NetTools.HTTP</PackageId>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <Authors>nwithan8</Authors>
+        <PackageProjectUrl>https://github.com/nwithan8/NetTools</PackageProjectUrl>
+        <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+        <PackageTags>HTTP JSON serialization deserialization</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -33,7 +37,7 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
-        <DocumentationFile>..\lib\net\NetTools.Common.HTTP.XML</DocumentationFile>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <NoWarn>1701;1702;1591;1570;CS8618;CS8603;CS8602;CS8765;CS8767;CS0659;CS0618</NoWarn>
     </PropertyGroup>
@@ -51,6 +55,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <None Include="../readme.md" Pack="true" PackagePath=""/>
         <PackageReference Include="N8.NetTools" Version="0.3.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="RestSharp" Version="108.0.2" />

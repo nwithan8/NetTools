@@ -7,11 +7,14 @@
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
         <RootNamespace>NetTools.Common.Attributes</RootNamespace>
-        <AssemblyName>NetTools.Common.Attributes</AssemblyName>
         <Configurations>Release;Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
         <PackageId>NetTools.Common.Attributes</PackageId>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+        <Authors>nwithan8</Authors>
+        <PackageProjectUrl>https://github.com/nwithan8/NetTools</PackageProjectUrl>
+        <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+        <PackageTags>attributes tools annotations</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -34,7 +37,7 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
-        <DocumentationFile>..\lib\net\NetTools.Common.Attributes.XML</DocumentationFile>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <NoWarn>1701;1702;1591;1570;CS8618;CS8603;CS8602;CS8765;CS8767;CS0659;CS0618</NoWarn>
     </PropertyGroup>
@@ -52,6 +55,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <None Include="../readme.md" Pack="true" PackagePath=""/>
         <PackageReference Include="N8.NetTools" Version="0.3.0" />
     </ItemGroup>
 

@@ -44,13 +44,12 @@ install: | install-tools
 lint:
 	dotnet dotnet-format --no-restore --check
 
-## lint-scripts - Lint and validate the Batch scripts (Windows only)
-lint-scripts:
-	scripts\lint_scripts.bat
-
-## prep-release - Build and package the project for distribution (Windows only)
+## prep-release - Build and package a project for distribution
+# @parameters:
+# path= - The path to the folder containing the project to build.
+# version= - The version to build of the project.
 prep-release:
-	scripts\build_release_nuget.bat NetTools Release
+	dotnet pack -c Release -o output ${path}/*.csproj -p:Version=${version} -p:ContinuousIntegrationBuild=true
 
 ## publish-all - Publish all NuGet files to nuget.org.
 # WARNING: Will publish ALL discovered NuGet files.
@@ -65,11 +64,6 @@ publish-all:
 # key= - The API key for nuget.org
 publish:
 	scripts\publish_nuget.bat ${file} ${key}
-
-## release - Cuts a release for the project on GitHub (requires GitHub CLI)
-# tag = The associated tag title of the release
-release:
-	gh release create ${tag} *.nupkg
 
 ## restore - Restore the project
 restore:
@@ -104,4 +98,4 @@ test-fw:
 uninstall-scanner:
 	dotnet tool uninstall security-scan
 
-.PHONY: help build build-test-fw build-prod clean format install-cert install-tools install lint lint-scripts pre-release publish-all publish release restore scan setup-win setup-unix sign test test-fw uninstall-scanner
+.PHONY: help build build-test-fw build-prod clean format install-tools install lint prep-release publish-all publish restore scan setup-win setup-unix test test-fw uninstall-scanner
