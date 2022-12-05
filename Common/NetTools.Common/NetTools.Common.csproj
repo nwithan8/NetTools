@@ -9,7 +9,7 @@
         <RootNamespace>NetTools.Common</RootNamespace>
         <Configurations>Release;Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <PackageId>NetTools.Common</PackageId>
+        <PackageId>N8.NetTools.Common</PackageId>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <Authors>nwithan8</Authors>
         <PackageProjectUrl>https://github.com/nwithan8/NetTools</PackageProjectUrl>
@@ -55,7 +55,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="../readme.md" Pack="true" PackagePath=""/>
+        <None Include="../README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
     
 </Project>

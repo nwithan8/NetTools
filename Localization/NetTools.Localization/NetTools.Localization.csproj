@@ -9,7 +9,7 @@
         <RootNamespace>NetTools.Localization</RootNamespace>
         <Configurations>Release;Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <PackageId>NetTools.Localization</PackageId>
+        <PackageId>N8.NetTools.Localization</PackageId>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <Authors>nwithan8</Authors>
         <PackageProjectUrl>https://github.com/nwithan8/NetTools</PackageProjectUrl>
@@ -55,7 +55,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="../readme.md" Pack="true" PackagePath=""/>
+        <None Include="../README.md" Pack="true" PackagePath=""/>
         <PackageReference Include="N8.NetTools" Version="0.3.0" />
         <PackageReference Include="libphonenumber-csharp" Version="8.12.56" />
         <PackageReference Include="Nager.Country" Version="3.1.1" />
