@@ -56,7 +56,6 @@
 
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="" />
-        <PackageReference Include="N8.NetTools" Version="0.3.0" />
         <PackageReference Include="N8.NetTools.Common" Version="0.6.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="RestSharp" Version="108.0.2" />

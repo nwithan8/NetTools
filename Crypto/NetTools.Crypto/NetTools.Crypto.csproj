@@ -56,7 +56,6 @@
 
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="" />
-        <PackageReference Include="N8.NetTools" Version="0.4.0" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
         <PackageReference Include="CrypticWizard.RandomWordGenerator" Version="0.9.5" />
         <PackageReference Include="N8.NetTools.Common" Version="0.6.0" />

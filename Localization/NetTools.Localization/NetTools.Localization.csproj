@@ -56,7 +56,6 @@
 
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="" />
-        <PackageReference Include="N8.NetTools" Version="0.3.0" />
         <PackageReference Include="libphonenumber-csharp" Version="8.12.56" />
         <PackageReference Include="N8.NetTools.Common" Version="0.6.0" />
         <PackageReference Include="Nager.Country" Version="3.1.1" />
