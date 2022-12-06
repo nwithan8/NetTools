@@ -1,12 +1,12 @@
 using CrypticWizard.RandomWordGenerator;
 
-namespace NetTools.Common.Crypto;
+namespace NetTools.Crypto;
 
 public static class Passwords
 {
     public static double GenerateRandomPasscode(int length = 8)
     {
-        return new Random().Next(0, (int)Math.Pow(10, length));
+        return new Random().Next(0, (int)System.Math.Pow(10, length));
     }
     
     public static string GenerateRandomPassword(int length = 16, bool allowSpecialCharacters = true)

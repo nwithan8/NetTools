@@ -1,6 +1,6 @@
 // ReSharper disable InconsistentNaming
 
-namespace NetTools.Common.HTTP;
+namespace NetTools.HTTP;
 
 public static class StatusCodes
 {

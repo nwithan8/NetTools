@@ -1,4 +1,4 @@
-namespace NetTools.Common.HTTP
+namespace NetTools.HTTP
 {
     /// <summary>
     ///     A JSON serializer instance with internal de/serialization settings

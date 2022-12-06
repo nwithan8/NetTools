@@ -1,3 +1,6 @@
+using NetTools.Common;
+using NetTools.Common.Conversions;
+
 namespace NetTools.Common.Files;
 
 public static class Files
@@ -40,7 +43,7 @@ public static class Files
 
     public static void SaveBase64AsFile(string base64String, string path)
     {
-        var byteArray = NetTools.Common.Crypto.Base64.ToByteArray(base64String: base64String);
+        var byteArray = base64String.Base64ToByteArray();
         SaveByteArrayAsFile(byteArray: byteArray, path: path);
     }
 }

@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace NetTools.Common.Crypto;
+namespace NetTools.Crypto;
 
 public static class Encryption
 {

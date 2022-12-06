@@ -23,7 +23,7 @@ public static class Hex
     /// </summary>
     /// <param name="hexString">Hex string to convert to a byte array.</param>
     /// <returns>Byte array</returns>
-    public static byte[] ToByteArray(this string hexString)
+    public static byte[] HexToByteArray(this string hexString)
     {
         return Enumerable.Range(0, hexString.Length)
             .Where(x => x % 2 == 0)
@@ -36,9 +36,9 @@ public static class Hex
     /// </summary>
     /// <param name="hexString">Hex string to convert to base64 string.</param>
     /// <returns>Base64 string</returns>
-    public static string ToBase64String(this string hexString)
+    public static string HexToBase64String(this string hexString)
     {
-        var byteArray = ToByteArray(hexString);
-        return byteArray.ToBase64String();
+        var byteArray = HexToByteArray(hexString);
+        return byteArray.BytesToBase64String();
     }
 }

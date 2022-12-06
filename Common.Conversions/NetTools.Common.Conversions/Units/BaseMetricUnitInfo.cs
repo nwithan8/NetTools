@@ -9,6 +9,6 @@ internal class BaseMetricUnitInfo : BaseUnitInfo, IConvertableUnitInfo
 
     internal double Base10Power { get; }
 
-    public Func<double, double> FromBase => x => x / Math.Pow(10, Base10Power);
-    public Func<double, double> ToBase => x => x * Math.Pow(10, Base10Power);
+    public Func<double, double> FromBase => x => x / System.Math.Pow(10, Base10Power);
+    public Func<double, double> ToBase => x => x * System.Math.Pow(10, Base10Power);
 }

@@ -1,5 +1,5 @@
 // ReSharper disable InconsistentNaming
-namespace NetTools.Common.Crypto;
+namespace NetTools.Crypto;
 
 public static class UUID
 {

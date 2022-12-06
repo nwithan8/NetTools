@@ -7,7 +7,7 @@ public static class ByteArray
     /// </summary>
     /// <param name="byteArray">Byte array to convert to base64 string.</param>
     /// <returns>Base64 string</returns>
-    public static string ToBase64String(this byte[] byteArray)
+    public static string BytesToBase64String(this byte[] byteArray)
     {
         return Convert.ToBase64String(byteArray);
     }
@@ -17,7 +17,7 @@ public static class ByteArray
     /// </summary>
     /// <param name="bytes">Byte array to convert to hex string.</param>
     /// <returns>Hex string</returns>
-    public static string ToHexString(this IReadOnlyList<byte> bytes)
+    public static string BytesToHexString(this IReadOnlyList<byte> bytes)
     {
         // Fastest safe way to convert a byte array to hex string,
         // per https://stackoverflow.com/a/624379/13343799

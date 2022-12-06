@@ -11,12 +11,6 @@
           "System.Collections.Immutable": "1.7.1"
         }
       },
-      "N8.NetTools": {
-        "type": "Direct",
-        "requested": "[0.3.0, )",
-        "resolved": "0.3.0",
-        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
-      },
       "N8.NetTools.Common": {
         "type": "Direct",
         "requested": "[0.6.0, )",
@@ -53,12 +47,6 @@
         "dependencies": {
           "System.Collections.Immutable": "1.7.1"
         }
-      },
-      "N8.NetTools": {
-        "type": "Direct",
-        "requested": "[0.3.0, )",
-        "resolved": "0.3.0",
-        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
       },
       "N8.NetTools.Common": {
         "type": "Direct",
@@ -139,12 +127,6 @@
           "System.Collections.Immutable": "1.7.1"
         }
       },
-      "N8.NetTools": {
-        "type": "Direct",
-        "requested": "[0.3.0, )",
-        "resolved": "0.3.0",
-        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
-      },
       "N8.NetTools.Common": {
         "type": "Direct",
         "requested": "[0.6.0, )",
@@ -210,12 +192,6 @@
           "System.Collections.Immutable": "1.7.1"
         }
       },
-      "N8.NetTools": {
-        "type": "Direct",
-        "requested": "[0.3.0, )",
-        "resolved": "0.3.0",
-        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
-      },
       "N8.NetTools.Common": {
         "type": "Direct",
         "requested": "[0.6.0, )",
@@ -253,12 +229,6 @@
           "System.Collections.Immutable": "1.7.1"
         }
       },
-      "N8.NetTools": {
-        "type": "Direct",
-        "requested": "[0.3.0, )",
-        "resolved": "0.3.0",
-        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
-      },
       "N8.NetTools.Common": {
         "type": "Direct",
         "requested": "[0.6.0, )",
@@ -295,12 +265,6 @@
         "dependencies": {
           "System.Collections.Immutable": "1.7.1"
         }
-      },
-      "N8.NetTools": {
-        "type": "Direct",
-        "requested": "[0.3.0, )",
-        "resolved": "0.3.0",
-        "contentHash": "/uRElXZj63b92pUU2tEdV/cZlR8Y6gJSUbCAev9uXi20ZBxZWthVUHJDTvbU4BA3NXjlPadXl7NissGajUvoLQ=="
       },
       "N8.NetTools.Common": {
         "type": "Direct",

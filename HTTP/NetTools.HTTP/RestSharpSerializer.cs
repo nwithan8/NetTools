@@ -1,4 +1,4 @@
-namespace NetTools.Common.HTTP;
+namespace NetTools.HTTP;
 
 /// <summary>
 ///     A RestSharp-compatible serializer that uses <see cref="JsonSerialization" />.

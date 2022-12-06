@@ -12,8 +12,8 @@ internal class StorageUnitInfo : BaseUnitInfo, IStorageUnitInfo
 
     internal bool Bytes { get; }
 
-    public Func<double, double> FromBase => x => x / Math.Pow(1024, Base1024) / (Bytes ? 8 : 1);
-    public Func<double, double> ToBase => x => x * Math.Pow(1024, Base1024) * (Bytes ? 8 : 1);
+    public Func<double, double> FromBase => x => x / System.Math.Pow(1024, Base1024) / (Bytes ? 8 : 1);
+    public Func<double, double> ToBase => x => x * System.Math.Pow(1024, Base1024) * (Bytes ? 8 : 1);
 }
 
 internal interface IStorageUnitInfo : IConvertableUnitInfo

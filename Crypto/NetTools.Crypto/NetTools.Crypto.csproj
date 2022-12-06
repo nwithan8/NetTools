@@ -55,7 +55,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="../README.md" Pack="true" PackagePath="" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
         <PackageReference Include="CrypticWizard.RandomWordGenerator" Version="0.9.5" />
         <PackageReference Include="N8.NetTools.Common" Version="0.6.0" />
@@ -63,6 +62,10 @@
 
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Common.Conversions\NetTools.Common.Conversions\NetTools.Common.Conversions.csproj" />
     </ItemGroup>
 
 </Project>

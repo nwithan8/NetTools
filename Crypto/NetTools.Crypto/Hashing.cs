@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using NetTools.Common.Conversions;
 
-namespace NetTools.Common.Crypto;
+namespace NetTools.Crypto;
 
 public static class Hashing
 {
@@ -100,7 +100,7 @@ public static class Hashing
             using var hmac = new HMACSHA256(keyBytes);
             var hash = hmac.ComputeHash(data);
 
-            return hash.ToHexString();
+            return hash.BytesToHexString();
         }
 
         /// <summary>
@@ -143,8 +143,8 @@ public static class Hashing
         /// <returns>Whether the two signatures match.</returns>
         public static bool SignaturesMatch(string signature1, string? signature2)
         {
-            var signatureBytes1 = signature1.ToByteArray();
-            var signatureBytes2 = signature2?.ToByteArray();
+            var signatureBytes1 = signature1.HexToByteArray();
+            var signatureBytes2 = signature2?.HexToByteArray();
 
             return SignaturesMatch(signatureBytes1, signatureBytes2);
         }
