@@ -6,15 +6,15 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
-        <RootNamespace>NetTools.HTTP</RootNamespace>
+        <RootNamespace>NetTools.Polly</RootNamespace>
         <Configurations>Release;Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <PackageId>N8.NetTools.HTTP</PackageId>
+        <PackageId>N8.NetTools.Polly</PackageId>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <Authors>nwithan8</Authors>
         <PackageProjectUrl>https://github.com/nwithan8/NetTools</PackageProjectUrl>
         <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-        <PackageTags>HTTP status request response</PackageTags>
+        <PackageTags>Polly policies</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -57,7 +57,8 @@
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="" />
         <PackageReference Include="N8.NetTools.Common" Version="0.6.0" />
-        <PackageReference Include="N8.NetTools.Polly" Version="0.1.0" />
+        <PackageReference Include="Polly" Version="7.2.3" />
+        <PackageReference Include="Polly.Contrib.WaitAndRetry" Version="1.1.1" />
     </ItemGroup>
 
 </Project>

@@ -1,11 +1,11 @@
-namespace NetTools.HTTP;
+namespace NetTools.JSON;
 
 /// <summary>
 ///     A JSON serializer instance with internal de/serialization settings
 /// </summary>
 public class JsonSerializer
 {
-    private readonly Newtonsoft.Json.JsonSerializerSettings _jsonSerializerSettings;
+    protected readonly Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings;
 
     /// <summary>
     ///     Constructor for a new JsonSerializer instance.
@@ -13,7 +13,7 @@ public class JsonSerializer
     /// <param name="jsonSerializerSettings"><see cref="Newtonsoft.Json.JsonSerializerSettings" /> to be used by this instance.</param>
     public JsonSerializer(Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null)
     {
-        _jsonSerializerSettings = jsonSerializerSettings ?? new Newtonsoft.Json.JsonSerializerSettings
+        JsonSerializerSettings = jsonSerializerSettings ?? new Newtonsoft.Json.JsonSerializerSettings
         {
             NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
             MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore
@@ -29,7 +29,7 @@ public class JsonSerializer
     /// <returns>A T-type object</returns>
     public T ConvertJsonToObject<T>(string? data, List<string>? rootElementKeys = null)
     {
-        return JsonSerialization.ConvertJsonToObject<T>(data, _jsonSerializerSettings, rootElementKeys);
+        return JsonSerialization.ConvertJsonToObject<T>(data, JsonSerializerSettings, rootElementKeys);
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public class JsonSerializer
     /// <returns>A T-type object</returns>
     public object ConvertJsonToObject(string? data, Type type, List<string>? rootElementKeys = null)
     {
-        return JsonSerialization.ConvertJsonToObject(data, _jsonSerializerSettings, rootElementKeys);
+        return JsonSerialization.ConvertJsonToObject(data, JsonSerializerSettings, rootElementKeys);
     }
 
     /// <summary>
@@ -52,30 +52,17 @@ public class JsonSerializer
     /// <returns>An ExpandoObject object</returns>
     public System.Dynamic.ExpandoObject ConvertJsonToObject(string? data, List<string>? rootElementKeys = null)
     {
-        return JsonSerialization.ConvertJsonToObject(data, _jsonSerializerSettings, rootElementKeys);
+        return JsonSerialization.ConvertJsonToObject(data, JsonSerializerSettings, rootElementKeys);
     }
 
     /// <summary>
-    ///     Deserialize data from a RestSharp.RestResponseBase into a T-type object, using this instance's
-    ///     <see cref="_jsonSerializerSettings" />
-    /// </summary>
-    /// <param name="response">RestSharp.RestResponseBase object to extract data from.</param>
-    /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
-    /// <typeparam name="T">Type of object to deserialize to</typeparam>
-    /// <returns>A T-type object</returns>
-    public T ConvertJsonToObject<T>(RestSharp.RestResponseBase response, List<string>? rootElementKeys = null)
-    {
-        return JsonSerialization.ConvertJsonToObject<T>(response, _jsonSerializerSettings, rootElementKeys);
-    }
-
-    /// <summary>
-    ///     Serialize an object into a JSON string, using this instance's <see cref="_jsonSerializerSettings" />
+    ///     Serialize an object into a JSON string, using this instance's <see cref="JsonSerializerSettings" />
     /// </summary>
     /// <param name="data">An object to serialize into a string</param>
     /// <returns>A string of JSON data</returns>
     public string ConvertObjectToJson(object data)
     {
-        return JsonSerialization.ConvertObjectToJson(data, _jsonSerializerSettings);
+        return JsonSerialization.ConvertObjectToJson(data, JsonSerializerSettings);
     }
 }
 
@@ -158,24 +145,7 @@ public static class JsonSerialization
     }
 
     /// <summary>
-    ///     Deserialize data from a RestSharp.RestResponseBase into a T-type object, using this instance's
-    ///     <see cref="JsonSerializerSettings" />
-    /// </summary>
-    /// <param name="response">RestSharp.RestResponseBase object to extract data from.</param>
-    /// <param name="jsonSerializerSettings">
-    ///     The <see cref="Newtonsoft.Json.JsonSerializerSettings" /> to use for
-    ///     deserialization. Defaults to <see cref="DefaultJsonSerializerSettings" /> if not provided.
-    /// </param>
-    /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
-    /// <typeparam name="T">Type of object to deserialize to</typeparam>
-    /// <returns>A T-type object</returns>
-    public static T ConvertJsonToObject<T>(RestSharp.RestResponseBase response, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
-    {
-        return ConvertJsonToObject<T>(response.Content, jsonSerializerSettings, rootElementKeys);
-    }
-
-    /// <summary>
-    ///     Serialize an object into a JSON string, using this instance's <see cref="JsonSerializerSettings" />
+    ///     Serialize an object into a JSON string, using this instance's <see cref="Newtonsoft.Json.JsonSerializerSettings" />
     /// </summary>
     /// <param name="data">An object to serialize into a string</param>
     /// <param name="jsonSerializerSettings">

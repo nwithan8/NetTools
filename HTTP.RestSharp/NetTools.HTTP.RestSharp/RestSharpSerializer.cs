@@ -1,4 +1,7 @@
-namespace NetTools.HTTP;
+using RestSharp;
+using RestSharp.Serializers;
+
+namespace NetTools.HTTP.RestSharp;
 
 /// <summary>
 ///     A RestSharp-compatible serializer that uses <see cref="JsonSerialization" />.
@@ -6,26 +9,26 @@ namespace NetTools.HTTP;
 ///     This serializer will reroute the serialization process to <see cref="JsonSerialization" />, which uses
 ///     Newtonsoft.Json.
 /// </summary>
-public class RestSharpSerializer : RestSharp.Serializers.IRestSerializer
+public class RestSharpSerializer : IRestSerializer
 {
     public string[] AcceptedContentTypes { get; } =
     {
         "application/json", "text/json", "text/x-json", "text/javascript", "*+json"
     };
-    public RestSharp.DataFormat DataFormat => RestSharp.DataFormat.Json;
-    public RestSharp.Serializers.IDeserializer Deserializer => new Deserializer();
+    public DataFormat DataFormat => DataFormat.Json;
+    public IDeserializer Deserializer => new Deserializer();
 
-    public RestSharp.Serializers.ISerializer Serializer => new Serializer();
-    public RestSharp.Serializers.SupportsContentType SupportsContentType => type => AcceptedContentTypes.Contains(type);
+    public ISerializer Serializer => new Serializer();
+    public SupportsContentType SupportsContentType => type => AcceptedContentTypes.Contains(type);
 
-    public string? Serialize(RestSharp.Parameter parameter)
+    public string? Serialize(Parameter parameter)
     {
         // Override the System.Text.Json serializer that RestSharp used to use the Newtonsoft.Json serializer instead (via NetTools.HTTP)
-        return parameter.Value != null ? JsonSerialization.ConvertObjectToJson(parameter.Value) : "";
+        return parameter.Value != null ? JSON.JsonSerialization.ConvertObjectToJson(parameter.Value) : "";
     }
 }
 
-public class Serializer : RestSharp.Serializers.ISerializer
+public class Serializer : ISerializer
 {
     public string ContentType
     {
@@ -36,13 +39,13 @@ public class Serializer : RestSharp.Serializers.ISerializer
     public string? Serialize(object obj)
     {
         // Override the System.Text.Json serializer that RestSharp used to use the Newtonsoft.Json serializer instead (via NetTools.HTTP)
-        return JsonSerialization.ConvertObjectToJson(obj);
+        return JSON.JsonSerialization.ConvertObjectToJson(obj);
     }
 }
 
-public class Deserializer : RestSharp.Serializers.IDeserializer
+public class Deserializer : IDeserializer
 {
-    public T? Deserialize<T>(RestSharp.RestResponse response)
+    public T? Deserialize<T>(RestResponse response)
     {
         // Override the System.Text.Json deserializer that RestSharp used to use the Newtonsoft.Json deserializer instead (via NetTools.HTTP)
         return JsonSerialization.ConvertJsonToObject<T>(response);

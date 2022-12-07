@@ -5,18 +5,6 @@ namespace NetTools.HTTP;
 public static class StatusCodes
 {
     /// <summary>
-    ///     Return whether the given response has a status code in the given range.
-    /// </summary>
-    /// <param name="response">Response to check.</param>
-    /// <param name="min">Minimum valid status code.</param>
-    /// <param name="max">Maximum valid status code.</param>
-    /// <returns>Whether the given response has a status code in the given range.</returns>
-    public static bool HasStatusCodeBetween(this RestSharp.RestResponseBase response, int min, int max)
-    {
-        return StatusCodeBetween(response, min, max);
-    }
-
-    /// <summary>
     ///     Return whether the given status code is a 1xx code.
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
@@ -79,26 +67,6 @@ public static class StatusCodes
     }
 
     /// <summary>
-    ///     Return whether the given response has an error status code.
-    /// </summary>
-    /// <param name="response">Response to check.</param>
-    /// <returns>True if the response code is not in the 200-299 range, false otherwise.</returns>
-    public static bool ReturnedError(this RestSharp.RestResponseBase response)
-    {
-        return !ReturnedNoError(response);
-    }
-
-    /// <summary>
-    ///     Return whether the given response has a successful status code.
-    /// </summary>
-    /// <param name="response">Response to check.</param>
-    /// <returns>True if the response code is in the 200-299 range, false otherwise.</returns>
-    public static bool ReturnedNoError(this RestSharp.RestResponseBase response)
-    {
-        return response.StatusCode.Is2xx();
-    }
-
-    /// <summary>
     ///     Return whether the given status code is in the given range.
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
@@ -123,18 +91,6 @@ public static class StatusCodes
     }
 
     /// <summary>
-    ///     Return whether the given response has a status code in the given range.
-    /// </summary>
-    /// <param name="response">Response to check.</param>
-    /// <param name="min">Minimum valid status code.</param>
-    /// <param name="max">Maximum valid status code.</param>
-    /// <returns>Whether the given response has a status code in the given range.</returns>
-    public static bool StatusCodeBetween(RestSharp.RestResponseBase response, int min, int max)
-    {
-        return StatusCodeBetween(response.StatusCode, min, max);
-    }
-
-    /// <summary>
     ///     Return whether the given status code is a 1xx code.
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
@@ -152,16 +108,6 @@ public static class StatusCodes
     public static bool StatusCodeIs1xx(System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeBetween(statusCode, 100, 199);
-    }
-
-    /// <summary>
-    ///     Return whether the given response has a status code that is a 1xx code.
-    /// </summary>
-    /// <param name="response">Response to check.</param>
-    /// <returns>True if the status code is a 1xx code, False otherwise.</returns>
-    public static bool StatusCodeIs1xx(RestSharp.RestResponseBase response)
-    {
-        return StatusCodeBetween(response, 100, 199);
     }
 
     /// <summary>
@@ -185,16 +131,6 @@ public static class StatusCodes
     }
 
     /// <summary>
-    ///     Return whether the given response has a status code that is a 2xx code.
-    /// </summary>
-    /// <param name="response">Response to check.</param>
-    /// <returns>True if the status code is a 2xx code, False otherwise.</returns>
-    public static bool StatusCodeIs2xx(RestSharp.RestResponseBase response)
-    {
-        return StatusCodeBetween(response, 200, 299);
-    }
-
-    /// <summary>
     ///     Return whether the given status code is a 3xx code.
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
@@ -212,16 +148,6 @@ public static class StatusCodes
     public static bool StatusCodeIs3xx(System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeBetween(statusCode, 300, 399);
-    }
-
-    /// <summary>
-    ///     Return whether the given response has a status code that is a 3xx code.
-    /// </summary>
-    /// <param name="response">Response to check.</param>
-    /// <returns>True if the status code is a 3xx code, False otherwise.</returns>
-    public static bool StatusCodeIs3xx(RestSharp.RestResponseBase response)
-    {
-        return StatusCodeBetween(response, 300, 399);
     }
 
     /// <summary>
@@ -245,16 +171,6 @@ public static class StatusCodes
     }
 
     /// <summary>
-    ///     Return whether the given response has a status code that is a 4xx code.
-    /// </summary>
-    /// <param name="response">Response to check.</param>
-    /// <returns>True if the status code is a 4xx code, False otherwise.</returns>
-    public static bool StatusCodeIs4xx(RestSharp.RestResponseBase response)
-    {
-        return StatusCodeBetween(response, 400, 499);
-    }
-
-    /// <summary>
     ///     Return whether the given status code is a 5xx code.
     /// </summary>
     /// <param name="statusCode">Status code to check.</param>
@@ -272,15 +188,5 @@ public static class StatusCodes
     public static bool StatusCodeIs5xx(System.Net.HttpStatusCode statusCode)
     {
         return StatusCodeBetween(statusCode, 500, 599);
-    }
-
-    /// <summary>
-    ///     Return whether the given response has a status code that is a 5xx code.
-    /// </summary>
-    /// <param name="response">Response to check.</param>
-    /// <returns>True if the status code is a 5xx code, False otherwise.</returns>
-    public static bool StatusCodeIs5xx(RestSharp.RestResponseBase response)
-    {
-        return StatusCodeBetween(response, 500, 599);
     }
 }

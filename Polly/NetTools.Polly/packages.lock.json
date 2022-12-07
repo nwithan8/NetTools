@@ -8,24 +8,15 @@
         "resolved": "0.6.0",
         "contentHash": "8qjgbQPa+Rq+h+8tpkYm5NmEFGuQ401la39yDljDmHt8xTl/etE0VKwSEBZQSUnPcwu1ntXuliyn8upGoKvj5g=="
       },
-      "N8.NetTools.Polly": {
-        "type": "Direct",
-        "requested": "[0.1.0, )",
-        "resolved": "0.1.0",
-        "contentHash": "1TnhxL7eCODUxBiNdJ0zxNUHjSDgUxWSFx1Wbqs3etcG1uQHU8d74DxBtwJG/KHB4Xl/MhsbtXgY0DWiBpdNXA==",
-        "dependencies": {
-          "N8.NetTools.Common": "0.6.0",
-          "Polly": "7.2.3",
-          "Polly.Contrib.WaitAndRetry": "1.1.1"
-        }
-      },
       "Polly": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[7.2.3, )",
         "resolved": "7.2.3",
         "contentHash": "DeCY0OFbNdNxsjntr1gTXHJ5pKUwYzp04Er2LLeN3g6pWhffsGuKVfMBLe1lw7x76HrPkLxKEFxBlpRxS2nDEQ=="
       },
       "Polly.Contrib.WaitAndRetry": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[1.1.1, )",
         "resolved": "1.1.1",
         "contentHash": "1MUQLiSo4KDkQe6nzQRhIU05lm9jlexX5BVsbuw0SL82ynZ+GzAHQxJVDPVBboxV37Po3SG077aX8DuSy8TkaA=="
       }
@@ -37,17 +28,6 @@
         "resolved": "0.6.0",
         "contentHash": "8qjgbQPa+Rq+h+8tpkYm5NmEFGuQ401la39yDljDmHt8xTl/etE0VKwSEBZQSUnPcwu1ntXuliyn8upGoKvj5g=="
       },
-      "N8.NetTools.Polly": {
-        "type": "Direct",
-        "requested": "[0.1.0, )",
-        "resolved": "0.1.0",
-        "contentHash": "1TnhxL7eCODUxBiNdJ0zxNUHjSDgUxWSFx1Wbqs3etcG1uQHU8d74DxBtwJG/KHB4Xl/MhsbtXgY0DWiBpdNXA==",
-        "dependencies": {
-          "N8.NetTools.Common": "0.6.0",
-          "Polly": "7.2.3",
-          "Polly.Contrib.WaitAndRetry": "1.1.1"
-        }
-      },
       "NETStandard.Library": {
         "type": "Direct",
         "requested": "[2.0.3, )",
@@ -57,20 +37,22 @@
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
       },
-      "Microsoft.NETCore.Platforms": {
-        "type": "Transitive",
-        "resolved": "1.1.0",
-        "contentHash": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A=="
-      },
       "Polly": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[7.2.3, )",
         "resolved": "7.2.3",
         "contentHash": "DeCY0OFbNdNxsjntr1gTXHJ5pKUwYzp04Er2LLeN3g6pWhffsGuKVfMBLe1lw7x76HrPkLxKEFxBlpRxS2nDEQ=="
       },
       "Polly.Contrib.WaitAndRetry": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[1.1.1, )",
         "resolved": "1.1.1",
         "contentHash": "1MUQLiSo4KDkQe6nzQRhIU05lm9jlexX5BVsbuw0SL82ynZ+GzAHQxJVDPVBboxV37Po3SG077aX8DuSy8TkaA=="
+      },
+      "Microsoft.NETCore.Platforms": {
+        "type": "Transitive",
+        "resolved": "1.1.0",
+        "contentHash": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A=="
       }
     },
     ".NETStandard,Version=v2.1": {
@@ -80,24 +62,15 @@
         "resolved": "0.6.0",
         "contentHash": "8qjgbQPa+Rq+h+8tpkYm5NmEFGuQ401la39yDljDmHt8xTl/etE0VKwSEBZQSUnPcwu1ntXuliyn8upGoKvj5g=="
       },
-      "N8.NetTools.Polly": {
-        "type": "Direct",
-        "requested": "[0.1.0, )",
-        "resolved": "0.1.0",
-        "contentHash": "1TnhxL7eCODUxBiNdJ0zxNUHjSDgUxWSFx1Wbqs3etcG1uQHU8d74DxBtwJG/KHB4Xl/MhsbtXgY0DWiBpdNXA==",
-        "dependencies": {
-          "N8.NetTools.Common": "0.6.0",
-          "Polly": "7.2.3",
-          "Polly.Contrib.WaitAndRetry": "1.1.1"
-        }
-      },
       "Polly": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[7.2.3, )",
         "resolved": "7.2.3",
         "contentHash": "DeCY0OFbNdNxsjntr1gTXHJ5pKUwYzp04Er2LLeN3g6pWhffsGuKVfMBLe1lw7x76HrPkLxKEFxBlpRxS2nDEQ=="
       },
       "Polly.Contrib.WaitAndRetry": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[1.1.1, )",
         "resolved": "1.1.1",
         "contentHash": "1MUQLiSo4KDkQe6nzQRhIU05lm9jlexX5BVsbuw0SL82ynZ+GzAHQxJVDPVBboxV37Po3SG077aX8DuSy8TkaA=="
       }
@@ -109,24 +82,15 @@
         "resolved": "0.6.0",
         "contentHash": "8qjgbQPa+Rq+h+8tpkYm5NmEFGuQ401la39yDljDmHt8xTl/etE0VKwSEBZQSUnPcwu1ntXuliyn8upGoKvj5g=="
       },
-      "N8.NetTools.Polly": {
-        "type": "Direct",
-        "requested": "[0.1.0, )",
-        "resolved": "0.1.0",
-        "contentHash": "1TnhxL7eCODUxBiNdJ0zxNUHjSDgUxWSFx1Wbqs3etcG1uQHU8d74DxBtwJG/KHB4Xl/MhsbtXgY0DWiBpdNXA==",
-        "dependencies": {
-          "N8.NetTools.Common": "0.6.0",
-          "Polly": "7.2.3",
-          "Polly.Contrib.WaitAndRetry": "1.1.1"
-        }
-      },
       "Polly": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[7.2.3, )",
         "resolved": "7.2.3",
         "contentHash": "DeCY0OFbNdNxsjntr1gTXHJ5pKUwYzp04Er2LLeN3g6pWhffsGuKVfMBLe1lw7x76HrPkLxKEFxBlpRxS2nDEQ=="
       },
       "Polly.Contrib.WaitAndRetry": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[1.1.1, )",
         "resolved": "1.1.1",
         "contentHash": "1MUQLiSo4KDkQe6nzQRhIU05lm9jlexX5BVsbuw0SL82ynZ+GzAHQxJVDPVBboxV37Po3SG077aX8DuSy8TkaA=="
       }
@@ -138,24 +102,15 @@
         "resolved": "0.6.0",
         "contentHash": "8qjgbQPa+Rq+h+8tpkYm5NmEFGuQ401la39yDljDmHt8xTl/etE0VKwSEBZQSUnPcwu1ntXuliyn8upGoKvj5g=="
       },
-      "N8.NetTools.Polly": {
-        "type": "Direct",
-        "requested": "[0.1.0, )",
-        "resolved": "0.1.0",
-        "contentHash": "1TnhxL7eCODUxBiNdJ0zxNUHjSDgUxWSFx1Wbqs3etcG1uQHU8d74DxBtwJG/KHB4Xl/MhsbtXgY0DWiBpdNXA==",
-        "dependencies": {
-          "N8.NetTools.Common": "0.6.0",
-          "Polly": "7.2.3",
-          "Polly.Contrib.WaitAndRetry": "1.1.1"
-        }
-      },
       "Polly": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[7.2.3, )",
         "resolved": "7.2.3",
         "contentHash": "DeCY0OFbNdNxsjntr1gTXHJ5pKUwYzp04Er2LLeN3g6pWhffsGuKVfMBLe1lw7x76HrPkLxKEFxBlpRxS2nDEQ=="
       },
       "Polly.Contrib.WaitAndRetry": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[1.1.1, )",
         "resolved": "1.1.1",
         "contentHash": "1MUQLiSo4KDkQe6nzQRhIU05lm9jlexX5BVsbuw0SL82ynZ+GzAHQxJVDPVBboxV37Po3SG077aX8DuSy8TkaA=="
       }
@@ -167,24 +122,15 @@
         "resolved": "0.6.0",
         "contentHash": "8qjgbQPa+Rq+h+8tpkYm5NmEFGuQ401la39yDljDmHt8xTl/etE0VKwSEBZQSUnPcwu1ntXuliyn8upGoKvj5g=="
       },
-      "N8.NetTools.Polly": {
-        "type": "Direct",
-        "requested": "[0.1.0, )",
-        "resolved": "0.1.0",
-        "contentHash": "1TnhxL7eCODUxBiNdJ0zxNUHjSDgUxWSFx1Wbqs3etcG1uQHU8d74DxBtwJG/KHB4Xl/MhsbtXgY0DWiBpdNXA==",
-        "dependencies": {
-          "N8.NetTools.Common": "0.6.0",
-          "Polly": "7.2.3",
-          "Polly.Contrib.WaitAndRetry": "1.1.1"
-        }
-      },
       "Polly": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[7.2.3, )",
         "resolved": "7.2.3",
         "contentHash": "DeCY0OFbNdNxsjntr1gTXHJ5pKUwYzp04Er2LLeN3g6pWhffsGuKVfMBLe1lw7x76HrPkLxKEFxBlpRxS2nDEQ=="
       },
       "Polly.Contrib.WaitAndRetry": {
-        "type": "Transitive",
+        "type": "Direct",
+        "requested": "[1.1.1, )",
         "resolved": "1.1.1",
         "contentHash": "1MUQLiSo4KDkQe6nzQRhIU05lm9jlexX5BVsbuw0SL82ynZ+GzAHQxJVDPVBboxV37Po3SG077aX8DuSy8TkaA=="
       }
