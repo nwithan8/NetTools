@@ -5,6 +5,11 @@ namespace NetTools.Common.Files;
 
 public static class Files
 {
+    public static void DeleteFile(string filePath)
+    {
+        File.Delete(filePath);
+    }
+
     public static byte[] ReadFile(string path)
     {
         using var fsSource = new FileStream(path,
@@ -29,9 +34,10 @@ public static class Files
         return byteArray;
     }
 
-    public static void DeleteFile(string filePath)
+    public static void SaveBase64AsFile(string base64String, string path)
     {
-        File.Delete(filePath);
+        var byteArray = base64String.Base64ToByteArray();
+        SaveByteArrayAsFile(byteArray, path);
     }
 
     public static void SaveByteArrayAsFile(byte[] byteArray, string path)
@@ -39,11 +45,5 @@ public static class Files
         using var stream = new FileStream(path, FileMode.Create);
         stream.Write(byteArray, 0, byteArray.Length);
         stream.Flush();
-    }
-
-    public static void SaveBase64AsFile(string base64String, string path)
-    {
-        var byteArray = base64String.Base64ToByteArray();
-        SaveByteArrayAsFile(byteArray: byteArray, path: path);
     }
 }

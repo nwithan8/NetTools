@@ -2,14 +2,14 @@ namespace NetTools.Common.Conversions.Units;
 
 internal class BaseUnitInfo
 {
+    internal string Name { get; }
+    internal string Symbol { get; }
+
     internal BaseUnitInfo(string name, string symbol)
     {
         Name = name;
         Symbol = symbol;
     }
-
-    internal string Name { get; }
-    internal string Symbol { get; }
 }
 
 internal interface IConvertableUnitInfo

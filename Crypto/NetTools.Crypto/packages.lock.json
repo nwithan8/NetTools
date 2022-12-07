@@ -21,9 +21,12 @@
         "contentHash": "8qjgbQPa+Rq+h+8tpkYm5NmEFGuQ401la39yDljDmHt8xTl/etE0VKwSEBZQSUnPcwu1ntXuliyn8upGoKvj5g=="
       },
       "N8.NetTools.Common.Conversions": {
-        "type": "Project",
+        "type": "Direct",
+        "requested": "[1.0.1, )",
+        "resolved": "1.0.1",
+        "contentHash": "DHdB51i/1sEkfF1txY2exvjpqtWOIA/q+VmRhptXwZT+b5zCUZ+V5pq4k54Cy0+bbOv9X3Aah8WBJg3YDcO6vQ==",
         "dependencies": {
-          "N8.NetTools.Common": "[0.6.0, )"
+          "N8.NetTools.Common": "0.6.0"
         }
       }
     },
@@ -47,9 +50,12 @@
         "contentHash": "8qjgbQPa+Rq+h+8tpkYm5NmEFGuQ401la39yDljDmHt8xTl/etE0VKwSEBZQSUnPcwu1ntXuliyn8upGoKvj5g=="
       },
       "N8.NetTools.Common.Conversions": {
-        "type": "Project",
+        "type": "Direct",
+        "requested": "[1.0.1, )",
+        "resolved": "1.0.1",
+        "contentHash": "DHdB51i/1sEkfF1txY2exvjpqtWOIA/q+VmRhptXwZT+b5zCUZ+V5pq4k54Cy0+bbOv9X3Aah8WBJg3YDcO6vQ==",
         "dependencies": {
-          "N8.NetTools.Common": "[0.6.0, )"
+          "N8.NetTools.Common": "0.6.0"
         }
       }
     },
@@ -73,9 +79,12 @@
         "contentHash": "8qjgbQPa+Rq+h+8tpkYm5NmEFGuQ401la39yDljDmHt8xTl/etE0VKwSEBZQSUnPcwu1ntXuliyn8upGoKvj5g=="
       },
       "N8.NetTools.Common.Conversions": {
-        "type": "Project",
+        "type": "Direct",
+        "requested": "[1.0.1, )",
+        "resolved": "1.0.1",
+        "contentHash": "DHdB51i/1sEkfF1txY2exvjpqtWOIA/q+VmRhptXwZT+b5zCUZ+V5pq4k54Cy0+bbOv9X3Aah8WBJg3YDcO6vQ==",
         "dependencies": {
-          "N8.NetTools.Common": "[0.6.0, )"
+          "N8.NetTools.Common": "0.6.0"
         }
       }
     },
@@ -99,9 +108,12 @@
         "contentHash": "8qjgbQPa+Rq+h+8tpkYm5NmEFGuQ401la39yDljDmHt8xTl/etE0VKwSEBZQSUnPcwu1ntXuliyn8upGoKvj5g=="
       },
       "N8.NetTools.Common.Conversions": {
-        "type": "Project",
+        "type": "Direct",
+        "requested": "[1.0.1, )",
+        "resolved": "1.0.1",
+        "contentHash": "DHdB51i/1sEkfF1txY2exvjpqtWOIA/q+VmRhptXwZT+b5zCUZ+V5pq4k54Cy0+bbOv9X3Aah8WBJg3YDcO6vQ==",
         "dependencies": {
-          "N8.NetTools.Common": "[0.6.0, )"
+          "N8.NetTools.Common": "0.6.0"
         }
       }
     }

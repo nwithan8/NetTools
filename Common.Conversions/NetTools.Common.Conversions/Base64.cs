@@ -11,10 +11,10 @@ public static class Base64
     /// <returns>Byte array</returns>
     public static byte[] Base64ToByteArray(this string base64String)
     {
-        var prefixStripped = NetTools.RegularExpressions.Replace(base64String, Base64PrefixRegexPattern, string.Empty, true);
+        var prefixStripped = RegularExpressions.Replace(base64String, Base64PrefixRegexPattern, string.Empty, true);
         return Convert.FromBase64String(prefixStripped);
     }
-    
+
     /// <summary>
     ///     Convert a base64 string to a hex string
     /// </summary>

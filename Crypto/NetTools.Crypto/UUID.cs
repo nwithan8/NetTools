@@ -5,6 +5,6 @@ public static class UUID
 {
     public static Guid GenerateUUID()
     {
-        return System.Guid.NewGuid();
+        return Guid.NewGuid();
     }
 }

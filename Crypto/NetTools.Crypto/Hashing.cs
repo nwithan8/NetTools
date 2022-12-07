@@ -8,23 +8,6 @@ public static class Hashing
 {
     public static class Standard
     {
-        private static string? GenerateHashString(HashAlgorithm algorithm, string text)
-        {
-            // Compute hash from text parameter
-            algorithm.ComputeHash(Encoding.UTF8.GetBytes(text));
-
-            // Get has value in array of bytes
-            var result = algorithm.Hash;
-
-            if (result == null)
-                return null;
-
-            // Return as hexadecimal string
-            return string.Join(
-                string.Empty,
-                result.Select(x => x.ToString("x2")));
-        }
-
         public static string? Md5(string text)
         {
             var algorithm = MD5.Create();
@@ -54,28 +37,45 @@ public static class Hashing
             var algorithm = SHA512.Create();
             return GenerateHashString(algorithm, text);
         }
+
+        private static string? GenerateHashString(HashAlgorithm algorithm, string text)
+        {
+            // Compute hash from text parameter
+            algorithm.ComputeHash(Encoding.UTF8.GetBytes(text));
+
+            // Get has value in array of bytes
+            var result = algorithm.Hash;
+
+            if (result == null)
+                return null;
+
+            // Return as hexadecimal string
+            return string.Join(
+                string.Empty,
+                result.Select(x => x.ToString("x2")));
+        }
     }
 
     public static class Bcrypt
     {
-        public static string Hash(string text, string? salt = null)
-        {
-            return salt != null ? BCrypt.Net.BCrypt.HashPassword(text, salt) : BCrypt.Net.BCrypt.HashPassword(text);
-        }
-
         public static string EnhancedHash(string text)
         {
             return BCrypt.Net.BCrypt.EnhancedHashPassword(text);
         }
 
-        public static bool Verify(string text, string hashToMatch)
-        {
-            return BCrypt.Net.BCrypt.Verify(text, hashToMatch);
-        }
-
         public static bool EnhancedVerify(string text, string hashToMatch)
         {
             return BCrypt.Net.BCrypt.EnhancedVerify(text, hashToMatch);
+        }
+
+        public static string Hash(string text, string? salt = null)
+        {
+            return salt != null ? BCrypt.Net.BCrypt.HashPassword(text, salt) : BCrypt.Net.BCrypt.HashPassword(text);
+        }
+
+        public static bool Verify(string text, string hashToMatch)
+        {
+            return BCrypt.Net.BCrypt.Verify(text, hashToMatch);
         }
     }
 
@@ -90,10 +90,7 @@ public static class Hashing
         /// <returns>Hex digest of data.</returns>
         public static string CalculateHmacSha256HexDigest(byte[] data, string secret, NormalizationForm? normalizationForm = null)
         {
-            if (normalizationForm != null)
-            {
-                secret = secret.Normalize(normalizationForm.Value);
-            }
+            if (normalizationForm != null) secret = secret.Normalize(normalizationForm.Value);
 
             var keyBytes = Encoding.UTF8.GetBytes(secret);
 
@@ -112,25 +109,15 @@ public static class Hashing
         public static bool SignaturesMatch(byte[] signature1, byte[]? signature2)
         {
             // short-circuit if second signature is null
-            if (signature2 == null)
-            {
-                return false;
-            }
+            if (signature2 == null) return false;
 
             // short-circuit if signatures are not the same length
-            if (signature1.Length != signature2?.Length)
-            {
-                return false;
-            }
+            if (signature1.Length != signature2?.Length) return false;
 
             var err = false;
             for (var i = 0; i < signature1.Length; i++)
-            {
                 if (signature1[i] != signature2[i])
-                {
                     err = true;
-                }
-            }
 
             return !err;
         }

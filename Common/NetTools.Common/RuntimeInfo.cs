@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace NetTools;
+namespace NetTools.Common;
 
 public static class RuntimeInfo
 {

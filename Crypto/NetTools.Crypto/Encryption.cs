@@ -9,51 +9,37 @@ public static class Encryption
     {
         private const int KeySize = 16;
 
-        private static byte[] Encrypt(byte[] data, byte[] key)
+        public static string DecryptString(string text, string key)
         {
-            if (data is not { Length: > 0 })
-            {
-                throw new ArgumentNullException($"{nameof(data)} cannot be empty");
-            }
+            var keyBytes = Encoding.UTF8.GetBytes(key);
+            return DecryptString(text, keyBytes);
+        }
 
-            if (key is not { Length: KeySize })
-            {
-                throw new ArgumentException($"{nameof(key)} must be length of {KeySize}");
-            }
+        public static string DecryptString(string text, byte[] key)
+        {
+            var textBytes = Convert.FromBase64String(text);
+            var bytes = Decrypt(textBytes, key);
+            return Encoding.UTF8.GetString(bytes);
+        }
 
-            var aes = System.Security.Cryptography.Aes.Create();
-            aes.Key = key;
-            aes.Mode = CipherMode.CBC;
-            aes.Padding = PaddingMode.PKCS7;
+        public static string EncryptString(string text, string key)
+        {
+            var keyBytes = Encoding.UTF8.GetBytes(key);
+            return EncryptString(text, keyBytes);
+        }
 
-
-            aes.GenerateIV();
-            var iv = aes.IV;
-            using var encryptor = aes.CreateEncryptor(aes.Key, iv);
-            using var cipherStream = new MemoryStream();
-            using (var cryptoStream = new CryptoStream(cipherStream, encryptor, CryptoStreamMode.Write))
-            using (var binaryWriter = new BinaryWriter(cryptoStream))
-            {
-                binaryWriter.Write(data);
-                cryptoStream.FlushFinalBlock();
-            }
-
-            var cipherBytes = cipherStream.ToArray();
-
-            return iv.Concat(cipherBytes).ToArray();
+        public static string EncryptString(string text, byte[] key)
+        {
+            var textBytes = Encoding.UTF8.GetBytes(text);
+            var bytes = Encrypt(textBytes, key);
+            return Convert.ToBase64String(bytes);
         }
 
         private static byte[] Decrypt(byte[] data, byte[] key)
         {
-            if (data is not { Length: > 0 })
-            {
-                throw new ArgumentNullException($"{nameof(data)} cannot be empty");
-            }
+            if (data is not { Length: > 0 }) throw new ArgumentNullException($"{nameof(data)} cannot be empty");
 
-            if (key is not { Length: KeySize })
-            {
-                throw new ArgumentException($"{nameof(key)} must be length of {KeySize}");
-            }
+            if (key is not { Length: KeySize }) throw new ArgumentException($"{nameof(key)} must be length of {KeySize}");
 
             var aes = System.Security.Cryptography.Aes.Create();
             aes.Key = key;
@@ -82,30 +68,32 @@ public static class Encryption
             return dataBytes;
         }
 
-        public static string EncryptString(string text, string key)
+        private static byte[] Encrypt(byte[] data, byte[] key)
         {
-            var keyBytes = Encoding.UTF8.GetBytes(key);
-            return EncryptString(text, keyBytes);
-        }
+            if (data is not { Length: > 0 }) throw new ArgumentNullException($"{nameof(data)} cannot be empty");
 
-        public static string DecryptString(string text, string key)
-        {
-            var keyBytes = Encoding.UTF8.GetBytes(key);
-            return DecryptString(text, keyBytes);
-        }
+            if (key is not { Length: KeySize }) throw new ArgumentException($"{nameof(key)} must be length of {KeySize}");
 
-        public static string EncryptString(string text, byte[] key)
-        {
-            var textBytes = Encoding.UTF8.GetBytes(text);
-            var bytes = Encrypt(textBytes, key);
-            return Convert.ToBase64String(bytes);
-        }
+            var aes = System.Security.Cryptography.Aes.Create();
+            aes.Key = key;
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
 
-        public static string DecryptString(string text, byte[] key)
-        {
-            var textBytes = Convert.FromBase64String(text);
-            var bytes = Decrypt(textBytes, key);
-            return Encoding.UTF8.GetString(bytes);
+
+            aes.GenerateIV();
+            var iv = aes.IV;
+            using var encryptor = aes.CreateEncryptor(aes.Key, iv);
+            using var cipherStream = new MemoryStream();
+            using (var cryptoStream = new CryptoStream(cipherStream, encryptor, CryptoStreamMode.Write))
+            using (var binaryWriter = new BinaryWriter(cryptoStream))
+            {
+                binaryWriter.Write(data);
+                cryptoStream.FlushFinalBlock();
+            }
+
+            var cipherBytes = cipherStream.ToArray();
+
+            return iv.Concat(cipherBytes).ToArray();
         }
     }
 }

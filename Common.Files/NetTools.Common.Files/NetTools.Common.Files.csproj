@@ -55,13 +55,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="../README.md" Pack="true" PackagePath="" />
-        <PackageReference Include="N8.NetTools.Common" Version="0.6.0" />
-        <PackageReference Include="N8.NetTools.Common.Conversions" Version="1.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\Common.Conversions\NetTools.Common.Conversions\NetTools.Common.Conversions.csproj" />
+        <None Include="../README.md" Pack="true" PackagePath=""/>
+        <PackageReference Include="N8.NetTools.Common" Version="0.6.0"/>
+        <PackageReference Include="N8.NetTools.Common.Conversions" Version="1.0.0"/>
     </ItemGroup>
 
 </Project>

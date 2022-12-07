@@ -3,30 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NetTools;
+namespace NetTools.Common;
 // Thanks to https://stackoverflow.com/a/34388226/13343799
 
 public class Scenario : ValidationEnum
 {
     /// <summary>
-    ///     Run associated action when no other cases match. <seealso cref="NoMatch"/>
+    ///     Run associated action when no other cases match. <seealso cref="NoMatch" />
     /// </summary>
     public static Scenario Default => NoMatch;
 
     /// <summary>
-    ///     Run associated action when no other cases match. <seealso cref="Default"/>
+    ///     Run associated action when multiple cases match.
     /// </summary>
-    public static Scenario NoMatch => new Scenario(2, matchCount => (int)matchCount! == 0);
+    public static Scenario MultipleMatch => new(4, matchCount => (int)matchCount! > 1);
+
+    /// <summary>
+    ///     Run associated action when no other cases match. <seealso cref="Default" />
+    /// </summary>
+    public static Scenario NoMatch => new(2, matchCount => (int)matchCount! == 0);
 
     /// <summary>
     ///     Run associated action when only one case matches.
     /// </summary>
-    public static Scenario SingleMatch => new Scenario(3, matchCount => (int)matchCount! == 1);
-    
-    /// <summary>
-    ///     Run associated action when multiple cases match.
-    /// </summary>
-    public static Scenario MultipleMatch => new Scenario(4, matchCount => (int)matchCount! > 1);
+    public static Scenario SingleMatch => new(3, matchCount => (int)matchCount! == 1);
+
+    private Scenario(int id, Func<object?, bool>? value) : base(id, value)
+    {
+    }
 
     /// <summary>
     ///     Run associated action when at least X number of cases match.
@@ -67,10 +71,6 @@ public class Scenario : ValidationEnum
     public static Scenario ExactlyXMatch(int count)
     {
         return new Scenario(8, matchCount => (int)matchCount! == count);
-    }
-
-    private Scenario(int id, Func<object?, bool>? value) : base(id, value)
-    {
     }
 }
 
@@ -118,12 +118,15 @@ internal sealed class ScenarioCase
 
     private Scenario Scenario { get; }
 
-    internal bool Validate(object value) => Scenario.Validate(value);
-
     internal ScenarioCase(Scenario scenario, Action? action)
     {
         Scenario = scenario;
         Action = action;
+    }
+
+    internal bool Validate(object value)
+    {
+        return Scenario.Validate(value);
     }
 }
 
@@ -175,12 +178,8 @@ public class SwitchCase : IEnumerable<ICase>
         var matchingCases = new List<ICase>();
 
         foreach (var @case in _cases)
-        {
             if (@case.Value.Equals(value))
-            {
                 matchingCases.Add(@case);
-            }
-        }
 
         ProcessMatchingCases(matchingCases.ToList());
 
@@ -189,19 +188,19 @@ public class SwitchCase : IEnumerable<ICase>
     }
 
     /// <summary>
-    ///     Execute the action of all cases that evaluates to true. If no match is found, execute the default case if set.
-    /// </summary>
-    public void MatchAllTrue()
-    {
-        MatchAll(true);
-    }
-
-    /// <summary>
     ///     Execute the action of all cases that evaluates to false. If no match is found, execute the default case if set.
     /// </summary>
     public void MatchAllFalse()
     {
         MatchAll(false);
+    }
+
+    /// <summary>
+    ///     Execute the action of all cases that evaluates to true. If no match is found, execute the default case if set.
+    /// </summary>
+    public void MatchAllTrue()
+    {
+        MatchAll(true);
     }
 
     /// <summary>
@@ -214,10 +213,7 @@ public class SwitchCase : IEnumerable<ICase>
 
         foreach (var @case in _cases)
         {
-            if (!@case.Value.Equals(value))
-            {
-                continue;
-            }
+            if (!@case.Value.Equals(value)) continue;
 
             matchingCases.Add(@case);
             break;
@@ -230,19 +226,20 @@ public class SwitchCase : IEnumerable<ICase>
     }
 
     /// <summary>
+    ///     Execute the action of the first case that evaluates to false. If no match is found, execute the default case if
+    ///     set.
+    /// </summary>
+    public void MatchFirstFalse()
+    {
+        MatchFirst(false);
+    }
+
+    /// <summary>
     ///     Execute the action of the first case that evaluates to true. If no match is found, execute the default case if set.
     /// </summary>
     public void MatchFirstTrue()
     {
         MatchFirst(true);
-    }
-
-    /// <summary>
-    ///     Execute the action of the first case that evaluates to false. If no match is found, execute the default case if set.
-    /// </summary>
-    public void MatchFirstFalse()
-    {
-        MatchFirst(false);
     }
 
     IEnumerator<ICase> IEnumerable<ICase>.GetEnumerator()
@@ -262,10 +259,7 @@ public class SwitchCase : IEnumerable<ICase>
     /// <param name="matchingCases">List of matching cases to process.</param>
     private void ProcessMatchingCases(List<ICase> matchingCases)
     {
-        foreach (var @case in matchingCases)
-        {
-            @case?.Action?.Invoke();
-        }
+        foreach (var @case in matchingCases) @case?.Action?.Invoke();
     }
 
     /// <summary>
@@ -278,11 +272,7 @@ public class SwitchCase : IEnumerable<ICase>
 
         // Default scenario will be processed in here as well
         foreach (var @case in _scenarioCases)
-        {
             if (@case.Validate(matchingCaseCount))
-            {
                 @case.Action?.Invoke();
-            }
-        }
     }
 }

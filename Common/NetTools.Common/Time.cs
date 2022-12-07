@@ -1,24 +1,41 @@
 using System;
 
-namespace NetTools;
+namespace NetTools.Common;
 
 public static class Time
 {
     private const string DefaultDateStringFormat = "yyyy-MM-dd'T'HH:mm:ssK";
+
+    public static DateTime LocalNow => DateTime.Now;
+
+    public static string LocalNowString => LocalNow.ToString(DefaultDateStringFormat);
+
+    public static TimeZoneInfo LocalTimeZone => TimeZoneInfo.Local;
+
+    public static string LocalTimeZoneString => TimeZoneInfo.Local.DisplayName;
+
+    public static DateTime UtcNow => Local.Datetime.ToUtcDatetime(LocalNow);
+
+    public static string UtcNowString => UtcNow.ToString(DefaultDateStringFormat);
 
     public static TimeSpan Between(DateTime startTime, DateTime endTime)
     {
         return endTime - startTime;
     }
 
-    public static TimeSpan Since(DateTime time)
+    public static string DateTimeToHumanFormatString(DateTime time, string format = "yyyy-MM-dd HH:mm:ss")
     {
-        return Between(startTime: time, endTime: DateTime.Now);
+        return DateTimeToString(time, format);
     }
 
-    public static TimeSpan Until(DateTime time)
+    public static bool Lapsed(DateTime startTime, int expectedDurationInMinutes)
     {
-        return Between(startTime: DateTime.Now, endTime: time);
+        if (!Validation.Exists(startTime)) return false;
+
+        // TODO Account for timezone?
+        var ts = Between(startTime, DateTime.Now);
+
+        return ts.TotalMinutes >= expectedDurationInMinutes;
     }
 
     public static DateTime Shift(DateTime startTime, int days = 0, int hours = 0, int minutes = 0,
@@ -28,17 +45,38 @@ public static class Time
         return startTime.Add(shift);
     }
 
-    public static bool Lapsed(DateTime startTime, int expectedDurationInMinutes)
+    public static TimeSpan Since(DateTime time)
     {
-        if (!Validation.Exists(startTime))
-        {
-            return false;
-        }
+        return Between(time, DateTime.Now);
+    }
 
-        // TODO Account for timezone?
-        var ts = Time.Between(startTime, DateTime.Now);
+    public static string TimeSpanToHumanFormatString(TimeSpan timeSpan, bool includeSeconds = false,
+        bool forceIncludeDays = false)
+    {
+        var timeString = $"{timeSpan.Hours:D2}:{timeSpan.Minutes:D2}";
 
-        return ts.TotalMinutes >= expectedDurationInMinutes;
+        if (timeSpan.Days > 0 || forceIncludeDays) timeString = $"{timeSpan.Days} day(s), {timeString}";
+
+        if (includeSeconds) timeString = $"{timeString}:{timeSpan.Seconds:D2}";
+
+        return timeString;
+    }
+
+    public static TimeSpan Until(DateTime time)
+    {
+        return Between(DateTime.Now, time);
+    }
+
+    private static string DateTimeToString(DateTime time, string? format = null)
+    {
+        format ??= DefaultDateStringFormat;
+
+        return time.ToString(format);
+    }
+
+    private static DateTime StringToDateTime(string timeString)
+    {
+        return DateTime.Parse(timeString);
     }
 
     public static class MoreThan
@@ -159,50 +197,10 @@ public static class Time
         }
     }
 
-    private static DateTime StringToDateTime(string timeString)
-    {
-        return DateTime.Parse(timeString);
-    }
-
-    private static string DateTimeToString(DateTime time, string? format = null)
-    {
-        format ??= DefaultDateStringFormat;
-
-        return time.ToString(format);
-    }
-
-    public static string DateTimeToHumanFormatString(DateTime time, string format = "yyyy-MM-dd HH:mm:ss")
-    {
-        return DateTimeToString(time, format);
-    }
-
-    public static string TimeSpanToHumanFormatString(TimeSpan timeSpan, bool includeSeconds = false,
-        bool forceIncludeDays = false)
-    {
-        var timeString = $"{timeSpan.Hours:D2}:{timeSpan.Minutes:D2}";
-
-        if (timeSpan.Days > 0 || forceIncludeDays)
-        {
-            timeString = $"{timeSpan.Days} day(s), {timeString}";
-        }
-
-        if (includeSeconds)
-        {
-            timeString = $"{timeString}:{timeSpan.Seconds:D2}";
-        }
-
-        return timeString;
-    }
-
     public static class Utc
     {
         public static class Datetime
         {
-            public static string ToString(DateTime utcTime)
-            {
-                return DateTimeToString(utcTime);
-            }
-
             public static DateTime ToLocalDatetime(DateTime utcTime)
             {
                 return utcTime.ToLocalTime();
@@ -213,6 +211,11 @@ public static class Time
                 var localTime = ToLocalDatetime(utcTime);
                 return Local.Datetime.ToString(localTime);
             }
+
+            public static string ToString(DateTime utcTime)
+            {
+                return DateTimeToString(utcTime);
+            }
         }
 
         public static class String
@@ -222,16 +225,16 @@ public static class Time
                 return StringToDateTime(utcTimeString);
             }
 
-            public static string ToLocalString(string utcTimeString)
-            {
-                var utcTime = ToDatetime(utcTimeString);
-                return Utc.Datetime.ToLocalString(utcTime);
-            }
-
             public static DateTime ToLocalDatetime(string utcTimeString)
             {
                 var localTimeString = ToLocalString(utcTimeString);
                 return Local.String.ToDatetime(localTimeString);
+            }
+
+            public static string ToLocalString(string utcTimeString)
+            {
+                var utcTime = ToDatetime(utcTimeString);
+                return Datetime.ToLocalString(utcTime);
             }
         }
     }
@@ -264,31 +267,19 @@ public static class Time
                 return StringToDateTime(localTimeString);
             }
 
-            public static string ToUtcString(string localTimeString)
-            {
-                var localTime = ToDatetime(localTimeString);
-                return Local.Datetime.ToUtcString(localTime);
-            }
-
             public static DateTime ToUtcDatetime(string localTimeString)
             {
                 var localTime = ToDatetime(localTimeString);
-                return Local.Datetime.ToUtcDatetime(localTime);
+                return Datetime.ToUtcDatetime(localTime);
+            }
+
+            public static string ToUtcString(string localTimeString)
+            {
+                var localTime = ToDatetime(localTimeString);
+                return Datetime.ToUtcString(localTime);
             }
         }
     }
-
-    public static DateTime LocalNow => DateTime.Now;
-
-    public static string LocalNowString => LocalNow.ToString(DefaultDateStringFormat);
-
-    public static DateTime UtcNow => Local.Datetime.ToUtcDatetime(LocalNow);
-
-    public static string UtcNowString => UtcNow.ToString(DefaultDateStringFormat);
-
-    public static TimeZoneInfo LocalTimeZone => TimeZoneInfo.Local;
-
-    public static string LocalTimeZoneString => TimeZoneInfo.Local.DisplayName;
 
     public class Format
     {
@@ -296,15 +287,12 @@ public static class Time
         {
             if (hours > 0)
             {
-                if (minutes > 0)
-                {
-                    return $"{hours} {Text.Suffix("Hour", suffix: (hours > 1) ? "s" : "")}, {minutes} {Text.Suffix("Minute", suffix: (minutes > 1) ? "s" : "")}";
-                }
+                if (minutes > 0) return $"{hours} {Text.Suffix("Hour", hours > 1 ? "s" : "")}, {minutes} {Text.Suffix("Minute", minutes > 1 ? "s" : "")}";
 
-                return $"{hours} {Text.Suffix("Hour", suffix: (hours > 1) ? "s" : "")}";
+                return $"{hours} {Text.Suffix("Hour", hours > 1 ? "s" : "")}";
             }
 
-            return $"{minutes} {Text.Suffix("Minute", suffix: (minutes > 1) ? "s" : "")}";
+            return $"{minutes} {Text.Suffix("Minute", minutes > 1 ? "s" : "")}";
         }
     }
 }

@@ -3,19 +3,14 @@ namespace NetTools.Common.Conversions;
 public static class Hex
 {
     /// <summary>
-    ///     Construct a lookup table of hex values.
+    ///     Convert a hex string array to a base64 string
     /// </summary>
-    /// <returns>Lookup table of hex values</returns>
-    internal static uint[] CreateLookup32()
+    /// <param name="hexString">Hex string to convert to base64 string.</param>
+    /// <returns>Base64 string</returns>
+    public static string HexToBase64String(this string hexString)
     {
-        var result = new uint[256];
-        for (var i = 0; i < 256; i++)
-        {
-            var s = i.ToString("X2");
-            result[i] = ((uint)s[0]) + ((uint)s[1] << 16);
-        }
-
-        return result;
+        var byteArray = HexToByteArray(hexString);
+        return byteArray.BytesToBase64String();
     }
 
     /// <summary>
@@ -32,13 +27,18 @@ public static class Hex
     }
 
     /// <summary>
-    ///     Convert a hex string array to a base64 string
+    ///     Construct a lookup table of hex values.
     /// </summary>
-    /// <param name="hexString">Hex string to convert to base64 string.</param>
-    /// <returns>Base64 string</returns>
-    public static string HexToBase64String(this string hexString)
+    /// <returns>Lookup table of hex values</returns>
+    internal static uint[] CreateLookup32()
     {
-        var byteArray = HexToByteArray(hexString);
-        return byteArray.BytesToBase64String();
+        var result = new uint[256];
+        for (var i = 0; i < 256; i++)
+        {
+            var s = i.ToString("X2");
+            result[i] = (uint)s[0] + ((uint)s[1] << 16);
+        }
+
+        return result;
     }
 }

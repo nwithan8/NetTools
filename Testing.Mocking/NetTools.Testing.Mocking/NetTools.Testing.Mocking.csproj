@@ -2,19 +2,19 @@
 
     <PropertyGroup>
         <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
-        <LangVersion>10</LangVersion>
+        <LangVersion>11</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
-        <RootNamespace>NetTools.Localization</RootNamespace>
+        <RootNamespace>NetTools.Testing.Mocking</RootNamespace>
         <Configurations>Release;Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <PackageId>N8.NetTools.Localization</PackageId>
+        <PackageId>N8.NetTools.Testing.Mocking</PackageId>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <Authors>nwithan8</Authors>
         <PackageProjectUrl>https://github.com/nwithan8/NetTools</PackageProjectUrl>
         <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-        <PackageTags>countries phones codes</PackageTags>
+        <PackageTags>testing mocking HTTP</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -55,11 +55,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="../README.md" Pack="true" PackagePath=""/>
-        <PackageReference Include="libphonenumber-csharp" Version="8.12.56"/>
-        <PackageReference Include="N8.NetTools.Common" Version="0.6.0"/>
-        <PackageReference Include="Nager.Country" Version="3.1.1"/>
-        <PackageReference Include="Nager.Country.Translation" Version="3.0.3"/>
+        <None Include="../README.md" Pack="true" PackagePath="" />
+        <PackageReference Include="N8.NetTools.Common" Version="0.6.0" />
+        <PackageReference Include="N8.NetTools.HTTP" Version="0.3.0" />
     </ItemGroup>
 
 </Project>

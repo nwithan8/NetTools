@@ -5,78 +5,6 @@ namespace NetTools.Common.Attributes;
 public abstract class CustomAttribute : Attribute, ICustomAttribute
 {
     /// <summary>
-    ///     Get all properties of the specified class that have the specified attribute.
-    /// </summary>
-    /// <param name="type">Class to find properties in.</param>
-    /// <typeparam name="T">Type of attribute to search for.</typeparam>
-    /// <returns>List of all properties that have the specified attribute.</returns>
-    public static IEnumerable<PropertyInfo> GetPropertiesWithAttribute<T>(Type @type)
-    {
-        var matchingProperties = new List<PropertyInfo>();
-
-        var properties = @type.GetProperties();
-
-        foreach (var property in properties)
-        {
-            var attributes = property.GetCustomAttributes(typeof(T), true);
-
-            if (attributes.Any())
-            {
-                matchingProperties.Add(property);
-            }
-        }
-
-        return matchingProperties;
-    }
-
-    /// <summary>
-    ///     Get all properties of the specified object's class that have the specified attribute.
-    /// </summary>
-    /// <param name="obj">Object whose class to find properties in.</param>
-    /// <typeparam name="T">Type of attribute to search for.</typeparam>
-    /// <returns>List of all properties that have the specified attribute.</returns>
-    public static IEnumerable<PropertyInfo> GetPropertiesWithAttribute<T>(object obj) where T : Attribute
-    {
-        return GetPropertiesWithAttribute<T>(obj.GetType());
-    }
-
-    /// <summary>
-    ///     Get all methods of the specified class that have the specified attribute.
-    /// </summary>
-    /// <param name="type">Class to find methods in.</param>
-    /// <typeparam name="T">Type of attribute to search for.</typeparam>
-    /// <returns>List of all methods that have the specified attribute.</returns>
-    public static IEnumerable<MethodInfo> GetMethodsWithAttribute<T>(Type @type)
-    {
-        var matchingMethods = new List<MethodInfo>();
-
-        var methods = @type.GetMethods();
-
-        foreach (var method in methods)
-        {
-            var attributes = method.GetCustomAttributes(typeof(T), true);
-
-            if (attributes.Any())
-            {
-                matchingMethods.Add(method);
-            }
-        }
-
-        return matchingMethods;
-    }
-
-    /// <summary>
-    ///     Get all methods of the specified object's class that have the specified attribute.
-    /// </summary>
-    /// <param name="obj">Object whose class to find methods in.</param>
-    /// <typeparam name="T">Type of attribute to search for.</typeparam>
-    /// <returns>List of all methods that have the specified attribute.</returns>
-    public static IEnumerable<MethodInfo> GetMethodsWithAttribute<T>(object obj) where T : Attribute
-    {
-        return GetMethodsWithAttribute<T>(obj.GetType());
-    }
-
-    /// <summary>
     ///     Get the attribute of the specified type for a property.
     /// </summary>
     /// <param name="property">Property to get attribute of.</param>
@@ -92,23 +20,6 @@ public abstract class CustomAttribute : Attribute, ICustomAttribute
         {
             return null;
         }
-    }
-
-    /// <summary>
-    ///     Get all attributes of the specified type for a property.
-    /// </summary>
-    /// <param name="property">Property to get attributes of.</param>
-    /// <typeparam name="T">Type of attribute to retrieve.</typeparam>
-    /// <returns>All T-type attributes for the property.</returns>
-    public static T[]? GetAttributes<T>(PropertyInfo property) where T : CustomAttribute
-    {
-        var attributes = property.GetCustomAttributes(typeof(T), false);
-        if (attributes.Length == 0)
-        {
-            return null;
-        }
-
-        return (T[])attributes;
     }
 
     /// <summary>
@@ -130,6 +41,20 @@ public abstract class CustomAttribute : Attribute, ICustomAttribute
     }
 
     /// <summary>
+    ///     Get all attributes of the specified type for a property.
+    /// </summary>
+    /// <param name="property">Property to get attributes of.</param>
+    /// <typeparam name="T">Type of attribute to retrieve.</typeparam>
+    /// <returns>All T-type attributes for the property.</returns>
+    public static T[]? GetAttributes<T>(PropertyInfo property) where T : CustomAttribute
+    {
+        var attributes = property.GetCustomAttributes(typeof(T), false);
+        if (attributes.Length == 0) return null;
+
+        return (T[])attributes;
+    }
+
+    /// <summary>
     ///     Get all attributes of the specified type for a method.
     /// </summary>
     /// <param name="method">Method to get attributes of.</param>
@@ -138,12 +63,75 @@ public abstract class CustomAttribute : Attribute, ICustomAttribute
     public static T[]? GetAttributes<T>(MethodInfo method) where T : CustomAttribute
     {
         var attributes = method.GetCustomAttributes(typeof(T), false);
-        if (attributes.Length == 0)
-        {
-            return null;
-        }
+        if (attributes.Length == 0) return null;
 
         return (T[])attributes;
+    }
+
+    /// <summary>
+    ///     Get all methods of the specified class that have the specified attribute.
+    /// </summary>
+    /// <param name="type">Class to find methods in.</param>
+    /// <typeparam name="T">Type of attribute to search for.</typeparam>
+    /// <returns>List of all methods that have the specified attribute.</returns>
+    public static IEnumerable<MethodInfo> GetMethodsWithAttribute<T>(Type @type)
+    {
+        var matchingMethods = new List<MethodInfo>();
+
+        var methods = @type.GetMethods();
+
+        foreach (var method in methods)
+        {
+            var attributes = method.GetCustomAttributes(typeof(T), true);
+
+            if (attributes.Any()) matchingMethods.Add(method);
+        }
+
+        return matchingMethods;
+    }
+
+    /// <summary>
+    ///     Get all methods of the specified object's class that have the specified attribute.
+    /// </summary>
+    /// <param name="obj">Object whose class to find methods in.</param>
+    /// <typeparam name="T">Type of attribute to search for.</typeparam>
+    /// <returns>List of all methods that have the specified attribute.</returns>
+    public static IEnumerable<MethodInfo> GetMethodsWithAttribute<T>(object obj) where T : Attribute
+    {
+        return GetMethodsWithAttribute<T>(obj.GetType());
+    }
+
+    /// <summary>
+    ///     Get all properties of the specified class that have the specified attribute.
+    /// </summary>
+    /// <param name="type">Class to find properties in.</param>
+    /// <typeparam name="T">Type of attribute to search for.</typeparam>
+    /// <returns>List of all properties that have the specified attribute.</returns>
+    public static IEnumerable<PropertyInfo> GetPropertiesWithAttribute<T>(Type @type)
+    {
+        var matchingProperties = new List<PropertyInfo>();
+
+        var properties = @type.GetProperties();
+
+        foreach (var property in properties)
+        {
+            var attributes = property.GetCustomAttributes(typeof(T), true);
+
+            if (attributes.Any()) matchingProperties.Add(property);
+        }
+
+        return matchingProperties;
+    }
+
+    /// <summary>
+    ///     Get all properties of the specified object's class that have the specified attribute.
+    /// </summary>
+    /// <param name="obj">Object whose class to find properties in.</param>
+    /// <typeparam name="T">Type of attribute to search for.</typeparam>
+    /// <returns>List of all properties that have the specified attribute.</returns>
+    public static IEnumerable<PropertyInfo> GetPropertiesWithAttribute<T>(object obj) where T : Attribute
+    {
+        return GetPropertiesWithAttribute<T>(obj.GetType());
     }
 
     /// <summary>

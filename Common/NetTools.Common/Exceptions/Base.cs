@@ -1,6 +1,6 @@
 using System;
 
-namespace NetTools.Exceptions;
+namespace NetTools.Common.Exceptions;
 
 public class NetToolsException : Exception
 {

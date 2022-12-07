@@ -2,102 +2,97 @@ using System.Globalization;
 using Nager.Country;
 using PhoneNumbers;
 
-namespace NetTools.Localization
+namespace NetTools.Localization;
+
+public static class PhoneNumbers
 {
-    public static class PhoneNumbers
+    private static readonly PhoneNumberUtil PhoneNumberUtil = PhoneNumberUtil.GetInstance();
+
+    public static List<Country> CountryCodes => GetCountryCodes();
+
+    public static string? FormatPhoneNumberInInternationalFormat(string validPhoneNumber, string countryCode = "US")
     {
-        private static readonly PhoneNumberUtil PhoneNumberUtil = PhoneNumberUtil.GetInstance();
-
-        public static List<Country> CountryCodes => GetCountryCodes();
-
-        public static List<Country> GetCountryCodes()
+        try
         {
-            var codes = new List<Country>();
-            var currentCulture = CultureInfo.CurrentCulture;
-            foreach (var abbreviation in PhoneNumberUtil.GetSupportedRegions())
-            {
-                var countryName = new CountryProvider().GetCountry(abbreviation).OfficialName;
-                var countryDigits = PhoneNumberUtil.GetCountryCodeForRegion(abbreviation).ToString();
+            var parsedPhoneNumber = PhoneNumberUtil.Parse(validPhoneNumber, countryCode);
+            return "+" + parsedPhoneNumber.CountryCode + parsedPhoneNumber.NationalNumber;
+        }
+        catch (NumberParseException)
+        {
+            return string.Empty;
+        }
+    }
 
-                if (!string.IsNullOrWhiteSpace(countryName)) // some country names can't be found, so skip them
-                {
-                    codes.Add(new Country(name: countryName, abbreviation: abbreviation, phoneCode: countryDigits));
-                }
-            }
+    public static List<Country> GetCountryCodes()
+    {
+        var codes = new List<Country>();
+        var currentCulture = CultureInfo.CurrentCulture;
+        foreach (var abbreviation in PhoneNumberUtil.GetSupportedRegions())
+        {
+            var countryName = new CountryProvider().GetCountry(abbreviation).OfficialName;
+            var countryDigits = PhoneNumberUtil.GetCountryCodeForRegion(abbreviation).ToString();
 
-            var sortedCodes = codes.OrderBy(o => o.Name).ToList();
-            return sortedCodes;
+            if (!string.IsNullOrWhiteSpace(countryName)) // some country names can't be found, so skip them
+                codes.Add(new Country(countryName, abbreviation, countryDigits));
         }
 
-        public static bool IsValidPhoneNumber(string phoneNumber, string countryCode = "US")
+        var sortedCodes = codes.OrderBy(o => o.Name).ToList();
+        return sortedCodes;
+    }
+
+    public static bool IsValidPhoneNumber(string phoneNumber, string countryCode = "US")
+    {
+        try
         {
-            try
+            var parsedPhoneNumber = PhoneNumberUtil.Parse(phoneNumber, countryCode);
+            return parsedPhoneNumber != null && PhoneNumberUtil.IsPossibleNumber(parsedPhoneNumber);
+        }
+        catch (NumberParseException)
+        {
+            return false;
+        }
+    }
+
+    public static string? StylizePhoneNumber(string phoneNumber, string countryCode = "US")
+    {
+        var formatter = new LiveFormatter(countryCode);
+
+        var formattedNumber = "";
+        foreach (var digit in phoneNumber.ToCharArray())
+            if (digit is '(' or ')' or '-' or ' ')
             {
-                var parsedPhoneNumber = PhoneNumberUtil.Parse(phoneNumber, countryCode);
-                return parsedPhoneNumber != null && PhoneNumberUtil.IsPossibleNumber(parsedPhoneNumber);
             }
-            catch (NumberParseException)
+            else
             {
-                return false;
+                formattedNumber = formatter.AddDigit(digit);
             }
+
+        return formattedNumber;
+    }
+
+    public class LiveFormatter
+    {
+        private readonly AsYouTypeFormatter _formatter;
+
+        public LiveFormatter(string countryCode = "US")
+        {
+            _formatter = new AsYouTypeFormatter(countryCode, PhoneNumberUtil);
+            _formatter.Clear();
         }
 
-        public static string? FormatPhoneNumberInInternationalFormat(string validPhoneNumber, string countryCode = "US")
+        public string? AddDigit(char digit)
         {
-            try
-            {
-                var parsedPhoneNumber = PhoneNumberUtil.Parse(validPhoneNumber, countryCode);
-                return "+" + parsedPhoneNumber.CountryCode + parsedPhoneNumber.NationalNumber;
-            }
-            catch (NumberParseException)
-            {
-                return string.Empty;
-            }
+            return _formatter.InputDigit(digit);
         }
 
-        public static string? StylizePhoneNumber(string phoneNumber, string countryCode = "US")
+        public string? AddDigit(int digit)
         {
-            var formatter = new LiveFormatter(countryCode);
-
-            var formattedNumber = "";
-            foreach (var digit in phoneNumber.ToCharArray())
-            {
-                if (digit is '(' or ')' or '-' or ' ')
-                {
-                }
-                else
-                {
-                    formattedNumber = formatter.AddDigit(digit);
-                }
-            }
-
-            return formattedNumber;
+            return AddDigit((char)digit);
         }
 
-        public class LiveFormatter
+        public string? AddDigit(string digit)
         {
-            private readonly AsYouTypeFormatter _formatter;
-
-            public LiveFormatter(string countryCode = "US")
-            {
-                _formatter = new AsYouTypeFormatter(countryCode, PhoneNumberUtil);
-                _formatter.Clear();
-            }
-
-            public string? AddDigit(char digit)
-            {
-                return _formatter.InputDigit(digit);
-            }
-
-            public string? AddDigit(int digit)
-            {
-                return AddDigit((char)digit);
-            }
-
-            public string? AddDigit(string digit)
-            {
-                return digit.Length <= 0 ? null : AddDigit(digit.ToCharArray()[0]);
-            }
+            return digit.Length <= 0 ? null : AddDigit(digit.ToCharArray()[0]);
         }
     }
 }

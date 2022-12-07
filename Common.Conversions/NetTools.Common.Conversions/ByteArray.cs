@@ -11,7 +11,7 @@ public static class ByteArray
     {
         return Convert.ToBase64String(byteArray);
     }
-    
+
     /// <summary>
     ///     Convert a byte array to a hex string.
     /// </summary>

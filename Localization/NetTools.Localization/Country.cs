@@ -4,15 +4,14 @@ namespace NetTools.Localization;
 
 public class Country
 {
-    public readonly string Name;
-
     public readonly string Abbreviation;
+    public readonly string Name;
 
     public readonly string PhoneCode;
 
-    public string PhoneCodeDisplay => $"{Name} (+{PhoneCode})";
-
     private ICountryInfo _countryInfo;
+
+    public string PhoneCodeDisplay => $"{Name} (+{PhoneCode})";
 
     /// <summary>
     ///     Constructor for a country.

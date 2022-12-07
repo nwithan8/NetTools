@@ -6,15 +6,15 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
-        <RootNamespace>NetTools.Localization</RootNamespace>
+        <RootNamespace>NetTools.Common.Validation</RootNamespace>
         <Configurations>Release;Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <PackageId>N8.NetTools.Localization</PackageId>
+        <PackageId>N8.NetTools.Common.Validation</PackageId>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <Authors>nwithan8</Authors>
         <PackageProjectUrl>https://github.com/nwithan8/NetTools</PackageProjectUrl>
         <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-        <PackageTags>countries phones codes</PackageTags>
+        <PackageTags>validation</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -55,11 +55,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="../README.md" Pack="true" PackagePath=""/>
-        <PackageReference Include="libphonenumber-csharp" Version="8.12.56"/>
-        <PackageReference Include="N8.NetTools.Common" Version="0.6.0"/>
-        <PackageReference Include="Nager.Country" Version="3.1.1"/>
-        <PackageReference Include="Nager.Country.Translation" Version="3.0.3"/>
+        <PackageReference Include="N8.NetTools.Common" Version="0.6.0" />
+        <PackageReference Include="N8.NetTools.Common.Conversions" Version="1.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="../README.md" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>
