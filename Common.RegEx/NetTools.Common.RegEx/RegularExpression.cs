@@ -169,9 +169,9 @@ public class RegularExpression
 
     private string RawPattern { get; } = string.Empty;
 
-    public bool ForceStartOfLine { get; init; }
+    public bool ForceStartOfLine { get; set; }
 
-    public bool ForceEndOfLine { get; init; }
+    public bool ForceEndOfLine { get; set; }
 
     public RegularExpression(string rawPattern)
     {
