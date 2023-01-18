@@ -92,6 +92,26 @@ public class Enum : IComparable
     {
         return !(one == two);
     }
+    
+    public static bool operator <(Enum? one, Enum? two)
+    {
+        return one!.Id < two!.Id;
+    }
+    
+    public static bool operator >(Enum? one, Enum? two)
+    {
+        return one!.Id > two!.Id;
+    }
+    
+    public static bool operator <=(Enum? one, Enum? two)
+    {
+        return one!.Id <= two!.Id;
+    }
+    
+    public static bool operator >=(Enum? one, Enum? two)
+    {
+        return one!.Id >= two!.Id;
+    }
 }
 
 /// <summary>
