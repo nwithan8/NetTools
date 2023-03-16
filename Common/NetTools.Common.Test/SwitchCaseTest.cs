@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Xunit;
+using NetTools.Common;
+using SwitchCase = NetTools.Common.SwitchCase;
 
 namespace NetTools.Tools;
 

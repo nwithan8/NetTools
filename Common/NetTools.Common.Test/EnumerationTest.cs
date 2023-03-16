@@ -1,12 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
+using NetTools.Common;
 using Xunit;
 
 namespace NetTools.Tools;
 
 public class EnumerationTest
 {
-    public class TestEnum : NetTools.Enum
+    public enum LegacyEnum
+    {
+        Value1,
+        Value2,
+        Value3,
+    }
+    
+    public class TestEnum : Enum
     {
         public static readonly TestEnum Value1 = new TestEnum(1);
         public static readonly TestEnum Value2 = new TestEnum(2);
@@ -17,7 +25,7 @@ public class EnumerationTest
         }
     }
 
-    public class TestValueEnum : NetTools.ValueEnum
+    public class TestValueEnum : ValueEnum
     {
         public static readonly TestValueEnum Value1 = new TestValueEnum(1, "string1");
         public static readonly TestValueEnum Value2 = new TestValueEnum(2, "string2");
@@ -28,7 +36,7 @@ public class EnumerationTest
         }
     }
 
-    public class TestMultiValueEnum : NetTools.MultiValueEnum
+    public class TestMultiValueEnum : MultiValueEnum
     {
         public static readonly TestMultiValueEnum Value1 = new TestMultiValueEnum(1, "string1", 100.00, false, new object());
         public static readonly TestMultiValueEnum Value2 = new TestMultiValueEnum(2, 1, 3, 4);

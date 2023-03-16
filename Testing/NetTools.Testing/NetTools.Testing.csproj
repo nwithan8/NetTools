@@ -2,19 +2,19 @@
 
     <PropertyGroup>
         <TargetFrameworks>net5.0;net6.0;netcoreapp3.1;netstandard2.0;netstandard2.1;net7.0</TargetFrameworks>
-        <LangVersion>10</LangVersion>
-        <ImplicitUsings>disable</ImplicitUsings>
+        <LangVersion>11</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
-        <RootNamespace>NetTools.Common</RootNamespace>
+        <RootNamespace>NetTools.Testing</RootNamespace>
         <Configurations>Release;Debug</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <PackageId>N8.NetTools.Common</PackageId>
+        <PackageId>N8.NetTools.Testing</PackageId>
         <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
         <Authors>nwithan8</Authors>
         <PackageProjectUrl>https://github.com/nwithan8/NetTools</PackageProjectUrl>
         <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-        <PackageTags>tools utilities</PackageTags>
+        <PackageTags>testing</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -56,10 +56,8 @@
 
     <ItemGroup>
         <None Include="../README.md" Pack="true" PackagePath="" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="N8.NetTools.Common" Version="0.6.0" />
+        <PackageReference Include="N8.NetTools.Common.Attributes" Version="1.1.0" />
     </ItemGroup>
 
 </Project>

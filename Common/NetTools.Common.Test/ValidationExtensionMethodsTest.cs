@@ -1,3 +1,4 @@
+using NetTools.Common;
 using Xunit;
 
 namespace NetTools.Tools;

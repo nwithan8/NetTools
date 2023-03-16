@@ -78,7 +78,10 @@ public abstract class CustomAttribute : Attribute, ICustomAttribute
     {
         var matchingMethods = new List<MethodInfo>();
 
-        var methods = @type.GetMethods();
+        var methods = @type.GetMethods(BindingFlags.Instance |
+                                       BindingFlags.Static |
+                                       BindingFlags.NonPublic |
+                                       BindingFlags.Public);
 
         foreach (var method in methods)
         {
@@ -111,7 +114,10 @@ public abstract class CustomAttribute : Attribute, ICustomAttribute
     {
         var matchingProperties = new List<PropertyInfo>();
 
-        var properties = @type.GetProperties();
+        var properties = @type.GetProperties(BindingFlags.Instance |
+                                             BindingFlags.Static |
+                                             BindingFlags.NonPublic |
+                                             BindingFlags.Public);
 
         foreach (var property in properties)
         {

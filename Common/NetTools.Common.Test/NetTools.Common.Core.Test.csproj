@@ -52,6 +52,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Common.RegEx\NetTools.Common.RegEx\NetTools.Common.RegEx.csproj" />
+      <ProjectReference Include="..\NetTools.Common\NetTools.Common.csproj" />
       <ProjectReference Include="..\NetTools\NetTools.csproj" />
     </ItemGroup>
 

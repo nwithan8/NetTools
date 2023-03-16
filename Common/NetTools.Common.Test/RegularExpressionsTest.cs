@@ -1,4 +1,5 @@
 using System;
+using NetTools.Common.RegEx;
 using Xunit;
 
 namespace NetTools.Tools;

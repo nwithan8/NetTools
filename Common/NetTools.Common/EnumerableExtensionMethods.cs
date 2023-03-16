@@ -100,9 +100,7 @@ public static class EnumerableExtensionMethods
         var i = 0;
         foreach (var e in ie) action(i++, e);
     }
-
-
-
+    
     public static object? GetMiddleElement(this IEnumerable<object?> elements, bool useUpperIndexIfEven = false)
     {
         var enumerable = elements as object?[] ?? elements.ToArray();

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NetTools.Common;
 using Xunit;
 
 namespace NetTools.Tools;
@@ -508,5 +509,29 @@ public class MathTest
         var median4 = Math.Median(new List<long> { 1L, 2L, 3L, 4L, 5L });
         
         Assert.Equal(3L, median4);
+    }
+
+    [Fact]
+    public void TestIsEven()
+    {
+        var isEven = 2.IsEven();
+        
+        Assert.True(isEven);
+        
+        var isEven2 = 3.IsEven();
+        
+        Assert.False(isEven2);
+    }
+    
+    [Fact]
+    public void TestIsOdd()
+    {
+        var isOdd = 3.IsOdd();
+        
+        Assert.True(isOdd);
+        
+        var isOdd2 = 2.IsOdd();
+        
+        Assert.False(isOdd2);
     }
 }
