@@ -7,7 +7,7 @@ namespace NetTools.Common.Attributes;
 /// <summary>
 ///     The base class for all method warnings.
 /// </summary>
-[AttributeUsage(AttributeTargets.Method, Inherited = false)]
+[AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = true)]
 public abstract class MethodWarning : CustomAttribute
 {
     private string? Comment { get; }
@@ -18,26 +18,52 @@ public abstract class MethodWarning : CustomAttribute
     
     protected abstract Func<bool> Condition { get; }
 
-    protected abstract string WarningMessage { get; }
+    protected abstract string WarningMessage(MethodInfo method);
 
-    /// <summary>
-    ///     Enforces the warning evaluation on the calling method.
-    /// </summary>
-    /// <exception cref="Exception"></exception>
-    public static void Enforce()
+    private string? CollectPotentialWarningMessage(MethodInfo method)
     {
-        // Get the method that called this method
-        var method = (new System.Diagnostics.StackTrace()).GetFrame(1)?.GetMethod();
-
-        var attr = method?.GetCustomAttribute<MethodWarning>();
-
-        if (attr is null) return;
-        if (attr.Condition.Invoke()) return;
+        if (Condition.Invoke()) return null;
         
-        var warning = attr.WarningMessage;
-        if (attr.Comment is not null) warning += $" Comment: {attr.Comment}";
+        var warning = WarningMessage(method);
+        if (Comment is not null) warning += $" Comment: {Comment}";
         
-        throw new Exception(warning);
+        return warning;
+    }
+
+    internal static void Enforce<TMethodWarning>()
+    {
+        // Go up two levels in the stack to get to the method that called for enforcement
+        var method = (new System.Diagnostics.StackTrace()).GetFrame(2)?.GetMethod();
+        
+        // get the assembly of the method
+        var assembly = method?.DeclaringType?.Assembly;
+        
+        if (assembly is null) return;
+
+        // Get all TMethodWarning-type attributes and their associated methods
+        var pairs = assembly
+            .GetTypes()
+            .SelectMany(t => t.GetMethods())
+            .Where(m => m.GetCustomAttributes(typeof(TMethodWarning), false).Length > 0)
+            .SelectMany(m => m.GetCustomAttributes(typeof(TMethodWarning), false), (m, a) => new { Method = m, Attribute = a })
+            .ToList();
+
+        IEnumerable<string> errorMessages = new List<string>();
+        foreach (var pair in pairs)
+        {
+            var warning = (pair.Attribute as MethodWarning)?.CollectPotentialWarningMessage(pair.Method);
+            if (warning is not null)
+            {
+                errorMessages = errorMessages.Append(warning);
+            }
+        }
+
+        var errorMessagesList = errorMessages.ToList();
+
+        if (errorMessagesList.Any())
+        {
+            throw new Exception(string.Join("\n", errorMessagesList));
+        }
     }
 }
 
@@ -61,18 +87,23 @@ public class ToDoBy : MethodWarning
         }
     }
     protected override Func<bool> Condition => () => DateTime.Now <= Date;
-    protected override string WarningMessage => $"This code was supposed to be completed by {Date.ToShortDateString()}.";
+    protected override string WarningMessage(MethodInfo method) => $"{method.Name} was supposed to be completed by {Date.ToShortDateString()}.";
+    
+    public static void Enforce()
+    {
+        Enforce<ToDoBy>();
+    }
 }
 
 /// <summary>
-///     Mark a method as deprecated with a end date. Will throw an exception if the method is called on or after the end date.
+///     Mark a method as deprecated with a date. Will throw an exception if the method exists on or after the date.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, Inherited = false)]
-public class DeprecationDate : MethodWarning
+public class DeprecateByDate : MethodWarning
 {
     private DateTime Date { get; }
 
-    public DeprecationDate(string date, string? comment = null) : base(comment)
+    public DeprecateByDate(string date, string? comment = null) : base(comment)
     {
         if (DateTime.TryParseExact(date, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var parsedDate))
         {
@@ -84,14 +115,19 @@ public class DeprecationDate : MethodWarning
         }
     }
     protected override Func<bool> Condition => () => DateTime.Now <= Date;
-    protected override string WarningMessage => $"This code can longer be used as of {Date.ToShortDateString()}.";
+    protected override string WarningMessage(MethodInfo method) => $"{method.Name} can longer be used as of {Date.ToShortDateString()}.";
+    
+    public static void Enforce()
+    {
+        Enforce<DeprecateByDate>();
+    }
 }
 
 /// <summary>
-///     Mark a method as deprecated with a version. Will throw an exception if the method is called and the application version is newer than or the same as the specified version.
+///     Mark a method as deprecated with a version. Will throw an exception if the method exists on or after the version.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, Inherited = false)]
-public class DeprecationVersion : MethodWarning
+public class DeprecateByVersion : MethodWarning
 {
     private const string Unknown = "Unknown";
 
@@ -112,7 +148,7 @@ public class DeprecationVersion : MethodWarning
         }
     }
     
-    private Version Version { get; }
+    private System.Version Version { get; }
 
     private bool IsNewerVersion()
     {
@@ -126,12 +162,17 @@ public class DeprecationVersion : MethodWarning
         return currentVersion >= Version;
     }
 
-    public DeprecationVersion(string version, string? comment = null) : base(comment)
+    public DeprecateByVersion(string version, string? comment = null) : base(comment)
     {
         Version.TryParse(version, out var deprecatedVersion);
         Version = deprecatedVersion ?? throw new ArgumentException("Version must be in the format x.x.x.x");
     }
 
     protected override Func<bool> Condition => IsNewerVersion;
-    protected override string WarningMessage => $"This code can longer be used as of {Version}.";
+    protected override string WarningMessage(MethodInfo method) => $"{method.Name} can longer be used as of {Version}.";
+    
+    public static void Enforce()
+    {
+        Enforce<DeprecateByVersion>();
+    }
 }
