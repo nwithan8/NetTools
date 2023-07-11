@@ -14,7 +14,7 @@
         <Authors>nwithan8</Authors>
         <PackageProjectUrl>https://github.com/nwithan8/NetTools</PackageProjectUrl>
         <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-        <PackageTags>RestSharp</PackageTags>
+        <PackageTags>types</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
