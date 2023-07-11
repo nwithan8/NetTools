@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using NetTools.Common;
+using NetTools.JSON;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace NetTools.Tools;
@@ -14,6 +16,8 @@ public class EnumerationTest
         Value3,
     }
     
+    // decorated with JsonConverter attribute so that it can be de/serialized custom
+    [JsonConverter(typeof(EnumJsonConverter<TestEnum>))]
     public class TestEnum : Enum
     {
         public static readonly TestEnum Value1 = new TestEnum(1);
@@ -25,6 +29,8 @@ public class EnumerationTest
         }
     }
 
+    // decorated with JsonConverter attribute so that it can be de/serialized custom
+    [JsonConverter(typeof(ValueEnumJsonConverter<TestValueEnum>))]
     public class TestValueEnum : ValueEnum
     {
         public static readonly TestValueEnum Value1 = new TestValueEnum(1, "string1");
@@ -36,6 +42,8 @@ public class EnumerationTest
         }
     }
 
+    // decorated with JsonConverter attribute so that it can be de/serialized custom
+    [JsonConverter(typeof(MultiValueEnumJsonConverter<TestMultiValueEnum>))]
     public class TestMultiValueEnum : MultiValueEnum
     {
         public static readonly TestMultiValueEnum Value1 = new TestMultiValueEnum(1, "string1", 100.00, false, new object());
@@ -46,6 +54,20 @@ public class EnumerationTest
         private TestMultiValueEnum(int id, params object[] values) : base(id, values)
         {
         }
+
+        public override int? SerializerValueIndex => 1;
+    }
+    
+    internal sealed class TestClass
+    {
+        [JsonProperty("enum")]
+        public TestEnum? Enum { get; set; }
+
+        [JsonProperty("value_enum")]
+        public TestValueEnum? ValueEnum { get; set; }
+        
+        [JsonProperty("multi_value_enum")]
+        public TestMultiValueEnum? MultiValueEnum { get; set; }
     }
 
     [Fact]
@@ -172,5 +194,43 @@ public class EnumerationTest
 
         // value enums print their value as a string
         Assert.Equal("string2", TestValueEnum.Value2.ToString());
+    }
+    
+    [Fact]
+    public void TestSerialization()
+    {
+        var obj = new TestClass
+        {
+            Enum = TestEnum.Value1,
+            ValueEnum = TestValueEnum.Value1,
+            MultiValueEnum = TestMultiValueEnum.Value1,
+        };
+
+        // run JSON serialization process
+        var dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonSerialization.ConvertObjectToJson(obj));
+
+        // check that the enum values are serialized correctly
+        Assert.Equal(1, (int)(long)dictionary["enum"]); // need to cast to avoid int64 vs int32 issues (https://stackoverflow.com/a/31737978)
+        Assert.Equal("string1", dictionary["value_enum"]);
+        Assert.Equal(100.00, (double)dictionary["multi_value_enum"]);
+    }
+
+    [Fact]
+    public void TestDeserialization()
+    {
+        var dictionary = new Dictionary<string, object>
+        {
+            { "enum", 1 },
+            { "value_enum", "string1" },
+            { "multi_value_enum", 100.00 },
+        };
+
+        // run JSON deserialization process
+        var obj = JsonConvert.DeserializeObject<TestClass>(JsonConvert.SerializeObject(dictionary));
+
+        // check that the enum values are deserialized correctly
+        Assert.Equal(TestEnum.Value1, obj.Enum);
+        Assert.Equal(TestValueEnum.Value1, obj.ValueEnum);
+        Assert.Equal(TestMultiValueEnum.Value1, obj.MultiValueEnum);
     }
 }
