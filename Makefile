@@ -51,19 +51,33 @@ lint:
 prep-release:
 	dotnet pack -c Release -o output ${path}/*.csproj -p:Version=${version} -p:ContinuousIntegrationBuild=true
 
-## publish-all - Publish all NuGet files to nuget.org.
-# WARNING: Will publish ALL discovered NuGet files.
-# @parameters:
-# key= - The API key for nuget.org
-publish-all:
-	scripts\publish_all_nuget.bat ${key}
-
-## publish - Publish a specific NuGet file to nuget.org (Windows only)
+## publish-win - Publish a specific NuGet file to nuget.org (Windows only)
 # @parameters:
 # file= - The NuGet file to publish
 # key= - The API key for nuget.org
-publish:
-	scripts\publish_nuget.bat ${file} ${key}
+publish-win:
+	scripts\win\publish_nuget.bat ${file} ${key}
+    
+## publish-all-win - Publish all NuGet files to nuget.org (Windows only)
+# WARNING: Will publish ALL discovered NuGet files.
+# @parameters:
+# key= - The API key for nuget.org
+publish-all-win:
+	scripts\win\publish_all_nuget.bat ${key}
+    
+## publish-unix - Publish a specific NuGet file to nuget.org (Unix only)
+# @parameters:
+# file= - The NuGet file to publish
+# key= - The API key for nuget.org
+publish-unix:
+	bash scripts/unix/publish_nuget.sh ${file} ${key}
+    
+## publish-all-unix - Publish all NuGet files to nuget.org (Unix only)
+# WARNING: Will publish ALL discovered NuGet files.
+# @parameters
+# key= - The API key for nuget.org
+publish-all-unix:
+	bash scripts/unix/publish_all_nuget.sh ${key}
 
 ## restore - Restore the project
 restore:
@@ -77,11 +91,11 @@ scan:
 
 ## setup-win - Install required .NET versions and tools (Windows only)
 setup-win:
-	scripts\setup.bat
+	scripts\win\setup.bat
 
 ## setup-unix - Install required .NET versions and tools (Unix only)
 setup-unix:
-	bash scripts/setup.sh
+	bash scripts/unix/setup.sh
 
 ## test - Test the project
 test:
