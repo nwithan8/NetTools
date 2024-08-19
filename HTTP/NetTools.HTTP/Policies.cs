@@ -14,14 +14,14 @@ public static class Policies
 
         public static IAsyncPolicy<HttpResponseMessage> CreateRetryPolicyForHttpStatusCodeInRange(int minStatusCode, int maxStatusCode, int retryCount = 5)
         {
-            var retryEvaluation = new Func<HttpResponseMessage, bool>(response => StatusCodes.StatusCodeBetween(response.StatusCode, minStatusCode, maxStatusCode));
+            var retryEvaluation = new Func<HttpResponseMessage, bool>(response => response.StatusCode.IsBetween(minStatusCode, maxStatusCode));
 
             return Polly.Policies.Retry.CreateBackOffRetryPolicy<HttpRequestException, HttpResponseMessage>(retryEvaluation, retryCount);
         }
 
         public static IAsyncPolicy<HttpResponseMessage> CreateRetryPolicyForHttpStatusCodeOutsideRange(int minStatusCode, int maxStatusCode, int retryCount = 5)
         {
-            var retryEvaluation = new Func<HttpResponseMessage, bool>(response => !StatusCodes.StatusCodeBetween(response.StatusCode, minStatusCode, maxStatusCode));
+            var retryEvaluation = new Func<HttpResponseMessage, bool>(response => !response.StatusCode.IsBetween(minStatusCode, maxStatusCode));
 
             return Polly.Policies.Retry.CreateBackOffRetryPolicy<HttpRequestException, HttpResponseMessage>(retryEvaluation, retryCount);
         }

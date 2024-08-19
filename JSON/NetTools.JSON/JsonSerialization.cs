@@ -21,45 +21,95 @@ public class JsonSerializer
     }
 
     /// <summary>
-    ///     Deserialize a JSON string into a T-type object
+    ///     Deserialize data from a <see cref="HttpResponseMessage"/> into a T-type object.
     /// </summary>
-    /// <param name="data">A string of JSON data</param>
+    /// <param name="response"><see cref="HttpResponseMessage"/> object to extract data from.</param>
     /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
-    /// <typeparam name="T">Type of object to deserialize to</typeparam>
-    /// <returns>A T-type object</returns>
+    /// <typeparam name="T">Type of object to deserialize to.</typeparam>
+    /// <returns>A T-type object.</returns>
+    public async Task<T> ConvertJsonToObject<T>(HttpResponseMessage response, List<string>? rootElementKeys = null)
+    {
+        return await JsonSerialization.ConvertJsonToObject<T>(response, JsonSerializerSettings, rootElementKeys);
+    }
+
+    /// <summary>
+    ///     Deserialize data from a <see cref="HttpContent"/> into a T-type object.
+    /// </summary>
+    /// <param name="content"><see cref="HttpContent"/> object to extract data from.</param>
+    /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
+    /// <typeparam name="T">Type of object to deserialize to.</typeparam>
+    /// <returns>A T-type object.</returns>
+    public async Task<T> ConvertJsonToObject<T>(HttpContent content, List<string>? rootElementKeys = null)
+    {
+        return JsonSerialization.ConvertJsonToObject<T>(await content.ReadAsStringAsync(), JsonSerializerSettings,
+            rootElementKeys);
+    }
+
+    /// <summary>
+    ///     Deserialize a JSON string into a T-type object.
+    /// </summary>
+    /// <param name="data">A string of JSON data.</param>
+    /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
+    /// <typeparam name="T">Type of object to deserialize to.</typeparam>
+    /// <returns>A T-type object.</returns>
     public T ConvertJsonToObject<T>(string? data, List<string>? rootElementKeys = null)
     {
         return JsonSerialization.ConvertJsonToObject<T>(data, JsonSerializerSettings, rootElementKeys);
     }
 
     /// <summary>
-    ///     Deserialize a JSON string into a T-type object
+    ///     Deserialize data from a <see cref="HttpResponseMessage"/> into a specified type object.
     /// </summary>
-    /// <param name="data">A string of JSON data</param>
+    /// <param name="response"><see cref="HttpResponseMessage"/> object to extract data from.</param>
+    /// <param name="type">Type of object to deserialize to.</param>
     /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
-    /// <param name="type">Type of object to deserialize to</param>
-    /// <returns>A T-type object</returns>
+    /// <returns>A <c>type</c>-type object.</returns>
+    public async Task<object> ConvertJsonToObject(HttpResponseMessage response, Type type,
+        List<string>? rootElementKeys = null)
+    {
+        return await JsonSerialization.ConvertJsonToObject(response, type, JsonSerializerSettings, rootElementKeys);
+    }
+
+    /// <summary>
+    ///     Deserialize data from a <see cref="HttpContent"/> into a specified type object.
+    /// </summary>
+    /// <param name="content"><see cref="HttpContent"/> object to extract data from.</param>
+    /// <param name="type">Type of object to deserialize to.</param>
+    /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
+    /// <returns>A <c>type</c>-type object.</returns>
+    public async Task<object> ConvertJsonToObject(HttpContent content, Type type, List<string>? rootElementKeys = null)
+    {
+        return await JsonSerialization.ConvertJsonToObject(content, type, JsonSerializerSettings, rootElementKeys);
+    }
+
+    /// <summary>
+    ///     Deserialize a JSON string into a specified type object.
+    /// </summary>
+    /// <param name="data">A string of JSON data.</param>
+    /// <param name="type">Type of object to deserialize to.</param>
+    /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
+    /// <returns>A <c>type</c>-type object.</returns>
     public object ConvertJsonToObject(string? data, Type type, List<string>? rootElementKeys = null)
     {
         return JsonSerialization.ConvertJsonToObject(data, JsonSerializerSettings, rootElementKeys);
     }
 
     /// <summary>
-    ///     Deserialize a JSON string into a dynamic object
+    ///     Deserialize a JSON string into a dynamic object.
     /// </summary>
-    /// <param name="data">A string of JSON data</param>
+    /// <param name="data">A string of JSON data.</param>
     /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
-    /// <returns>An ExpandoObject object</returns>
+    /// <returns>An ExpandoObject object.</returns>
     public System.Dynamic.ExpandoObject ConvertJsonToObject(string? data, List<string>? rootElementKeys = null)
     {
         return JsonSerialization.ConvertJsonToObject(data, JsonSerializerSettings, rootElementKeys);
     }
 
     /// <summary>
-    ///     Serialize an object into a JSON string, using this instance's <see cref="JsonSerializerSettings" />
+    ///     Serialize an object into a JSON string.
     /// </summary>
-    /// <param name="data">An object to serialize into a string</param>
-    /// <returns>A string of JSON data</returns>
+    /// <param name="data">An object to serialize into a string.</param>
+    /// <returns>A string of JSON data.</returns>
     public string ConvertObjectToJson(object data)
     {
         return JsonSerialization.ConvertObjectToJson(data, JsonSerializerSettings);
@@ -83,6 +133,38 @@ public static class JsonSerialization
     };
 
     /// <summary>
+    ///     Deserialize data from a <see cref="HttpResponseMessage"/> into a T-type object, using this instance's
+    ///     <see cref="Newtonsoft.Json.JsonSerializerSettings" />.
+    /// </summary>
+    /// <param name="response"><see cref="HttpResponseMessage"/> object to extract data from.</param>
+    /// <param name="jsonSerializerSettings">
+    ///     The <see cref="Newtonsoft.Json.JsonSerializerSettings" /> to use for
+    ///     deserialization. Defaults to <see cref="DefaultJsonSerializerSettings" /> if not provided.
+    /// </param>
+    /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
+    /// <typeparam name="T">Type of object to deserialize to.</typeparam>
+    /// <returns>A T-type object.</returns>
+    public static async Task<T> ConvertJsonToObject<T>(HttpResponseMessage response,
+        Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null) =>
+        await ConvertJsonToObject<T>(response.Content, jsonSerializerSettings, rootElementKeys);
+
+    /// <summary>
+    ///     Deserialize data from a <see cref="HttpContent"/> into a T-type object, using this instance's
+    ///     <see cref="Newtonsoft.Json.JsonSerializerSettings" />.
+    /// </summary>
+    /// <param name="content"><see cref="HttpContent"/> object to extract data from.</param>
+    /// <param name="jsonSerializerSettings">
+    ///     The <see cref="Newtonsoft.Json.JsonSerializerSettings" /> to use for
+    ///     deserialization. Defaults to <see cref="DefaultJsonSerializerSettings" /> if not provided.
+    /// </param>
+    /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
+    /// <typeparam name="T">Type of object to deserialize to.</typeparam>
+    /// <returns>A T-type object.</returns>
+    public static async Task<T> ConvertJsonToObject<T>(HttpContent content,
+        Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null) =>
+        ConvertJsonToObject<T>(await content.ReadAsStringAsync(), jsonSerializerSettings, rootElementKeys);
+
+    /// <summary>
     ///     Deserialize a JSON string into a T-type object
     /// </summary>
     /// <param name="data">A string of JSON data</param>
@@ -93,7 +175,8 @@ public static class JsonSerialization
     /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
     /// <typeparam name="T">Type of object to deserialize to</typeparam>
     /// <returns>A T-type object</returns>
-    public static T ConvertJsonToObject<T>(string? data, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
+    public static T ConvertJsonToObject<T>(string? data,
+        Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
     {
         var obj = ConvertJsonToObject(data, typeof(T), jsonSerializerSettings, rootElementKeys);
         if (obj is T t) return t;
@@ -102,17 +185,52 @@ public static class JsonSerialization
     }
 
     /// <summary>
-    ///     Deserialize a JSON string into a T-type object
+    ///     Deserialize data from a <see cref="HttpResponseMessage"/> into a specified type object, using this instance's <see cref="Newtonsoft.Json.JsonSerializerSettings" />.
     /// </summary>
-    /// <param name="data">A string of JSON data</param>
+    /// <param name="response"><see cref="HttpResponseMessage"/> object to extract data from.</param>
+    /// <param name="type">Type of object to deserialize to.</param>
     /// <param name="jsonSerializerSettings">
     ///     The <see cref="Newtonsoft.Json.JsonSerializerSettings" /> to use for
     ///     deserialization. Defaults to <see cref="DefaultJsonSerializerSettings" /> if not provided.
     /// </param>
     /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
-    /// <param name="type">Type of object to deserialize to</param>
-    /// <returns>A T-type object</returns>
-    public static object ConvertJsonToObject(string? data, Type type, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
+    /// <returns>A <c>type</c>-type object.</returns>
+    public static async Task<object> ConvertJsonToObject(HttpResponseMessage response, Type type,
+        Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
+    {
+        return await ConvertJsonToObject(response.Content, type, jsonSerializerSettings, rootElementKeys);
+    }
+
+    /// <summary>
+    ///     Deserialize data from a <see cref="HttpContent"/> into a specified type object, using this instance's <see cref="Newtonsoft.Json.JsonSerializerSettings" />.
+    /// </summary>
+    /// <param name="content"><see cref="HttpContent"/> object to extract data from.</param>
+    /// <param name="type">Type of object to deserialize to.</param>
+    /// <param name="jsonSerializerSettings">
+    ///     The <see cref="Newtonsoft.Json.JsonSerializerSettings" /> to use for
+    ///     deserialization. Defaults to <see cref="DefaultJsonSerializerSettings" /> if not provided.
+    /// </param>
+    /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
+    /// <returns>A <c>type</c>-type object.</returns>
+    public static async Task<object> ConvertJsonToObject(HttpContent content, Type type,
+        Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
+    {
+        return ConvertJsonToObject(await content.ReadAsStringAsync(), type, jsonSerializerSettings, rootElementKeys);
+    }
+
+    /// <summary>
+    ///     Deserialize a JSON string into a specified type object, using this instance's <see cref="Newtonsoft.Json.JsonSerializerSettings" />.
+    /// </summary>
+    /// <param name="data">A string of JSON data.</param>
+    /// <param name="type">Type of object to deserialize to.</param>
+    /// <param name="jsonSerializerSettings">
+    ///     The <see cref="Newtonsoft.Json.JsonSerializerSettings" /> to use for
+    ///     deserialization. Defaults to <see cref="DefaultJsonSerializerSettings" /> if not provided.
+    /// </param>
+    /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
+    /// <returns>A <c>type</c>-type object.</returns>
+    public static object ConvertJsonToObject(string? data, Type type,
+        Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
     {
         if (rootElementKeys != null && rootElementKeys.Any()) data = GoToRootElement(data, rootElementKeys);
 
@@ -120,7 +238,8 @@ public static class JsonSerialization
 
         try
         {
-            var obj = Newtonsoft.Json.JsonConvert.DeserializeObject(data, type, jsonSerializerSettings ?? DefaultJsonSerializerSettings);
+            var obj = Newtonsoft.Json.JsonConvert.DeserializeObject(data, type,
+                jsonSerializerSettings ?? DefaultJsonSerializerSettings);
             return (obj ?? default)!;
         }
         catch (Exception)
@@ -130,16 +249,17 @@ public static class JsonSerialization
     }
 
     /// <summary>
-    ///     Deserialize a JSON string into a dynamic object
+    ///     Deserialize a JSON string into a dynamic object, using this instance's <see cref="Newtonsoft.Json.JsonSerializerSettings" />.
     /// </summary>
-    /// <param name="data">A string of JSON data</param>
+    /// <param name="data">A string of JSON data.</param>
     /// <param name="jsonSerializerSettings">
     ///     The <see cref="Newtonsoft.Json.JsonSerializerSettings" /> to use for
     ///     deserialization. Defaults to <see cref="DefaultJsonSerializerSettings" /> if not provided.
     /// </param>
     /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
-    /// <returns>An ExpandoObject object</returns>
-    public static System.Dynamic.ExpandoObject ConvertJsonToObject(string? data, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
+    /// <returns>An ExpandoObject object.</returns>
+    public static System.Dynamic.ExpandoObject ConvertJsonToObject(string? data,
+        Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null, List<string>? rootElementKeys = null)
     {
         return ConvertJsonToObject<System.Dynamic.ExpandoObject>(data, jsonSerializerSettings, rootElementKeys);
     }
@@ -152,12 +272,14 @@ public static class JsonSerialization
     ///     The <see cref="Newtonsoft.Json.JsonSerializerSettings" /> to use for
     ///     serialization. Defaults to <see cref="DefaultJsonSerializerSettings" /> if not provided.
     /// </param>
-    /// <returns>A string of JSON data</returns>
-    public static string ConvertObjectToJson(object data, Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null)
+    /// <returns>A string of JSON data.</returns>
+    public static string ConvertObjectToJson(object data,
+        Newtonsoft.Json.JsonSerializerSettings? jsonSerializerSettings = null)
     {
         try
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(data, jsonSerializerSettings ?? DefaultJsonSerializerSettings);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(data,
+                jsonSerializerSettings ?? DefaultJsonSerializerSettings);
         }
         catch (Exception)
         {
@@ -168,9 +290,9 @@ public static class JsonSerialization
     /// <summary>
     ///     Venture through the root element keys to find the root element of the JSON string.
     /// </summary>
-    /// <param name="data">A string of JSON data</param>
+    /// <param name="data">A string of JSON data.</param>
     /// <param name="rootElementKeys">List, in order, of sub-keys path to follow to deserialization starting position.</param>
-    /// <returns>The value of the JSON sub-element key path</returns>
+    /// <returns>The value of the JSON sub-element key path.</returns>
     private static string? GoToRootElement(string? data, List<string> rootElementKeys)
     {
         if (data == null) return null;
