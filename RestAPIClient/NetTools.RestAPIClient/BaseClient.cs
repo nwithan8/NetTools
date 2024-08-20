@@ -1,6 +1,7 @@
 using NetTools.HTTP;
 using NetTools.JSON;
 using NetTools.RestAPIClient.Http;
+using NetTools.RestAPIClient.Parameters;
 
 namespace NetTools.RestAPIClient;
 
@@ -41,7 +42,7 @@ public abstract class BaseClient : IDisposable
     public HttpClient? CustomHttpClient =>
         _configuration
             .CustomHttpClient; // public read-only property so users can audit the custom HTTP client they set to be used by the client
-    
+
     /// <summary>
     ///     Gets the <see cref="Hooks"/> used by this client.
     /// </summary>
@@ -89,13 +90,16 @@ public abstract class BaseClient : IDisposable
             var requestId = Guid.NewGuid();
             var requestTimestamp = Environment.TickCount;
             // if a pre-request event has been set, invoke it
-            Hooks.OnRequestExecuting?.Invoke(this, new OnRequestExecutingEventArgs(request, requestTimestamp, requestId));
+            Hooks.OnRequestExecuting?.Invoke(this,
+                new OnRequestExecutingEventArgs(request, requestTimestamp, requestId));
             // execute the request
-            var response = await HttpClient.SendAsync(request, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var response = await HttpClient.SendAsync(request, cancellationToken: cancellationToken)
+                .ConfigureAwait(false);
             // if a post-request event has been set, invoke it
             var responseTimestamp = Environment.TickCount;
-            Hooks.OnRequestResponseReceived?.Invoke(this, new OnRequestResponseReceivedEventArgs(response, requestTimestamp, responseTimestamp, requestId));
-            
+            Hooks.OnRequestResponseReceived?.Invoke(this,
+                new OnRequestResponseReceivedEventArgs(response, requestTimestamp, responseTimestamp, requestId));
+
             return response;
         }
         catch (TaskCanceledException e)
@@ -112,10 +116,26 @@ public abstract class BaseClient : IDisposable
     /// <param name="cancellationToken"><see cref="CancellationToken"/> to use for the HTTP request.</param>
     /// <param name="parameters">Optional parameters to use for the request.</param>
     /// <param name="rootElement">Optional root element for the resultant JSON to begin deserialization at.</param>
-    /// <typeparam name="T">Type of object to deserialize response data into. Must be sub-class of <see cref="BaseObject"/>.</typeparam>
+    /// <typeparam name="T">Type of object to deserialize response data into.</typeparam>
     /// <returns>An instance of a T-type object.</returns>
     /// <exception cref="JsonDeserializationException">If JSON deserialization of response fails.</exception>
-    public async Task<T> RequestAsync<T>(Method method, string endpoint,  CancellationToken cancellationToken, Dictionary<string, object>? parameters = null, string? rootElement = null)
+    public async Task<T> RequestAsync<T>(Method method, string endpoint, CancellationToken cancellationToken,
+        IBaseParameters? parameters = null, string? rootElement = null) where T : class => await RequestAsync<T>(method,
+        endpoint, cancellationToken, parameters?.ToDictionary(), rootElement);
+
+    /// <summary>
+    ///     Execute a request against the REST API.
+    /// </summary>
+    /// <param name="method">HTTP method to use for the request.</param>
+    /// <param name="endpoint">API endpoint to use for the request.</param>
+    /// <param name="cancellationToken"><see cref="CancellationToken"/> to use for the HTTP request.</param>
+    /// <param name="parameters">Optional parameters to use for the request.</param>
+    /// <param name="rootElement">Optional root element for the resultant JSON to begin deserialization at.</param>
+    /// <typeparam name="T">Type of object to deserialize response data into.</typeparam>
+    /// <returns>An instance of a T-type object.</returns>
+    /// <exception cref="JsonDeserializationException">If JSON deserialization of response fails.</exception>
+    public async Task<T> RequestAsync<T>(Method method, string endpoint, CancellationToken cancellationToken,
+        Dictionary<string, object>? parameters = null, string? rootElement = null)
         where T : class
     {
         // Build the request
@@ -165,8 +185,21 @@ public abstract class BaseClient : IDisposable
     /// <param name="cancellationToken"><see cref="CancellationToken"/> to use for the HTTP request.</param>
     /// <param name="parameters">Optional parameters to use for the request.</param>
     /// <returns><c>true</c> if the request was successful, <c>false</c> otherwise.</returns>
+    public async Task<bool> RequestAsync(Method method, string endpoint, CancellationToken cancellationToken,
+        IBaseParameters? parameters = null) =>
+        await RequestAsync(method, endpoint, cancellationToken, parameters?.ToDictionary());
+
+    /// <summary>
+    ///     Execute a request against the EasyPost API.
+    /// </summary>
+    /// <param name="method">HTTP <see cref="Method"/> to use for the request.</param>
+    /// <param name="endpoint">EasyPost API endpoint to use for the request.</param>
+    /// <param name="cancellationToken"><see cref="CancellationToken"/> to use for the HTTP request.</param>
+    /// <param name="parameters">Optional parameters to use for the request.</param>
+    /// <returns><c>true</c> if the request was successful, <c>false</c> otherwise.</returns>
     // ReSharper disable once UnusedMethodReturnValue.Global
-    public async Task<bool> RequestAsync(Method method, string endpoint, CancellationToken cancellationToken, Dictionary<string, object>? parameters = null)
+    public async Task<bool> RequestAsync(Method method, string endpoint, CancellationToken cancellationToken,
+        Dictionary<string, object>? parameters = null)
     {
         // Build the request
         var headers = _configuration.GetHeaders();

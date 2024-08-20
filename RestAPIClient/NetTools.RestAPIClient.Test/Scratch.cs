@@ -63,7 +63,7 @@ public class Scratch
             CancellationToken cancellationToken = default)
         {
             return await RequestAsync<MyApiResponseObject>(NetTools.HTTP.Method.Get, "/my-object", cancellationToken,
-                parameters.ToDictionary());
+                parameters);
         }
     }
 
