@@ -114,14 +114,43 @@ public abstract class BaseClient : IDisposable
     /// <param name="method">HTTP method to use for the request.</param>
     /// <param name="endpoint">API endpoint to use for the request.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken"/> to use for the HTTP request.</param>
-    /// <param name="parameters">Optional parameters to use for the request.</param>
     /// <param name="rootElement">Optional root element for the resultant JSON to begin deserialization at.</param>
     /// <typeparam name="T">Type of object to deserialize response data into.</typeparam>
     /// <returns>An instance of a T-type object.</returns>
     /// <exception cref="JsonDeserializationException">If JSON deserialization of response fails.</exception>
-    public async Task<T> RequestAsync<T>(Method method, string endpoint, CancellationToken cancellationToken,
-        IBaseParameters? parameters = null, string? rootElement = null) where T : class => await RequestAsync<T>(method,
-        endpoint, cancellationToken, parameters?.ToDictionary(), rootElement);
+    public async Task<T> RequestAsync<T>(Method method, string endpoint, CancellationToken cancellationToken = default,
+        string? rootElement = null) where T : class =>
+        await RequestAsync<T>(cancellationToken, method, endpoint, null, rootElement);
+
+    /// <summary>
+    ///     Execute a request against the REST API.
+    /// </summary>
+    /// <param name="method">HTTP method to use for the request.</param>
+    /// <param name="endpoint">API endpoint to use for the request.</param>
+    /// <param name="parameters">Parameters to use for the request.</param>
+    /// <param name="cancellationToken"><see cref="CancellationToken"/> to use for the HTTP request.</param>
+    /// <param name="rootElement">Optional root element for the resultant JSON to begin deserialization at.</param>
+    /// <typeparam name="T">Type of object to deserialize response data into.</typeparam>
+    /// <returns>An instance of a T-type object.</returns>
+    /// <exception cref="JsonDeserializationException">If JSON deserialization of response fails.</exception>
+    public async Task<T> RequestAsync<T>(Method method, string endpoint, IBaseParameters parameters,
+        CancellationToken cancellationToken = default, string? rootElement = null) where T : class =>
+        await RequestAsync<T>(cancellationToken, method, endpoint, parameters.ToDictionary(), rootElement);
+
+    /// <summary>
+    ///     Execute a request against the REST API.
+    /// </summary>
+    /// <param name="method">HTTP method to use for the request.</param>
+    /// <param name="endpoint">API endpoint to use for the request.</param>
+    /// <param name="parameters">Parameters to use for the request.</param>
+    /// <param name="cancellationToken"><see cref="CancellationToken"/> to use for the HTTP request.</param>
+    /// <param name="rootElement">Optional root element for the resultant JSON to begin deserialization at.</param>
+    /// <typeparam name="T">Type of object to deserialize response data into.</typeparam>
+    /// <returns>An instance of a T-type object.</returns>
+    /// <exception cref="JsonDeserializationException">If JSON deserialization of response fails.</exception>
+    public async Task<T> RequestAsync<T>(Method method, string endpoint, Dictionary<string, object> parameters,
+        CancellationToken cancellationToken = default, string? rootElement = null) where T : class =>
+        await RequestAsync<T>(cancellationToken, method, endpoint, parameters, rootElement);
 
     /// <summary>
     ///     Execute a request against the REST API.
@@ -134,8 +163,8 @@ public abstract class BaseClient : IDisposable
     /// <typeparam name="T">Type of object to deserialize response data into.</typeparam>
     /// <returns>An instance of a T-type object.</returns>
     /// <exception cref="JsonDeserializationException">If JSON deserialization of response fails.</exception>
-    public async Task<T> RequestAsync<T>(Method method, string endpoint, CancellationToken cancellationToken,
-        Dictionary<string, object>? parameters = null, string? rootElement = null)
+    private async Task<T> RequestAsync<T>(CancellationToken cancellationToken, Method method, string endpoint,
+        Dictionary<string, object>? parameters, string? rootElement)
         where T : class
     {
         // Build the request
@@ -160,7 +189,7 @@ public abstract class BaseClient : IDisposable
         }
 
         // Deserialize the response into an object
-        T resource = await JsonSerialization.ConvertJsonToObject<T>(response, null, rootElements);
+        var resource = await JsonSerialization.ConvertJsonToObject<T>(response, null, rootElements);
 
         // Dispose of the request and response
         request.Dispose();
@@ -178,16 +207,37 @@ public abstract class BaseClient : IDisposable
     }
 
     /// <summary>
-    ///     Execute a request against the EasyPost API.
+    ///     Execute a request against the REST API.
     /// </summary>
-    /// <param name="method">HTTP <see cref="Method"/> to use for the request.</param>
-    /// <param name="endpoint">EasyPost API endpoint to use for the request.</param>
+    /// <param name="method">HTTP method to use for the request.</param>
+    /// <param name="endpoint">API endpoint to use for the request.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken"/> to use for the HTTP request.</param>
-    /// <param name="parameters">Optional parameters to use for the request.</param>
     /// <returns><c>true</c> if the request was successful, <c>false</c> otherwise.</returns>
-    public async Task<bool> RequestAsync(Method method, string endpoint, CancellationToken cancellationToken,
-        IBaseParameters? parameters = null) =>
-        await RequestAsync(method, endpoint, cancellationToken, parameters?.ToDictionary());
+    public async Task<bool> RequestAsync(Method method, string endpoint, CancellationToken cancellationToken) =>
+        await RequestAsync(cancellationToken, method, endpoint, null);
+
+    /// <summary>
+    ///     Execute a request against the REST API.
+    /// </summary>
+    /// <param name="method">HTTP method to use for the request.</param>
+    /// <param name="endpoint">API endpoint to use for the request.</param>
+    /// <param name="parameters">Parameters to use for the request.</param>
+    /// <param name="cancellationToken"><see cref="CancellationToken"/> to use for the HTTP request.</param>
+    /// <returns><c>true</c> if the request was successful, <c>false</c> otherwise.</returns>
+    public async Task<bool> RequestAsync(Method method, string endpoint, IBaseParameters parameters,
+        CancellationToken cancellationToken) =>
+        await RequestAsync(cancellationToken, method, endpoint, parameters.ToDictionary());
+
+    /// <summary>
+    ///     Execute a request against the REST API.
+    /// </summary>
+    /// <param name="method">HTTP method to use for the request.</param>
+    /// <param name="endpoint">API endpoint to use for the request.</param>
+    /// <param name="parameters">Parameters to use for the request.</param>
+    /// <param name="cancellationToken"><see cref="CancellationToken"/> to use for the HTTP request.</param>
+    /// <returns><c>true</c> if the request was successful, <c>false</c> otherwise.</returns>
+    public async Task<bool> RequestAsync(Method method, string endpoint, Dictionary<string, object> parameters,
+        CancellationToken cancellationToken) => await RequestAsync(cancellationToken, method, endpoint, null);
 
     /// <summary>
     ///     Execute a request against the EasyPost API.
@@ -198,8 +248,10 @@ public abstract class BaseClient : IDisposable
     /// <param name="parameters">Optional parameters to use for the request.</param>
     /// <returns><c>true</c> if the request was successful, <c>false</c> otherwise.</returns>
     // ReSharper disable once UnusedMethodReturnValue.Global
-    public async Task<bool> RequestAsync(Method method, string endpoint, CancellationToken cancellationToken,
-        Dictionary<string, object>? parameters = null)
+#pragma warning disable CA1068
+    private async Task<bool> RequestAsync(CancellationToken cancellationToken, Method method, string endpoint,
+        Dictionary<string, object>? parameters)
+#pragma warning restore CA1068
     {
         // Build the request
         var headers = _configuration.GetHeaders();

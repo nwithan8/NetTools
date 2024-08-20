@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
+using NetTools.Common.Attributes;
 using NetTools.HTTP;
 using NetTools.RestAPIClient.Parameters;
 using Newtonsoft.Json;
@@ -59,10 +59,10 @@ public class Scratch
         {
         }
 
-        public async Task<MyApiResponseObject> GetMyObjectAsync(MyApiRequestParameters parameters,
-            CancellationToken cancellationToken = default)
+        [CrudOperations.Read]
+        public async Task<MyApiResponseObject> GetMyObjectAsync(MyApiRequestParameters parameters)
         {
-            return await RequestAsync<MyApiResponseObject>(NetTools.HTTP.Method.Get, "/my-object", cancellationToken,
+            return await RequestAsync<MyApiResponseObject>(NetTools.HTTP.Method.Get, "/my-object",
                 parameters);
         }
     }
