@@ -58,26 +58,12 @@ prep-release:
 publish-win:
 	scripts\win\publish_nuget.bat ${file} ${key}
     
-## publish-all-win - Publish all NuGet files to nuget.org (Windows only)
-# WARNING: Will publish ALL discovered NuGet files.
-# @parameters:
-# key= - The API key for nuget.org
-publish-all-win:
-	scripts\win\publish_all_nuget.bat ${key}
-    
 ## publish-unix - Publish a specific NuGet file to nuget.org (Unix only)
 # @parameters:
 # file= - The NuGet file to publish
 # key= - The API key for nuget.org
 publish-unix:
 	bash scripts/unix/publish_nuget.sh ${file} ${key}
-    
-## publish-all-unix - Publish all NuGet files to nuget.org (Unix only)
-# WARNING: Will publish ALL discovered NuGet files.
-# @parameters
-# key= - The API key for nuget.org
-publish-all-unix:
-	bash scripts/unix/publish_all_nuget.sh ${key}
 
 ## restore - Restore the project
 restore:
