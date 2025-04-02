@@ -110,6 +110,27 @@ public abstract class BaseClientConfiguration : IDisposable
     }
 
     /// <summary>
+    ///     Inject any authentication query parameter pairs into the provided parameter set.
+    /// </summary>
+    /// <param name="parameters">A <see cref="Dictionary{TKey,TValue}"/> set of parameters to inject authentication-related query parameters into, if applicable.</param>
+    /// <returns>A <see cref="Dictionary{TKey,TValue}"/> of the original parameters, plus any applicable authentication-related query parameter pairs.</returns>
+    internal Dictionary<string, object> AddOptionalAuthenticationParameters(
+        Dictionary<string, object>? parameters)
+    {
+        parameters ??= new Dictionary<string, object>();
+        
+        if (Authentication?.IsQueryParameterBased != true) return parameters;
+
+        Dictionary<string, string> authQueryParameters = Authentication.AuthenticationPair;
+        foreach (KeyValuePair<string, string> pair in authQueryParameters)
+        {
+            parameters.Add(pair.Key, pair.Value);
+        }
+
+        return parameters;
+    }
+
+    /// <summary>
     ///     Initializes a new instance of the <see cref="BaseClientConfiguration"/> class.
     /// </summary>
     /// <param name="authentication">Optional <see cref="IAuthentication"/> to use for requests.</param>

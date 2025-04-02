@@ -169,6 +169,7 @@ public abstract class BaseClient : IDisposable
     {
         // Build the request
         var headers = _configuration.GetHeaders();
+        parameters = _configuration.AddOptionalAuthenticationParameters(parameters);
         var request = new Request(ApiBaseInUse, endpoint, method, parameters, headers);
 
         // Execute the request
@@ -255,6 +256,7 @@ public abstract class BaseClient : IDisposable
     {
         // Build the request
         var headers = _configuration.GetHeaders();
+        parameters = _configuration.AddOptionalAuthenticationParameters(parameters);
         Request request = new(ApiBaseInUse, endpoint, method, parameters, headers);
 
         // Execute the request
